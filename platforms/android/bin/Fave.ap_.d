@@ -120,8 +120,8 @@
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/angular-touch.js \
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/angular.min.js \
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/cdv-plugin-fb-connect.js \
-/srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/facebook-js-sdk.js \
-/srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/facebook-sdk.js \
+/srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/facebook-sdk-phone.js \
+/srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/src/js/vendors/facebook-sdk-web.js \
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/test/spec \
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/test/spec.html \
 /srv/phonegap-dev/projects/faveapp/platforms/android/assets/www/test/spec/helper.js \

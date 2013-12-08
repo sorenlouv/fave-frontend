@@ -21,40 +21,7 @@ app.factory('facebook', ['$q',
 
     var devices = {
       // phone
-      // phone_native: {
-      //   init: function(){
-
-      //     this.loadJS('src/js/vendors/facebook-js-sdk.js', function() {
-      //       alert("Facebook SKD Loaded");
-      //     });
-
-      //     this.loadJS('src/js/vendors/cdv-plugin-fb-connect.js', function() {
-      //       alert("cdv-plugin-fb-connect.js loaded");
-      //     });
-
-      //     // Attach event listener
-      //     document.addEventListener('deviceready', function() {
-      //       FB.init({
-      //         appId: this.appId,
-      //         nativeInterface: CDV.FB,
-      //         useCachedDialogs: false
-      //       });
-      //       deferred.resolve();
-      //     }, false);
-      //   },
-
-      //   // Phonegap SDK + Facebook SDK ready
-      //   sdkReady: function(){
-      //     if ((typeof cordova == 'undefined') && (typeof Cordova == 'undefined')) alert('Cordova variable does not exist. Check that you have included cordova.js correctly');
-      //     if (typeof CDV == 'undefined') alert('CDV variable does not exist. Check that you have included cdv-plugin-fb-connect.js correctly');
-      //     if (typeof FB == 'undefined') alert('FB variable does not exist. Check that you have included the Facebook JS SDK file.');
-
-      //     return deferred.promise;
-      //   },
-      // },
-
-      // Web
-      web: {
+      phone: {
         init: function() {
           // attach event listener
           window.fbAsyncInit = function() {
@@ -67,13 +34,28 @@ app.factory('facebook', ['$q',
             deferred.resolve();
           };
 
-          loadJS('src/js/vendors/facebook-js-sdk.js');
+          loadJS('src/js/vendors/facebook-sdk-phone.js');
+        }
+      },
+
+      // Web
+      web: {
+        init: function() {
+          // attach event listener
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId: appId
+            });
+
+            deferred.resolve();
+          };
+
+          loadJS('src/js/vendors/facebook-sdk-web.js');
         }
       }
     };
 
-    // var device = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) ? devices.phone : devices.web;
-    var device = devices.web;
+    var device = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) ? devices.phone : devices.web;
     device.init();
 
     return deferred.promise;
