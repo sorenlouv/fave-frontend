@@ -1,4 +1,21 @@
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes.dex : \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/AsyncFacebookRunner$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/AsyncFacebookRunner$2.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/AsyncFacebookRunner$RequestListener.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/AsyncFacebookRunner.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/DialogError.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$AutoPublishAsyncTask.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$DialogListener.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$ServiceListener.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$TokenRefreshServiceConnection$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook$TokenRefreshServiceConnection.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Facebook.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FacebookError.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FbDialog$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FbDialog$FbWebViewClient.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FbDialog.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Util.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/BuildConfig.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/Fave.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/R$attr.class \
@@ -6,4 +23,10 @@
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/R$string.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/R$xml.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/R.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin$2.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin$AuthorizeListener$1.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin$AuthorizeListener.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin$UIDialogListener.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/org/apache/cordova/facebook/ConnectPlugin.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/dexedLibs/cordova-3.2.0-f699290455740fe818786e169537fd7c.jar \
