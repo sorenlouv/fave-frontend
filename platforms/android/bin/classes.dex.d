@@ -16,6 +16,7 @@
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FbDialog$FbWebViewClient.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/FbDialog.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/facebook/android/Util.class \
+/srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/jamiestarke/webviewdebug/WebViewDebug.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/BuildConfig.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/Fave.class \
 /srv/phonegap-dev/projects/faveapp/platforms/android/bin/classes/com/konscript/faveapp/R$attr.class \
