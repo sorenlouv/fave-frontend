@@ -45,7 +45,7 @@ module.exports = function(grunt) {
       },
       strict: {
         options: {},
-        src: ['dist/css/main.css']
+        src: ['dist/css/<%= pkg.name %>.css']
       }
     },
 
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
           // cleancss: true
         },
         files: {
-          "dist/css/main.css": "src/less/main.less"
+          "dist/css/<%= pkg.name %>.css": "src/less/main.less"
         }
       }
     },
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         }
       },
       css: {
-        files: 'dist/css/main.css'
+        files: 'dist/css/<%= pkg.name %>.css'
       },
       templates: {
         files: ['src/templates/*.html', 'index.html']

@@ -1,5 +1,4 @@
-app.factory('facebook', ['$q',
-  function($q) {
+app.factory('facebook', ['$q', function($q) {
     'use strict';
 
     var deferred = $q.defer();

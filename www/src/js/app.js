@@ -1,1 +1,1 @@
-var app = angular.module('faveapp', ['ngTouch']);
+var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'firebase']);

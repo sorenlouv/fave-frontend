@@ -4,30 +4,41 @@
     <title>Profile</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=0">
-    <!-- <link rel="stylesheet" href="/powerapp/public-profile/dist/css/main.css"> -->
+    <link rel="stylesheet" href="dist/css/fave-app.css">
 
+    <!-- Phonegap specific stuff -->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="src/js/phonegap-app.js"></script>
+    <script type="text/javascript" src="src/js/bootstrap-app.js"></script>
 
     <!-- Vendors -->
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-    <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
     <script type="text/javascript" src="src/js/vendors/cdv-plugin-fb-connect.js"></script>
     <script type="text/javascript" src="src/js/vendors/angular.min.js"></script>
     <script type="text/javascript" src="src/js/vendors/angular-touch.js"></script>
+    <script type="text/javascript" src="src/js/vendors/angular-animate.js"></script>
+    <script type='text/javascript' src='src/js/vendors/firebase.js'></script>
+    <script type='text/javascript' src='src/js/vendors/firebase-simple-login.js'></script>
+    <script type='text/javascript' src="src/js/vendors/angularfire.min.js"></script>
 
     <!-- Angular app -->
-    <script type="text/javascript" src="src/js/app.js"></script>
-    <script type="text/javascript" src="src/js/controllers/main.js"></script>
-    <script type="text/javascript" src="src/js/services/facebook.js"></script>
+    <script type="text/javascript" src="dist/js/fave-app.js"></script>
   </head>
   <body ng-controller="mainController">
+
+        <input ng-model="activeUser.email">
+        <input ng-model="activeUser.test">
+        <input ng-model="activeUser.new">
 
         <input type="text" ng-model="test">
         <p ng-bind="test">Intet</p>
 
         <button ng-click="login()">Login</button>
         <button ng-click="me()">Me</button>
+
+        isSwiped: {{isSwiped}}
+        <div ng-swipe-right="isSwiped = true" ng-swipe-left="isSwiped = false" style="height: 100px; border: 1px solid black;">
+            swipe me to the right!!
+        </div>
+        <h1 ng-show="isSwiped">Jeg er en overskrift!!</h1>
 
         <div id="fb-root"></div>
     </body>

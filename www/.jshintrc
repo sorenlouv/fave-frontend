@@ -2,6 +2,7 @@
     "unused": false,
     "quotmark": false,
     "es3": true,
+    "debug": true,
     "globals": {
         "console": true,
         "module": true,
@@ -11,6 +12,8 @@
         "angular": true,
         "FB": true,
         "app": true,
-        "CDV": true
+        "CDV": true,
+        "Firebase": true,
+        "FirebaseSimpleLogin": true
     }
 }
