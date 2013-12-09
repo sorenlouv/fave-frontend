@@ -3,6 +3,7 @@
     "quotmark": false,
     "es3": true,
     "debug": true,
+    "newcap": false,
     "globals": {
         "console": true,
         "module": true,
@@ -14,6 +15,7 @@
         "app": true,
         "CDV": true,
         "Firebase": true,
-        "FirebaseSimpleLogin": true
+        "FirebaseSimpleLogin": true,
+        "Swipe": true
     }
 }

@@ -18,25 +18,17 @@
   <script type="text/javascript" src="src/js/vendors/angular.min.js"></script>
   <script type="text/javascript" src="src/js/vendors/angular-touch.js"></script>
   <script type="text/javascript" src="src/js/vendors/angular-animate.js"></script>
-  <script type='text/javascript' src='src/js/vendors/firebase.js'></script>
-  <script type='text/javascript' src='src/js/vendors/firebase-simple-login.js'></script>
-  <script type='text/javascript' src="src/js/vendors/angularfire.min.js"></script>
+  <script type="text/javascript" src="src/js/vendors/firebase.js"></script>
+  <script type="text/javascript" src="src/js/vendors/firebase-simple-login.js"></script>
+  <script type="text/javascript" src="src/js/vendors/angularfire.min.js"></script>
+  <script type="text/javascript" src="src/js/vendors/swipe.js"></script>
 
   <!-- Angular app -->
   <script type="text/javascript" src="dist/js/fave-app.js"></script>
   </head>
   <body ng-controller="mainController">
 
-    <section>
-      <h1>Tom Ka Gai</h1>
-      <h3>11$ - 21 Faves</h3>
-      <span>ASIO Thai</span>
-      <div class="takeout">
-        <img src="img/chicken.jpg">
-        <span></span>
-        <p>Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. </p>
-      </div>
-    </section>
+    <section id="slider" class="swipe"></section>
 
     <div id="fb-root"></div>
   </body>
