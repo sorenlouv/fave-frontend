@@ -24,22 +24,17 @@
   </head>
   <body ng-controller="mainController">
 
-        <input ng-model="activeUser.email">
-        <input ng-model="activeUser.test">
-        <input ng-model="activeUser.new">
+    <input ng-model="activeUser.email">
 
-        <input type="text" ng-model="test">
-        <p ng-bind="test">Intet</p>
+    <button ng-click="login()">Login</button>
+    <button ng-click="me()">Me</button>
 
-        <button ng-click="login()">Login</button>
-        <button ng-click="me()">Me</button>
+    isSwiped: {{isSwiped}}
+    <div ng-swipe-right="isSwiped = true" ng-swipe-left="isSwiped = false" style="height: 100px; border: 1px solid black;">
+        swipe me to the right!!
+    </div>
+    <h1 ng-show="isSwiped">Jeg er en overskrift!!</h1>
 
-        isSwiped: {{isSwiped}}
-        <div ng-swipe-right="isSwiped = true" ng-swipe-left="isSwiped = false" style="height: 100px; border: 1px solid black;">
-            swipe me to the right!!
-        </div>
-        <h1 ng-show="isSwiped">Jeg er en overskrift!!</h1>
-
-        <div id="fb-root"></div>
-    </body>
+    <div id="fb-root"></div>
+  </body>
 </html>
