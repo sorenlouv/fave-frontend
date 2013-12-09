@@ -146,6 +146,7 @@ app.factory('firebaseAuth', ['$q', 'safeApply', function($q, safeApply) {
 
     onAuthenticationChange: function(error, facebookUser) {
       if(error){
+        // auth error
         console.log("Authentication error", error);
         this.userReadyDef.reject(error);
 
@@ -157,7 +158,8 @@ app.factory('firebaseAuth', ['$q', 'safeApply', function($q, safeApply) {
         });
 
       }else{
-        userReadyDef.reject("User signed out");
+        // user signed out
+        // userReadyDef.reject("User signed out");
       }
     }
   };
