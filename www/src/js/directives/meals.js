@@ -1,9 +1,10 @@
-app.directive('swipe', ['$timeout', function ($timeout) {
+app.directive('swipeMeals', ['$timeout', function ($timeout) {
   'use strict';
 
   return {
-    restrict: 'C',
+    restrict: 'E',
     templateUrl: 'src/templates/meal.html',
+    replace: true,
     controller: function($scope){
       $scope.meals = [
         {
@@ -26,7 +27,15 @@ app.directive('swipe', ['$timeout', function ($timeout) {
     },
     link: function ($scope, $element, $attrs) {
       $timeout(function(){
-        var swipeElement = Swipe($element[0]);
+        var swipeElement = Swipe($element[0], {
+          disableScroll: true,
+          callback: function(index, elem) {},
+          transitionEnd: function(index, elem) {}
+        });
+
+        $scope.prev = swipeElement.prev;
+        $scope.next = swipeElement.next;
+
       }, 0);
     }
   };
