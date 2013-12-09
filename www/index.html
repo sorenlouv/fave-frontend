@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Profile</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=0">
-    <link rel="stylesheet" href="dist/css/fave-app.css">
+  <title>FAVE - Take-Away Favorites</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="dist/css/fave-app.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="dist/css/font-awesome.css" />
 
-    <!-- Phonegap specific stuff -->
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="src/js/bootstrap-app.js"></script>
+  <!-- Phonegap specific stuff -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="src/js/bootstrap-app.js"></script>
 
-    <!-- Vendors -->
-    <script type="text/javascript" src="src/js/vendors/cdv-plugin-fb-connect.js"></script>
-    <script type="text/javascript" src="src/js/vendors/angular.min.js"></script>
-    <script type="text/javascript" src="src/js/vendors/angular-touch.js"></script>
-    <script type="text/javascript" src="src/js/vendors/angular-animate.js"></script>
-    <script type='text/javascript' src='src/js/vendors/firebase.js'></script>
-    <script type='text/javascript' src='src/js/vendors/firebase-simple-login.js'></script>
-    <script type='text/javascript' src="src/js/vendors/angularfire.min.js"></script>
+  <!-- Vendors -->
+  <script type="text/javascript" src="src/js/vendors/cdv-plugin-fb-connect.js"></script>
+  <script type="text/javascript" src="src/js/vendors/angular.min.js"></script>
+  <script type="text/javascript" src="src/js/vendors/angular-touch.js"></script>
+  <script type="text/javascript" src="src/js/vendors/angular-animate.js"></script>
+  <script type='text/javascript' src='src/js/vendors/firebase.js'></script>
+  <script type='text/javascript' src='src/js/vendors/firebase-simple-login.js'></script>
+  <script type='text/javascript' src="src/js/vendors/angularfire.min.js"></script>
 
-    <!-- Angular app -->
-    <script type="text/javascript" src="dist/js/fave-app.js"></script>
+  <!-- Angular app -->
+  <script type="text/javascript" src="dist/js/fave-app.js"></script>
   </head>
   <body ng-controller="mainController">
 
-    <input ng-model="activeUser.email">
-
-    <button ng-click="login()">Login</button>
-    <button ng-click="me()">Me</button>
-
-    isSwiped: {{isSwiped}}
-    <div ng-swipe-right="isSwiped = true" ng-swipe-left="isSwiped = false" style="height: 100px; border: 1px solid black;">
-        swipe me to the right!!
-    </div>
-    <h1 ng-show="isSwiped">Jeg er en overskrift!!</h1>
+    <section>
+      <h1>Tom Ka Gai</h1>
+      <h3>11$ - 21 Faves</h3>
+      <span>ASIO Thai</span>
+      <div class="takeout">
+        <img src="img/chicken.jpg">
+        <span></span>
+        <p>Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. </p>
+      </div>
+    </section>
 
     <div id="fb-root"></div>
   </body>

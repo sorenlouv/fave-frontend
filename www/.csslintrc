@@ -1,3 +1,5 @@
 {
-  "qualified-headings": false
+  "qualified-headings": false,
+  "import": false,
+  "box-model": false
 }
