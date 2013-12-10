@@ -34,16 +34,6 @@ module.exports = function(grunt) {
       }
     },
 
-    csslint: {
-      options: {
-        csslintrc: '.csslintrc' // Get CSSLint options from external file.
-      },
-      strict: {
-        options: {},
-        src: ['dist/css/<%= pkg.name %>.css']
-      }
-    },
-
     // compile less to css
     less: {
       development: {
@@ -57,6 +47,16 @@ module.exports = function(grunt) {
       }
     },
 
+    csslint: {
+      options: {
+        csslintrc: '.csslintrc' // Get CSSLint options from external file.
+      },
+      strict: {
+        options: {},
+        src: ['dist/css/<%= pkg.name %>.css']
+      }
+    },
+
     watch: {
       options: {
         livereload: true
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: 'src/**/*.less',
-        tasks: ['concat:js', 'less:development', 'csslint'],
+        tasks: ['concat:less', 'less:development', 'csslint'],
         options: {
           livereload: false
         }
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
         files: 'dist/css/<%= pkg.name %>.css'
       },
       templates: {
-        files: ['src/*.html', 'index.html']
+        files: ['src/**/*.html', 'index.html']
       }
     }
   });
