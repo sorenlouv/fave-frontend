@@ -16,7 +16,7 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-app.directive('swipeMeals', ['$timeout', function ($timeout) {
+app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($timeout, angularFireCollection) {
   'use strict';
 
   return {
@@ -24,37 +24,26 @@ app.directive('swipeMeals', ['$timeout', function ($timeout) {
     templateUrl: 'src/directives/swipe-meals/meal.html',
     replace: true,
     controller: function($scope){
-      $scope.meals = [
-        {
-          title: "Tom Ka Gai",
-          description: "Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. ",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        },
-        {
-          title: "Test",
-          description: "Halløj!",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        }
-      ];
     },
     link: function ($scope, $element, $attrs) {
-      $timeout(function(){
-        var swipeElement = Swipe($element[0], {
-          disableScroll: true,
-          callback: function(index, elem) {},
-          transitionEnd: function(index, elem) {}
-        });
+      var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
+      $scope.meals = angularFireCollection(mealsRef, function(){
+        initializeSlider();
+      });
 
-        $scope.prev = swipeElement.prev;
-        $scope.next = swipeElement.next;
+      var initializeSlider = function(){
+        $timeout(function(){
+          var swipeElement = Swipe($element[0], {
+            disableScroll: true,
+            callback: function(index, elem) {},
+            transitionEnd: function(index, elem) {}
+          });
 
-      }, 0);
+          $scope.prev = swipeElement.prev;
+          $scope.next = swipeElement.next;
+        }, 0);
+
+      };
     }
   };
 }]);
