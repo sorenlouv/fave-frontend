@@ -1,4 +1,76 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'firebase']);
+var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'firebase', 'ngRoute']);
+
+app.config(['$routeProvider', function($routeProvider) {
+  'use strict';
+
+  $routeProvider
+    .when('/home', {
+      templateUrl: 'src/shared/templates/home.html',
+      controller: 'adminController'
+    })
+    .when('/admin', {
+      templateUrl: 'src/admin/admin.html',
+      controller: 'adminController'
+    })
+    .otherwise({redirectTo: '/home'});
+}]);
+
+
+var phonegap = {
+  // Application Constructor
+  initialize: function() {
+    'use strict';
+
+    this.bindEvents();
+  },
+
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function() {
+    'use strict';
+
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+      document.addEventListener('deviceready', this.bootstrapAngular.bind(this), false);
+    } else {
+      this.bootstrapAngular();
+    }
+  },
+
+  loadJS: function(src, callback) {
+    'use strict';
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onreadystatechange = s.onload = function() {
+        var state = s.readyState;
+        if (!callback.done && (!state || /loaded|complete/.test(state))) {
+            callback.done = true;
+            callback();
+        }
+    };
+    document.getElementsByTagName('head')[0].appendChild(s);
+  },
+
+  // deviceready Event Handler
+  bootstrapAngular: function() {
+    'use strict';
+
+    this.loadJS('dist/js/vendors/angular.min.js', function(){
+      angular.element(document).ready(function() {
+        angular.bootstrap(document, ['faveapp']);
+      });
+    });
+  }
+};
+
+// initialize phonegap
+phonegap.initialize();
+app.controller('adminController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+  'use strict';
+
+}]);
 app.controller('mainController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
@@ -26,48 +98,6 @@ app.controller('mainController', ['$scope', 'facebook', 'safeApply', function ($
         alert("Hej " + response.name);
       });
     });
-  };
-}]);
-app.directive('swipeMeals', ['$timeout', function ($timeout) {
-  'use strict';
-
-  return {
-    restrict: 'E',
-    templateUrl: 'src/templates/meal.html',
-    replace: true,
-    controller: function($scope){
-      $scope.meals = [
-        {
-          title: "Tom Ka Gai",
-          description: "Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. ",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        },
-        {
-          title: "Test",
-          description: "Halløj!",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        }
-      ];
-    },
-    link: function ($scope, $element, $attrs) {
-      $timeout(function(){
-        var swipeElement = Swipe($element[0], {
-          disableScroll: true,
-          callback: function(index, elem) {},
-          transitionEnd: function(index, elem) {}
-        });
-
-        $scope.prev = swipeElement.prev;
-        $scope.next = swipeElement.next;
-
-      }, 0);
-    }
   };
 }]);
 app.factory('facebook', ['$q', function($q) {
@@ -118,7 +148,7 @@ app.factory('facebook', ['$q', function($q) {
     phone: {
       // Load SDK
       loadSDK: function(){
-        loadJS('src/js/vendors/facebook-sdk-phone.js');
+        loadJS('dist/js/vendors/facebook-sdk-phone.js');
       },
 
       // Run FB.init when SDK is ready
@@ -137,7 +167,7 @@ app.factory('facebook', ['$q', function($q) {
     web: {
       // Load SDK
       loadSDK: function(){
-        loadJS('src/js/vendors/facebook-sdk-web.js');
+        loadJS('dist/js/vendors/facebook-sdk-web.js');
       },
 
       // Run FB.init when SDK is ready
@@ -234,4 +264,46 @@ angular.module('safeApply',[]).factory('safeApply', [function($rootScope) {
             }
         }
     };
+}]);
+app.directive('swipeMeals', ['$timeout', function ($timeout) {
+  'use strict';
+
+  return {
+    restrict: 'E',
+    templateUrl: 'src/swipe-meals/meal.html',
+    replace: true,
+    controller: function($scope){
+      $scope.meals = [
+        {
+          title: "Tom Ka Gai",
+          description: "Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. ",
+          restaurant: "ASIO Thai",
+          price: 11,
+          faves: 21,
+          images: ["img/chicken.jpg"]
+        },
+        {
+          title: "Test",
+          description: "Halløj!",
+          restaurant: "ASIO Thai",
+          price: 11,
+          faves: 21,
+          images: ["img/chicken.jpg"]
+        }
+      ];
+    },
+    link: function ($scope, $element, $attrs) {
+      $timeout(function(){
+        var swipeElement = Swipe($element[0], {
+          disableScroll: true,
+          callback: function(index, elem) {},
+          transitionEnd: function(index, elem) {}
+        });
+
+        $scope.prev = swipeElement.prev;
+        $scope.next = swipeElement.next;
+
+      }, 0);
+    }
+  };
 }]);
