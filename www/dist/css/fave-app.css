@@ -14,10 +14,10 @@
   position: relative;
 }
 .meals {
-  border: 1px solid #ddd;
   width: 94%;
   margin: 0 auto;
   text-align: center;
+  border-top: 3px double #ddd;
 }
 .meals h1 {
   font-size: 24px;
@@ -35,11 +35,16 @@
 }
 .meals .takeout {
   margin-top: 20px;
+  overflow: auto;
+}
+.meals .takeout img {
+  float: left;
 }
 .meals .takeout .meal {
   width: 100%;
 }
-.meals .takeout .desc {
+.meals .desc {
+  display: block;
   padding: 20px 0;
   width: 70%;
   margin: 0 auto;

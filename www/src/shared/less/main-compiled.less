@@ -7,7 +7,6 @@
   .swipe-wrap {
     overflow: hidden;
     position: relative;
-
     .single-meal {
       float:left;
       width:100%;
@@ -20,10 +19,10 @@
 // Visual styles
 
 .meals {
-  border: 1px solid #ddd;
   width: 94%;
   margin: 0 auto;
   text-align: center;
+  border-top: 3px double #ddd;
 
   h1 {
     font-size: 24px;
@@ -35,21 +34,29 @@
     font-size: 14px;
     font-weight: 300;
   }
+
   .subheader {
     font-size: 14px;
     font-weight: 300;
   }
   .takeout {
     margin-top: 20px;
+    overflow: auto;
+    img {
+      float: left;
+    }
     .meal {
       width: 100%;
     }
-    .desc {
-      padding: 20px 0;
-      width: 70%;
-      margin: 0 auto;
-    }
+
   }
+  .desc {
+    display: block;
+    padding: 20px 0;
+    width: 70%;
+    margin: 0 auto;
+  }
+
   .actions {
     display: none;
     margin-bottom: 20px;
