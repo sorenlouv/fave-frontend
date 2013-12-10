@@ -1,11 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400);
-@font-face {
-  font-family: 'bebas_neueregular';
-  src: url('bebasneue-webfont.eot');
-  src: url('bebasneue-webfont.eot?#iefix') format('embedded-opentype'), url('bebasneue-webfont.woff') format('woff'), url('bebasneue-webfont.ttf') format('truetype'), url('bebasneue-webfont.svg#bebas_neueregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 .meals {
   overflow: hidden;
   visibility: hidden;
@@ -20,44 +13,48 @@
   width: 100%;
   position: relative;
 }
-section {
+.meals {
+  border: 1px solid #ddd;
+  width: 94%;
+  margin: 0 auto;
   text-align: center;
 }
-section h1 {
+.meals h1 {
   font-size: 24px;
-  margin: 20px 0 0 0 ;
-  font-weight: 300;
+  font-weight: normal;
+  margin: 20px 0 0 0;
 }
-section h3 {
+.meals h3 {
   margin: 0;
   font-size: 14px;
   font-weight: 300;
 }
-section span {
-  font-size: 12px;
-  font-weight: 300;
-  color: #333;
-}
-section .takeout {
-  margin-top: 20px;
-  text-align: center;
-}
-section .takeout img {
-  width: 300px;
-}
-section .takeout p {
-  margin: 0 auto;
-  margin-top: 10px;
-  text-align: center;
+.meals .subheader {
   font-size: 14px;
   font-weight: 300;
-  width: 260px;
 }
-section .takeout span {
-  display: block;
-  margin-top: 10px;
-  color: #e45c36;
-  font-size: 18px;
+.meals .takeout {
+  margin-top: 20px;
+}
+.meals .takeout .meal {
+  width: 100%;
+}
+.meals .takeout .desc {
+  padding: 20px 0;
+  width: 70%;
+  margin: 0 auto;
+}
+.meals .actions {
+  display: none;
+  margin-bottom: 20px;
+}
+.meals .actions a {
+  cursor: pointer;
+}
+@media screen and (min-width: 800px) {
+  .actions {
+    display: block !important;
+  }
 }
 .clear {
   clear: both;
@@ -70,11 +67,17 @@ body {
 }
 header {
   text-align: center;
-  height: 44px;
+  height: 66px;
   background-color: #fff;
 }
-header img {
-  margin-top: 10px;
+header .action {
+  float: left;
+  margin: 25px;
+  color: #e45c36;
+}
+header .logo {
+  padding-top: 10px;
+  margin: 10px 0 0 -66px;
   height: 30px;
 }
 footer {

@@ -3,16 +3,19 @@
     <div class="single-meal" ng-repeat="meal in meals">
       <h1 ng-bind="meal.title"></h1>
       <h3>
-        <span ng-bind="meal.price"></span> -
-        <span ng-bind="meal.faves"></span>
-      </h3>
-      <span ng-bind="meal.restaurant"></span>
+        <span ng-bind="meal.price"></span>$ -
+        <span ng-bind="meal.faves"></span> Faves
+        <br> 
+        <span ng-bind="meal.restaurant"></span>
+      </h3>      
       <div class="takeout">
-        <img ng-src="{{meal.images[0]}}" width="200">
-        <p ng-bind="meal.description"></p>
+        <img ng-src="{{meal.images[0]}}" class="meal">
+        <p ng-bind="meal.description" class="desc"></p>
       </div>
     </div>
   </div>
-  <a ng-click="prev()">Prev</a>
-  <a ng-click="next()">Next</a>
+  <div class="actions">
+    <a ng-click="prev()">Prev</a>
+    <a ng-click="next()">Next</a>
+  </div>
 </div>

@@ -1,8 +1,9 @@
+// Functional styles
+
 .meals {
   overflow: hidden;
   visibility: hidden;
   position: relative;
-
   .swipe-wrap {
     overflow: hidden;
     position: relative;
@@ -15,46 +16,54 @@
   }
 }
 
-// Rewrite:
-section {
+
+// Visual styles
+
+.meals {
+  border: 1px solid #ddd;
+  width: 94%;
+  margin: 0 auto;
   text-align: center;
 
   h1 {
     font-size: 24px;
-    margin: 20px 0 0 0 ;
-    font-weight: 300;
+    font-weight: normal;
+    margin: 20px 0 0 0;
   }
-
   h3 {
     margin: 0;
     font-size: 14px;
     font-weight: 300;
   }
-  span {
-    font-size: 12px;
-    font-weight: 300;
-    color: #333;
+  .subheader {
+    font-size: 14px;
+    font-weight: 300;  
   }
   .takeout {
     margin-top: 20px;
-    text-align: center;
-
-    img {
-      width: 300px;
+    .meal {
+      width: 100%;
     }
-    p {
+    .desc {
+      padding: 20px 0;
+      width: 70%;
       margin: 0 auto;
-      margin-top: 10px;
-      text-align: center;
-      font-size: 14px;
-      font-weight: 300;
-      width: 260px;
-    }
-    span {
-      display: block;
-      margin-top: 10px;
-      color: #e45c36;
-      font-size: 18px;
     }
   }
+  .actions {
+    display: none;
+    margin-bottom: 20px;
+    a {
+      cursor: pointer;
+    }
+  }
+}
+
+
+@media screen and (min-width: 800px) {
+  .actions {
+    display: block !important;
+  }
+
+    // this css will only be used when the screen size is min 800px
 }
