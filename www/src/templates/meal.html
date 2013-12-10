@@ -1,0 +1,24 @@
+<div class="meals">
+  <div class="swipe-wrap">
+    <div class="single-meal" ng-repeat="meal in meals">
+      <div class="border">
+        <h1 ng-bind="meal.title"></h1>
+        <h3>
+          <span ng-bind="meal.price"></span>$ -
+          <span ng-bind="meal.faves"></span> Faves
+          <br> 
+          <span ng-bind="meal.restaurant"></span>
+        </h3>      
+        <div class="takeout">
+          <img ng-src="{{meal.images[0]}}" class="meal">
+        </div>
+      </div>
+      <div class="clear"></div>
+      <p ng-bind="meal.description" class="desc"></p>
+    </div>
+  </div>
+  <div class="actions">
+    <a ng-click="prev()">Prev</a>
+    <a ng-click="next()">Next</a>
+  </div>
+</div>
