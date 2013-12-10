@@ -3,7 +3,7 @@ app.directive('swipeMeals', ['$timeout', function ($timeout) {
 
   return {
     restrict: 'E',
-    templateUrl: 'src/templates/meal.html',
+    templateUrl: 'src/swipe-meals/meal.html',
     replace: true,
     controller: function($scope){
       $scope.meals = [

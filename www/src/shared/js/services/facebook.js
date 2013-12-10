@@ -46,7 +46,7 @@ app.factory('facebook', ['$q', function($q) {
     phone: {
       // Load SDK
       loadSDK: function(){
-        loadJS('src/js/vendors/facebook-sdk-phone.js');
+        loadJS('dist/js/vendors/facebook-sdk-phone.js');
       },
 
       // Run FB.init when SDK is ready
@@ -65,7 +65,7 @@ app.factory('facebook', ['$q', function($q) {
     web: {
       // Load SDK
       loadSDK: function(){
-        loadJS('src/js/vendors/facebook-sdk-web.js');
+        loadJS('dist/js/vendors/facebook-sdk-web.js');
       },
 
       // Run FB.init when SDK is ready

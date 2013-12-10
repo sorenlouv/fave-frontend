@@ -9,13 +9,7 @@ module.exports = function(grunt) {
         separator: '\n'
       },
       dist: {
-        src: [
-          'src/js/app.js',
-          'src/js/controllers/*.js',
-          'src/js/directives/*.js',
-          'src/js/filters/*.js',
-          'src/js/services/*.js'
-          ],
+        src: ['src/**/*.js'],
         dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
@@ -32,7 +26,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['src/js/**/*.js'],
+      files: ['src/**/*.js'],
       // JSHint options http://jshint.com/docs/options/
       options: {
         jshintrc: '.jshintrc'
@@ -53,7 +47,7 @@ module.exports = function(grunt) {
     less: {
       development: {
         options: {
-          paths: ["src/less/"]
+          paths: ["src/shared/less/"]
           // cleancss: true
         },
         files: {
@@ -67,11 +61,11 @@ module.exports = function(grunt) {
         livereload: true
       },
       js: {
-        files: 'src/js/**/*.js',
+        files: 'src/**/*.js',
         tasks: ['jshint', 'concat']
       },
       less: {
-        files: 'src/less/**/*.less',
+        files: 'src/**/*.less',
         tasks: ['less:development', 'csslint'],
         options: {
           livereload: false
@@ -81,7 +75,7 @@ module.exports = function(grunt) {
         files: 'dist/css/<%= pkg.name %>.css'
       },
       templates: {
-        files: ['src/templates/*.html', 'index.html']
+        files: ['src/*.html', 'index.html']
       }
     }
   });
