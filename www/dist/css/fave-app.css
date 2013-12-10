@@ -14,7 +14,7 @@
   position: relative;
 }
 .meals {
-  width: 94%;
+  width: 90%;
   margin: 0 auto;
   text-align: center;
 }
@@ -29,9 +29,8 @@
   font-weight: 300;
 }
 .meals .border {
-  border: 1px solid #ddd;
-  float: left;
-  clear: both;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 .meals .subheader {
   font-size: 14px;
@@ -50,7 +49,7 @@
 .meals .desc {
   display: block;
   padding: 20px 0;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
 }
 .meals .actions {

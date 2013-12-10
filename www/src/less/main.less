@@ -1,0 +1,50 @@
+@import "_colors.less";
+@import "_variables.less";
+@import "_fonts.less";
+
+// Components
+@import "components/meal.less";
+
+.clear {
+  clear: both;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Averia Serif Libre', cursive;
+  color: #323232;
+}
+
+header {
+  text-align: center;
+  height: 66px;
+  background-color: #fff;
+  .action {
+    float: left; 
+    margin: 25px;
+    color: @red;
+  }
+  .logo {
+    padding-top: 10px;
+    margin: 10px 0 0 -66px;
+    height: 30px;
+  }
+}
+
+footer {
+  height: 44px;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+
+  h5 {
+    margin: 0;
+    padding: 14px;
+    color: #bbbbbb;
+    display: inline-block;
+  }
+  i {
+    margin: 14px 14px 0 0;
+    float: right;
+    color: #bbbbbb;
+  }
+}
