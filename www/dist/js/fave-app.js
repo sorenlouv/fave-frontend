@@ -111,6 +111,10 @@ app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($
       });
     });
   };
+
+  $scope.action = function() {
+    console.log("hey");
+  };
 }]);
 app.factory('facebook', ['$q', function($q) {
   'use strict';
