@@ -3,25 +3,26 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     // Concatenate files
     concat: {
       options: {
         separator: '\n'
       },
-      dist: {
-        src: ['src/**/*.js'],
+      js: {
+        src: [
+          'src/**/*.js',        // Concat all js files
+          '!src/bootstrap-app.js'  // ... except this on!
+        ],
         dest: 'dist/js/<%= pkg.name %>.js'
-      }
-    },
-    // Minify
-    uglify: {
-      options: {
-        mangle: false // should be changed to true, but due to dependency injection errors can't ATM
       },
-      dist: {
-        files: {
-          'dist/js/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
-        }
+      less: {
+        src: [
+          'src/directives/**/*.less',   // Directive
+          'src/pages/**/*.less',        // Pages
+          'src/shared/less/main.less'   // Everything else
+        ],
+        dest: 'src/shared/less/main-compiled.less'
       }
     },
 
@@ -43,7 +44,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // compile css
+    // compile less to css
     less: {
       development: {
         options: {
@@ -51,7 +52,7 @@ module.exports = function(grunt) {
           // cleancss: true
         },
         files: {
-          "dist/css/<%= pkg.name %>.css": "src/less/main.less"
+          "dist/css/<%= pkg.name %>.css": "src/shared/less/main-compiled.less"
         }
       }
     },
@@ -62,11 +63,11 @@ module.exports = function(grunt) {
       },
       js: {
         files: 'src/**/*.js',
-        tasks: ['jshint', 'concat']
+        tasks: ['jshint', 'concat:js']
       },
       less: {
         files: 'src/**/*.less',
-        tasks: ['less:development', 'csslint'],
+        tasks: ['concat:js', 'less:development', 'csslint'],
         options: {
           livereload: false
         }
@@ -82,13 +83,12 @@ module.exports = function(grunt) {
 
   // load in the plugins we need
   grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s) - will be run by writing "grunt" from the command line
-  grunt.registerTask('default', ['less:development', 'jshint', 'csslint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['concat:less', 'less:development', 'csslint', 'jshint', 'concat:js']);
 
 };

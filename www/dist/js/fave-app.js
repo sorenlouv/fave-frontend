@@ -5,73 +5,64 @@ app.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider
     .when('/home', {
-      templateUrl: 'src/shared/templates/home.html',
-      controller: 'adminController'
+      templateUrl: 'src/pages/home/home.html',
+      controller: 'homeController'
     })
     .when('/admin', {
-      templateUrl: 'src/admin/admin.html',
+      templateUrl: 'src/pages/admin/admin.html',
       controller: 'adminController'
     })
     .otherwise({redirectTo: '/home'});
 }]);
 
 
-var phonegap = {
-  // Application Constructor
-  initialize: function() {
-    'use strict';
+app.directive('swipeMeals', ['$timeout', function ($timeout) {
+  'use strict';
 
-    this.bindEvents();
-  },
-
-  // Bind Event Listeners
-  //
-  // Bind any events that are required on startup. Common events are:
-  // 'load', 'deviceready', 'offline', and 'online'.
-  bindEvents: function() {
-    'use strict';
-
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
-      document.addEventListener('deviceready', this.bootstrapAngular.bind(this), false);
-    } else {
-      this.bootstrapAngular();
-    }
-  },
-
-  loadJS: function(src, callback) {
-    'use strict';
-    var s = document.createElement('script');
-    s.src = src;
-    s.async = true;
-    s.onreadystatechange = s.onload = function() {
-        var state = s.readyState;
-        if (!callback.done && (!state || /loaded|complete/.test(state))) {
-            callback.done = true;
-            callback();
+  return {
+    restrict: 'E',
+    templateUrl: 'src/directives/swipe-meals/meal.html',
+    replace: true,
+    controller: function($scope){
+      $scope.meals = [
+        {
+          title: "Tom Ka Gai",
+          description: "Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. ",
+          restaurant: "ASIO Thai",
+          price: 11,
+          faves: 21,
+          images: ["img/chicken.jpg"]
+        },
+        {
+          title: "Test",
+          description: "Halløj!",
+          restaurant: "ASIO Thai",
+          price: 11,
+          faves: 21,
+          images: ["img/chicken.jpg"]
         }
-    };
-    document.getElementsByTagName('head')[0].appendChild(s);
-  },
+      ];
+    },
+    link: function ($scope, $element, $attrs) {
+      $timeout(function(){
+        var swipeElement = Swipe($element[0], {
+          disableScroll: true,
+          callback: function(index, elem) {},
+          transitionEnd: function(index, elem) {}
+        });
 
-  // deviceready Event Handler
-  bootstrapAngular: function() {
-    'use strict';
+        $scope.prev = swipeElement.prev;
+        $scope.next = swipeElement.next;
 
-    this.loadJS('dist/js/vendors/angular.min.js', function(){
-      angular.element(document).ready(function() {
-        angular.bootstrap(document, ['faveapp']);
-      });
-    });
-  }
-};
-
-// initialize phonegap
-phonegap.initialize();
-app.controller('adminController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+      }, 0);
+    }
+  };
+}]);
+app.controller('adminController', ['$scope', function ($scope) {
   'use strict';
 
 }]);
-app.controller('mainController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
   facebook.userReady.then(function(){
@@ -264,46 +255,4 @@ angular.module('safeApply',[]).factory('safeApply', [function($rootScope) {
             }
         }
     };
-}]);
-app.directive('swipeMeals', ['$timeout', function ($timeout) {
-  'use strict';
-
-  return {
-    restrict: 'E',
-    templateUrl: 'src/swipe-meals/meal.html',
-    replace: true,
-    controller: function($scope){
-      $scope.meals = [
-        {
-          title: "Tom Ka Gai",
-          description: "Thai Chicken Soup (Tom Ka Gai) has that distinctive Thai flavor - a balance of spicy, salty, sweet and sour. ",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        },
-        {
-          title: "Test",
-          description: "Halløj!",
-          restaurant: "ASIO Thai",
-          price: 11,
-          faves: 21,
-          images: ["img/chicken.jpg"]
-        }
-      ];
-    },
-    link: function ($scope, $element, $attrs) {
-      $timeout(function(){
-        var swipeElement = Swipe($element[0], {
-          disableScroll: true,
-          callback: function(index, elem) {},
-          transitionEnd: function(index, elem) {}
-        });
-
-        $scope.prev = swipeElement.prev;
-        $scope.next = swipeElement.next;
-
-      }, 0);
-    }
-  };
 }]);

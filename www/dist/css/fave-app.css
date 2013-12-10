@@ -51,11 +51,6 @@
 .meals .actions a {
   cursor: pointer;
 }
-@media screen and (min-width: 800px) {
-  .actions {
-    display: block !important;
-  }
-}
 .clear {
   clear: both;
 }

@@ -1,4 +1,4 @@
-app.controller('mainController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
   facebook.userReady.then(function(){
