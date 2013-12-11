@@ -1,4 +1,4 @@
-app.factory('facebook', ['$q', function($q) {
+app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   'use strict';
 
   var appId = "627802337276971";
@@ -41,6 +41,7 @@ app.factory('facebook', ['$q', function($q) {
   });
   var userReady = userReadyDef.promise;
 
+  //
   var devices = {
     // phone
     phone: {
@@ -61,11 +62,11 @@ app.factory('facebook', ['$q', function($q) {
       }
     },
 
-    // Web
-    web: {
+    // Desktop
+    desktop: {
       // Load SDK
       loadSDK: function(){
-        loadJS('dist/js/vendors/facebook-sdk-web.js');
+        loadJS('dist/js/vendors/facebook-sdk-desktop.js');
       },
 
       // Run FB.init when SDK is ready
@@ -79,7 +80,7 @@ app.factory('facebook', ['$q', function($q) {
     }
   };
 
-  var device = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) ? devices.phone : devices.web;
+  var device = helpers.isPhone() ? devices.phone : devices.desktop;
   device.loadSDK();
   device.init();
 

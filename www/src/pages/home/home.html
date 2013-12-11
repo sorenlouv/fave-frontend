@@ -2,13 +2,19 @@
   <a ng-click="action()" class="menu"><i class="fa fa-cog"></i> </a>
   <img class="logo" src="img/logo-red.png">
   <a ng-click="action()" class="action"></a>
-  <i class="fa fa-plus action"></i>
 
-  <button ng-click="captureImage()">Snap pic</button>
+  <div class="add-image-desktop" ng-if="!isPhone">
+    <i class="fa fa-plus action"></i>
+    <input file-upload-on-change="uploadImage" type="file" />
+  </div>
+  <div class="add-image-phone" ng-if="isPhone">
+    <i class="fa fa-plus action" ng-click="captureImage()"></i>
+  </div>
+
+
 </header>
 
-Response: {{imageResponse}}
-Image: <img ng-src="{{imageResponse}}" height="200">
+<img ng-src="{{imageResponse}}" height="200">
 
 <swipe-meals></swipe-meals>
 

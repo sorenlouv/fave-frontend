@@ -1,5 +1,7 @@
-app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+app.controller('homeController', ['$scope', 'facebook', 'safeApply', 'helpers', function ($scope, facebook, safeApply, helpers) {
   'use strict';
+
+  $scope.isPhone = helpers.isPhone();
 
   // facebook.userReady.then(function(){
   //   FB.api('/me', function(activeUser) {
@@ -19,14 +21,21 @@ app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($
   //   });
   // };
 
-  // $scope.me = function(path){
-  //   facebook.sdkReady.then(function(){
-  //     FB.api('/me', function(response) {
-  //       alert("Hej " + response.name);
-  //     });
-  //   });
-  // };
+  // For desktop only
+  $scope.uploadImage = function($event){
+    var file = $event.target.files[0];
+    var reader = new FileReader();
 
+    reader.onload = function(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        var encodedFile = btoa(binaryString);
+        console.log(encodedFile);
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  // For mobile only
   $scope.captureImage = function(){
     navigator.camera.getPicture( function(image){
       // success

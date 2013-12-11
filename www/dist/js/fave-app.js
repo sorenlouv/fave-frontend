@@ -16,6 +16,18 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
+// make a fileinput listen for change events
+app.directive('fileUploadOnChange', [function() {
+  'use strict';
+
+  return {
+    restrict: "A",
+    link: function ($scope, $element, $attrs) {
+      var onChangeFunc = $element.scope()[$attrs.fileUploadOnChange];
+      $element.bind('change', onChangeFunc);
+    }
+  };
+}]);
 app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($timeout, angularFireCollection) {
   'use strict';
 
@@ -74,8 +86,10 @@ app.controller('adminController', ['$scope', 'angularFire', function ($scope, an
   };
 
 }]);
-app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+app.controller('homeController', ['$scope', 'facebook', 'safeApply', 'helpers', function ($scope, facebook, safeApply, helpers) {
   'use strict';
+
+  $scope.isPhone = helpers.isPhone();
 
   // facebook.userReady.then(function(){
   //   FB.api('/me', function(activeUser) {
@@ -95,14 +109,21 @@ app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($
   //   });
   // };
 
-  // $scope.me = function(path){
-  //   facebook.sdkReady.then(function(){
-  //     FB.api('/me', function(response) {
-  //       alert("Hej " + response.name);
-  //     });
-  //   });
-  // };
+  // For desktop only
+  $scope.uploadImage = function($event){
+    var file = $event.target.files[0];
+    var reader = new FileReader();
 
+    reader.onload = function(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        var encodedFile = btoa(binaryString);
+        console.log(encodedFile);
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  // For mobile only
   $scope.captureImage = function(){
     navigator.camera.getPicture( function(image){
       // success
@@ -121,7 +142,7 @@ app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($
   };
 
 }]);
-app.factory('facebook', ['$q', function($q) {
+app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   'use strict';
 
   var appId = "627802337276971";
@@ -164,6 +185,7 @@ app.factory('facebook', ['$q', function($q) {
   });
   var userReady = userReadyDef.promise;
 
+  //
   var devices = {
     // phone
     phone: {
@@ -184,11 +206,11 @@ app.factory('facebook', ['$q', function($q) {
       }
     },
 
-    // Web
-    web: {
+    // Desktop
+    desktop: {
       // Load SDK
       loadSDK: function(){
-        loadJS('dist/js/vendors/facebook-sdk-web.js');
+        loadJS('dist/js/vendors/facebook-sdk-desktop.js');
       },
 
       // Run FB.init when SDK is ready
@@ -202,7 +224,7 @@ app.factory('facebook', ['$q', function($q) {
     }
   };
 
-  var device = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) ? devices.phone : devices.web;
+  var device = helpers.isPhone() ? devices.phone : devices.desktop;
   device.loadSDK();
   device.init();
 
@@ -268,6 +290,18 @@ app.factory('firebaseAuth', ['$q', 'safeApply', function($q, safeApply) {
   };
 
   return login;
+}]);
+app.factory('helpers', [function() {
+  'use strict';
+
+  // Determine whether current user is on a phone or desktop
+  var isPhone = function(){
+    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+  };
+
+  return {
+    isPhone: isPhone
+  };
 }]);
 angular.module('safeApply',[]).factory('safeApply', [function($rootScope) {
     'use strict';
