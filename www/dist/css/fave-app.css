@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400);
+@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400,300italic);
 .meals {
   overflow: hidden;
   visibility: hidden;
@@ -20,12 +20,13 @@
   border-top: 3px double #ddd;
 }
 .meals h1 {
+  color: #333;
   font-size: 24px;
-  font-weight: normal;
+  font-weight: 300;
   margin: 20px 0 0 0;
 }
 .meals h3 {
-  margin: 0;
+  margin: 3px 0 0 0;
   font-size: 14px;
   font-weight: 300;
 }
@@ -38,6 +39,11 @@
   overflow: auto;
 }
 .meals .takeout img {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
   float: left;
 }
 .meals .takeout .meal {
@@ -48,9 +54,10 @@
   padding: 20px 0;
   width: 70%;
   margin: 0 auto;
+  font-weight: 300;
+  font-style: italic;
 }
 .meals .actions {
-  display: none;
   margin-bottom: 20px;
 }
 .meals .actions a {
@@ -67,18 +74,30 @@ body {
 }
 header {
   text-align: center;
-  height: 66px;
   background-color: #fff;
 }
-header .action {
+header .menu {
   float: left;
-  margin: 25px;
-  color: #e45c36;
+  margin: 15px 18px 18px 18px;
+  font-size: 24px;
+  height: 22px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #e45c36;
+  color: transparent;
 }
 header .logo {
-  padding-top: 10px;
-  margin: 10px 0 0 -66px;
+  padding-top: 5px;
+  margin: 10px 0 0 0;
   height: 30px;
+}
+header .action {
+  float: right;
+  margin: 18px;
+  font-size: 24px;
+  height: 22px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #e45c36;
+  color: transparent;
 }
 footer {
   height: 44px;

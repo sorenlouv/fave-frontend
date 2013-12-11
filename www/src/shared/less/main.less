@@ -1,6 +1,7 @@
 @import "_colors.less";
 @import "_variables.less";
 @import "_fonts.less";
+@import "_mixins.less";
 
 .clear {
   clear: both;
@@ -14,17 +15,31 @@ html, body {
 
 header {
   text-align: center;
-  height: 66px;
   background-color: #fff;
-  .action {
+  .menu{
     float: left;
-    margin: 25px;
-    color: @red;
+    margin: 15px 18px 18px 18px;
+    font-size: 24px;
+    height: 22px;
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: @red;
+    color: transparent;
   }
   .logo {
-    padding-top: 10px;
-    margin: 10px 0 0 -66px;
+    padding-top: 5px;
+    margin: 10px 0 0 0;
     height: 30px;
+  }
+  .action {
+    float: right;
+    margin: 18px;
+    font-size: 24px;
+    height: 22px;
+    color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: @red;
+    color: transparent;
   }
 }
 

@@ -24,12 +24,13 @@
   text-align: center;
   border-top: 3px double #ddd;
   h1 {
+    color: #333;
     font-size: 24px;
-    font-weight: normal;
+    font-weight: 300;
     margin: 20px 0 0 0;
   }
   h3 {
-    margin: 0;
+    margin: 3px 0 0 0;
     font-size: 14px;
     font-weight: 300;
   }
@@ -40,7 +41,9 @@
   .takeout {
     margin-top: 20px;
     overflow: auto;
+    // border-bottom: 1px solid #ddd;
     img {
+      .rounded();
       float: left;
     }
     .meal {
@@ -52,9 +55,10 @@
     padding: 20px 0;
     width: 70%;
     margin: 0 auto;
-  }
+    font-weight: 300;
+    font-style: italic;
+    }
   .actions {
-    display: none;
     margin-bottom: 20px;
     a {
       cursor: pointer;
