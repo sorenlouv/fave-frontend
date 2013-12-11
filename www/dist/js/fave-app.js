@@ -191,7 +191,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
     phone: {
       // Load SDK
       loadSDK: function(){
-        loadJS('dist/js/vendors/facebook-sdk-phone.js');
+        loadJS('src/vendors/facebook-sdk-phone.js');
       },
 
       // Run FB.init when SDK is ready
@@ -210,7 +210,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
     desktop: {
       // Load SDK
       loadSDK: function(){
-        loadJS('dist/js/vendors/facebook-sdk-desktop.js');
+        loadJS('src/vendors/facebook-sdk-desktop.js');
       },
 
       // Run FB.init when SDK is ready

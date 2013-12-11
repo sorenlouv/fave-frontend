@@ -39,7 +39,7 @@ var phonegap = {
   bootstrapAngular: function() {
     'use strict';
 
-    this.loadJS('dist/js/vendors/angular.min.js', function(){
+    this.loadJS('src/vendors/1.angular.min.js', function(){
       angular.element(document).ready(function() {
         angular.bootstrap(document, ['faveapp']);
       });

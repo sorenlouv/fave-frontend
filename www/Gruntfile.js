@@ -9,9 +9,17 @@ module.exports = function(grunt) {
       options: {
         separator: '\n'
       },
+      js_vendors: {
+        src: [
+          'src/vendors/*.js',
+          '!src/vendors/facebook-sdk-*.js'
+        ],
+        dest: 'dist/js/<%= pkg.name %>-vendors.js'
+      },
       js: {
         src: [
-          'src/**/*.js'        // Concat all js files
+          'src/**/*.js',
+          '!src/vendors/*.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
       },
@@ -26,7 +34,10 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['src/**/*.js'],
+      files: [
+        'src/**/*.js',
+        '!src/vendors/*.js'
+      ],
       // JSHint options http://jshint.com/docs/options/
       options: {
         jshintrc: '.jshintrc'
@@ -88,6 +99,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s) - will be run by writing "grunt" from the command line
-  grunt.registerTask('default', ['concat:less', 'less:development', 'csslint', 'jshint', 'concat:js']);
+  grunt.registerTask('default', ['concat:less', 'less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors']);
 
 };
