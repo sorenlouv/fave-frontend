@@ -51,4 +51,7 @@
     <feature name="org.apache.cordova.facebook.Connect">
       <param name="android-package" value="org.apache.cordova.facebook.ConnectPlugin" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.CameraLauncher" />
+    </feature>
 </widget>
