@@ -9,22 +9,24 @@ app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($tim
     },
     link: function ($scope, $element, $attrs) {
       var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
-      $scope.meals = angularFireCollection(mealsRef, function(){
-        initializeSlider();
+      mealsRef.on('value', function(snapshot) {
+        $scope.$apply(function(){
+          $scope.meals = snapshot.val();
+        });
+        $timeout(function(){
+          initializeSlider();
+        }, 0);
       });
 
       var initializeSlider = function(){
-        $timeout(function(){
-          var swipeElement = Swipe($element[0], {
-            disableScroll: true,
-            callback: function(index, elem) {},
-            transitionEnd: function(index, elem) {}
-          });
+        var swipeElement = Swipe($element[0], {
+          disableScroll: true,
+          callback: function(index, elem) {},
+          transitionEnd: function(index, elem) {}
+        });
 
-          $scope.prev = swipeElement.prev;
-          $scope.next = swipeElement.next;
-        }, 0);
-
+        $scope.prev = swipeElement.prev;
+        $scope.next = swipeElement.next;
       };
     }
   };

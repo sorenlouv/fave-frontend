@@ -27,22 +27,24 @@ app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($tim
     },
     link: function ($scope, $element, $attrs) {
       var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
-      $scope.meals = angularFireCollection(mealsRef, function(){
-        initializeSlider();
+      mealsRef.on('value', function(snapshot) {
+        $scope.$apply(function(){
+          $scope.meals = snapshot.val();
+        });
+        $timeout(function(){
+          initializeSlider();
+        }, 0);
       });
 
       var initializeSlider = function(){
-        $timeout(function(){
-          var swipeElement = Swipe($element[0], {
-            disableScroll: true,
-            callback: function(index, elem) {},
-            transitionEnd: function(index, elem) {}
-          });
+        var swipeElement = Swipe($element[0], {
+          disableScroll: true,
+          callback: function(index, elem) {},
+          transitionEnd: function(index, elem) {}
+        });
 
-          $scope.prev = swipeElement.prev;
-          $scope.next = swipeElement.next;
-        }, 0);
-
+        $scope.prev = swipeElement.prev;
+        $scope.next = swipeElement.next;
       };
     }
   };
@@ -75,35 +77,49 @@ app.controller('adminController', ['$scope', 'angularFire', function ($scope, an
 app.controller('homeController', ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
-  facebook.userReady.then(function(){
-    FB.api('/me', function(activeUser) {
-      safeApply($scope, function(){
-        $scope.activeUser = activeUser;
-      });
-    });
-  });
+  // facebook.userReady.then(function(){
+  //   FB.api('/me', function(activeUser) {
+  //     safeApply($scope, function(){
+  //       $scope.activeUser = activeUser;
+  //     });
+  //   });
+  // });
 
   /*
    * Click events
    ********************************************/
 
-  $scope.login = function(){
-    facebook.sdkReady.then(function(){
-      FB.login(null, { scope: "email" });
-    });
-  };
+  // $scope.login = function(){
+  //   facebook.sdkReady.then(function(){
+  //     FB.login(null, { scope: "email" });
+  //   });
+  // };
 
-  $scope.me = function(path){
-    facebook.sdkReady.then(function(){
-      FB.api('/me', function(response) {
-        alert("Hej " + response.name);
+  // $scope.me = function(path){
+  //   facebook.sdkReady.then(function(){
+  //     FB.api('/me', function(response) {
+  //       alert("Hej " + response.name);
+  //     });
+  //   });
+  // };
+
+  $scope.captureImage = function(){
+    navigator.camera.getPicture( function(image){
+      // success
+      $scope.$apply(function(){
+        $scope.imageResponse = image;
       });
+    }, function(error){
+      // error
+      alert("error");
+      $scope.imageResponse = error;
+    }, {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      allowEdit: true
     });
   };
 
-  $scope.action = function() {
-    console.log("hey");
-  };
 }]);
 app.factory('facebook', ['$q', function($q) {
   'use strict';
