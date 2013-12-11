@@ -1,5 +1,11 @@
 <header>
   <a ng-click="action()" class="action"><i class="fa fa-chevron-up "></i></a>
   <img class="logo" src="img/logo.png">
+  <button ng-click="captureImage()">Snap pic</button>
 </header>
+
+Response: {{imageResponse}}
+Image: <img ng-src="{{imageResponse}}" height="200">
+
 <swipe-meals></swipe-meals>
+
