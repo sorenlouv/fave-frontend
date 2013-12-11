@@ -11,8 +11,7 @@ module.exports = function(grunt) {
       },
       js: {
         src: [
-          'src/**/*.js',        // Concat all js files
-          '!src/bootstrap-app.js'  // ... except this on!
+          'src/**/*.js'        // Concat all js files
         ],
         dest: 'dist/js/<%= pkg.name %>.js'
       },
