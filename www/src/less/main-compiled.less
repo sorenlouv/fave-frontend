@@ -148,7 +148,27 @@ html, body {
 }
 @import "_colors.less";
 
-section.admin {
+
+
+section.add-meal {
+
+	::-webkit-input-placeholder {
+	   color: white;
+	   color: rgba(255, 255, 255, 0.7);
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	   color: white;
+	   color: rgba(255, 255, 255, 0.7);  
+	}
+	::-moz-placeholder {  /* Firefox 19+ */
+	   color: white;
+	   color: rgba(255, 255, 255, 0.7);  
+	}
+	:-ms-input-placeholder {  
+	   color: white;
+	   color: rgba(255, 255, 255, 0.7);  
+	}
+
 	background-color: @red;
 	height: 100%;
 	float: left;
@@ -180,27 +200,7 @@ section.admin {
 }
 @import "_colors.less";
 
-
-
-section.add-meal {
-
-	::-webkit-input-placeholder {
-	   color: white;
-	   color: rgba(255, 255, 255, 0.7);
-	}
-	:-moz-placeholder { /* Firefox 18- */
-	   color: white;
-	   color: rgba(255, 255, 255, 0.7);  
-	}
-	::-moz-placeholder {  /* Firefox 19+ */
-	   color: white;
-	   color: rgba(255, 255, 255, 0.7);  
-	}
-	:-ms-input-placeholder {  
-	   color: white;
-	   color: rgba(255, 255, 255, 0.7);  
-	}
-
+section.admin {
 	background-color: @red;
 	height: 100%;
 	float: left;

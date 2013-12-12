@@ -124,33 +124,6 @@ body {
   font-family: 'Averia Serif Libre', cursive;
   color: #323232;
 }
-section.admin {
-  background-color: #e45c36;
-  height: 100%;
-  float: left;
-  width: 100%;
-  padding: 20px;
-}
-section.admin .intro {
-  width: 70%;
-  font-size: 14px;
-  color: white;
-  margin: 0 0 20px 0;
-}
-section.admin .fa {
-  float: left;
-  margin-top: 20px;
-  margin-right: 20px;
-  -webkit-text-stroke-color: #b5462a;
-}
-section.admin .comment {
-  height: 50px;
-  padding: 10px;
-  width: 220px;
-  display: block;
-  border: 1px solid #b5462a;
-  background-color: transparent;
-}
 section.add-meal {
   background-color: #e45c36;
   height: 100%;
@@ -189,6 +162,33 @@ section.add-meal .fa {
   -webkit-text-stroke-color: #b5462a;
 }
 section.add-meal .comment {
+  height: 50px;
+  padding: 10px;
+  width: 220px;
+  display: block;
+  border: 1px solid #b5462a;
+  background-color: transparent;
+}
+section.admin {
+  background-color: #e45c36;
+  height: 100%;
+  float: left;
+  width: 100%;
+  padding: 20px;
+}
+section.admin .intro {
+  width: 70%;
+  font-size: 14px;
+  color: white;
+  margin: 0 0 20px 0;
+}
+section.admin .fa {
+  float: left;
+  margin-top: 20px;
+  margin-right: 20px;
+  -webkit-text-stroke-color: #b5462a;
+}
+section.admin .comment {
   height: 50px;
   padding: 10px;
   width: 220px;
