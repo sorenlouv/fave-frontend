@@ -12,6 +12,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: 'src/pages/admin/admin.html',
       controller: 'adminController'
     })
+    .when('/add-meal', {
+      templateUrl: 'src/pages/add-meal/add-meal.html',
+      controller: 'addMealController'
+    })
     .otherwise({redirectTo: '/home'});
 }]);
 
