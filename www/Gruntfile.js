@@ -25,11 +25,10 @@ module.exports = function(grunt) {
       },
       less: {
         src: [
-          'src/directives/**/*.less',   // Directive
-          'src/pages/**/*.less',        // Pages
-          'src/shared/less/main.less'   // Everything else
+          'src/**/*.less',    // All less files
+          '!src/less/main-compiled.less'    // Except the main-compiled
         ],
-        dest: 'src/shared/less/main-compiled.less'
+        dest: 'src/less/main-compiled.less'
       }
     },
 
@@ -48,11 +47,11 @@ module.exports = function(grunt) {
     less: {
       development: {
         options: {
-          paths: ["src/shared/less/"]
+          paths: ["src/less/"]
           // cleancss: true
         },
         files: {
-          "dist/css/<%= pkg.name %>.css": "src/shared/less/main-compiled.less"
+          "dist/css/<%= pkg.name %>.css": "src/less/main-compiled.less"
         }
       }
     },

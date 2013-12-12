@@ -1,4 +1,22 @@
 @import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400,300italic);
+@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400,300italic);
+header {
+  text-align: center;
+  background-color: #fff;
+}
+header .settings {
+  float: left;
+  margin: 15px 18px 18px 18px;
+}
+header .logo {
+  padding-top: 5px;
+  margin: 10px 0 0 0;
+  height: 30px;
+}
+header .addMeal {
+  float: right;
+  margin: 18px;
+}
 .meals {
   overflow: hidden;
   visibility: hidden;
@@ -63,8 +81,60 @@
 .meals .actions a {
   cursor: pointer;
 }
+::-webkit-input-placeholder {
+  color: white;
+  color: rgba(255, 255, 255, 0.7);
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: white;
+  color: rgba(255, 255, 255, 0.7);
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: white;
+  color: rgba(255, 255, 255, 0.7);
+}
+:-ms-input-placeholder {
+  color: white;
+  color: rgba(255, 255, 255, 0.7);
+}
 .clear {
   clear: both;
+}
+.fa {
+  font-size: 24px;
+  height: 22px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #e45c36;
+  color: transparent;
+}
+.button {
+  font-weight: 300;
+  padding: 13px 20px;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 200px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.button.red {
+  background-color: #b5462b;
+}
+.button p {
+  font-size: 18px;
+  margin: 0;
+}
+.button span {
+  font-size: 14px;
+  font-style: italic;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
 }
 html,
 body {
@@ -72,46 +142,30 @@ body {
   font-family: 'Averia Serif Libre', cursive;
   color: #323232;
 }
-header {
-  text-align: center;
-  background-color: #fff;
-}
-header .menu {
+section {
+  background-color: #e45c36;
+  height: 100%;
   float: left;
-  margin: 15px 18px 18px 18px;
-  font-size: 24px;
-  height: 22px;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #e45c36;
-  color: transparent;
+  width: 100%;
+  padding: 20px;
 }
-header .logo {
-  padding-top: 5px;
-  margin: 10px 0 0 0;
-  height: 30px;
+section .intro {
+  width: 70%;
+  font-size: 14px;
+  color: white;
+  margin: 0 0 20px 0;
 }
-header .action {
-  float: right;
-  margin: 18px;
-  font-size: 24px;
-  height: 22px;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #e45c36;
-  color: transparent;
-}
-footer {
-  height: 44px;
-  border-top: 1px solid #eee;
+section .fa {
+  float: left;
   margin-top: 20px;
+  margin-right: 20px;
+  -webkit-text-stroke-color: #b5462a;
 }
-footer h5 {
-  margin: 0;
-  padding: 14px;
-  color: #bbbbbb;
-  display: inline-block;
-}
-footer i {
-  margin: 14px 14px 0 0;
-  float: right;
-  color: #bbbbbb;
+section .comment {
+  height: 50px;
+  padding: 10px;
+  width: 220px;
+  display: block;
+  border: 1px solid #b5462a;
+  background-color: transparent;
 }

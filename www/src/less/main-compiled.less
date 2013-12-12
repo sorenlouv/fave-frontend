@@ -1,0 +1,197 @@
+header {
+  text-align: center;
+  background-color: #fff;
+  .settings{
+    float: left;
+    margin: 15px 18px 18px 18px;
+  }
+  .logo {
+    padding-top: 5px;
+    margin: 10px 0 0 0;
+    height: 30px;
+  }
+  .addMeal {
+    float: right;
+    margin: 18px;
+  }
+}
+
+// Functional styles
+
+.meals {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+  .swipe-wrap {
+    overflow: hidden;
+    position: relative;
+    .single-meal {
+      float:left;
+      width:100%;
+      position: relative;
+    }
+  }
+}
+
+
+// Visual styles
+
+.meals {
+  width: 94%;
+  margin: 0 auto;
+  text-align: center;
+  border-top: 3px double #ddd;
+  h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 300;
+    margin: 20px 0 0 0;
+  }
+  h3 {
+    margin: 3px 0 0 0;
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .subheader {
+    font-size: 14px;
+    font-weight: 300;
+  }
+  .takeout {
+    margin-top: 20px;
+    overflow: auto;
+    // border-bottom: 1px solid #ddd;
+    img {
+      .rounded();
+      float: left;
+    }
+    .meal {
+      width: 100%;
+    }
+  }
+  .desc {
+    display: block;
+    padding: 20px 0;
+    width: 70%;
+    margin: 0 auto;
+    font-weight: 300;
+    font-style: italic;
+    }
+  .actions {
+    margin-bottom: 20px;
+    a {
+      cursor: pointer;
+    }
+  }
+}
+@red : #e45c36;
+@red-dark: #b5462a;
+@grey-light: #aaaaaa;
+@import url(http://fonts.googleapis.com/css?family=Averia+Serif+Libre:300,400,300italic);
+
+.rounded (@radius: 3px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+@import "_colors.less";
+@import "_variables.less";
+@import "_fonts.less";
+@import "_mixins.less";
+
+::-webkit-input-placeholder {
+   color: white;
+   color: rgba(255, 255, 255, 0.7);
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: white;
+   color: rgba(255, 255, 255, 0.7);  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: white;
+   color: rgba(255, 255, 255, 0.7);  
+}
+:-ms-input-placeholder {  
+   color: white;
+   color: rgba(255, 255, 255, 0.7);  
+}
+
+.clear {
+  clear: both;
+}
+
+.fa {
+  font-size: 24px;
+  height: 22px;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: @red;
+  color: transparent;
+}
+
+.button {
+  font-weight: 300;
+  padding: 13px 20px;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 200px;
+  .rounded();
+
+  &.red {
+    background-color: #b5462b;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+  span {
+    font-size: 14px;
+    font-style: italic;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Averia Serif Libre', cursive;
+  color: #323232;
+}
+@import "_colors.less";
+
+section {
+	background-color: @red;
+	height: 100%;
+	float: left;
+	width: 100%;
+	padding: 20px;
+
+	.intro {
+		width: 70%;
+		font-size: 14px;
+		color: white;
+		margin: 0 0 20px 0;
+	}
+
+	.fa {
+		float: left;
+		margin-top: 20px;
+		margin-right: 20px;
+	    -webkit-text-stroke-color: @red-dark ;
+	}
+	.comment {
+		height: 50px;
+		padding: 10px;
+		width: 220px;
+		display: block;
+		border: 1px solid @red-dark;
+		background-color: transparent;
+
+	}
+}

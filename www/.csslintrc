@@ -1,5 +1,6 @@
 {
   "qualified-headings": false,
   "import": false,
-  "box-model": false
+  "box-model": false,
+  "adjoining-classes": false
 }
