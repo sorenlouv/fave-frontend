@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>FAVE - Take-Away Favorites</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" href="dist/css/fave-app.css">
+  <link rel="stylesheet" type="text/css" href="dist/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="dist/css/font-awesome.css" />
+
+  <!-- Phonegap specific stuff -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="dist/js/bootstrap-app.js"></script> <!-- This loads angular async - problem! -->
+
+  <!-- Vendors -->
+  <script type="text/javascript" src="dist/js/fave-app-vendors.js"></script>
+
+  <!-- Angular app -->
+  <script type="text/javascript" src="dist/js/fave-app.js"></script>
+  </head>
+  <body>
+    <header ng-controller="headerController">
+      <a ng-click="settings()" class="settings"><i class="fa fa-cog"></i> </a>
+      <img class="logo" src="img/logo-red.png">
+      <a ng-click="addMeal()" class="addMeal" href="#/add-meal"><i class="fa fa-plus action"></i></a>
+    </header>
+    <ng-view></ng-view>
+
+    <div id="fb-root"></div>
+  </body>
+</html>

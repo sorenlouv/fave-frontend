@@ -1,0 +1,26 @@
+objc[18156]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2013-12-16 22:31:55.719 Fave[18156:80b] Cannot find executable for CFBundle 0xa682ec0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/SocialFramework.axbundle> (not loaded)
+2013-12-16 22:31:55.751 Fave[18156:80b] Cannot find executable for CFBundle 0xa8b9f10 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2013-12-16 22:31:55.761 Fave[18156:80b] Cannot find executable for CFBundle 0xa8cf9e0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2013-12-16 22:31:55.816 Fave[18156:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-16 22:31:55.844 Fave[18156:80b] Unlimited access to network resources
+2013-12-16 22:31:56.193 Fave[18156:80b] Resetting plugins due to page load.
+2013-12-16 22:31:56.798 Fave[18156:80b] Finished load of: file:///Users/sqren/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/C7283FE0-066C-4527-86CB-19B3C82BBE7A/Fave.app/www/index.html#/home
+2013-12-16 22:31:56.874 Fave[18156:80b] ERROR: Plugin 'org.apache.cordova.facebook.Connect' not found, or is not a CDVPlugin. Check your plugin mapping in config.xml.
+2013-12-16 22:31:56.875 Fave[18156:80b] -[CDVCommandQueue executePending] [Line 127] FAILED pluginJSON = [
+  "org.apache.cordova.facebook.Connect1734534608",
+  "org.apache.cordova.facebook.Connect",
+  "init",
+  [
+    "627802337276971"
+  ]
+]
+2013-12-16 22:31:56.875 Fave[18156:80b] ERROR: Plugin 'org.apache.cordova.facebook.Connect' not found, or is not a CDVPlugin. Check your plugin mapping in config.xml.
+2013-12-16 22:31:56.875 Fave[18156:80b] -[CDVCommandQueue executePending] [Line 127] FAILED pluginJSON = [
+  "org.apache.cordova.facebook.Connect1734534609",
+  "org.apache.cordova.facebook.Connect",
+  "getLoginStatus",
+  [
+
+  ]
+]

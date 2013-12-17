@@ -1,0 +1,50 @@
+@import "_colors.less";
+@import "_variables.less";
+@import "_fonts.less";
+@import "_mixins.less";
+
+.clear {
+  clear: both;
+}
+
+.fa {
+  font-size: 24px;
+  height: 22px;
+  color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: @red;
+  color: transparent;
+}
+
+.button {
+  font-weight: 300;
+  padding: 13px 20px;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.9);
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 200px;
+  .rounded();
+
+  &.red {
+    background-color: #b5462b;
+  }
+
+  p {
+    font-size: 18px;
+    margin: 0;
+  }
+  span {
+    font-size: 14px;
+    font-style: italic;
+    color: #fff;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Averia Serif Libre', cursive;
+  color: #323232;
+}
