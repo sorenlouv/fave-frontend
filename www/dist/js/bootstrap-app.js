@@ -20,26 +20,24 @@ var phonegap = {
     }
   },
 
-  loadJS: function(src, callback) {
+  angularIsReady: function(callback){
     'use strict';
-    var s = document.createElement('script');
-    s.src = src;
-    s.async = true;
-    s.onreadystatechange = s.onload = function() {
-        var state = s.readyState;
-        if (!callback.done && (!state || /loaded|complete/.test(state))) {
-            callback.done = true;
-            callback();
-        }
-    };
-    document.getElementsByTagName('head')[0].appendChild(s);
+
+    this.checkForAngularInternval = window.setInterval(function(){
+      if(typeof angular !== "undefined"){
+        window.clearInterval(phonegap.checkForAngularInternval);
+        callback();
+      }
+    }, 50);
   },
 
   // deviceready Event Handler
   bootstrapAngular: function() {
     'use strict';
 
-    this.loadJS('src/vendors/1.angular.min.js', function(){
+    console.log("bootstrapAngular");
+
+    this.angularIsReady(function(){
       angular.element(document).ready(function() {
         angular.bootstrap(document, ['faveapp']);
       });

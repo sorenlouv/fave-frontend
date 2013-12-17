@@ -11,7 +11,7 @@
 
   <!-- Phonegap specific stuff -->
   <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="dist/js/bootstrap-app.js"></script> <!-- This loads angular async - problem! -->
+  <script type="text/javascript" src="dist/js/bootstrap-app.js"></script>
 
   <!-- Vendors -->
   <script type="text/javascript" src="dist/js/fave-app-vendors.js"></script>
@@ -22,25 +22,11 @@
   <body>
     <header ng-controller="headerController">
       <a ng-click="settings()" class="settings"><i class="fa fa-cog"></i> </a>
-      <img class="logo" src="img/logo-red.png">
-      <a ng-click="addMeal()" class="addMeal" href="#/add-meal"><i class="fa fa-plus action"></i></a>
-
-      <!-- 
-        <a ng-click="action()" class="settings"><i class="fa fa-cog"></i> </a>
-        <img class="logo" src="img/logo-red.png">
-        <a ng-click="action()" class="addMeal" href="#/admin"><i class="fa fa-plus action"></i> </a>
-        <div class="add-image-desktop" ng-if="!isPhone">
-          <input file-upload-on-change="uploadImage" type="file" />
-        </div>
-        <div class="add-image-phone" ng-if="isPhone">
-          <i class="fa fa-plus action" ng-click="captureImage()"></i>
-        </div>
-       -->
-
-
-
+      <a href="#/home"><img class="logo" src="img/logo-red.png"></a>
+      <a class="addMeal" href="#/add-meal"><i class="fa fa-plus action"></i></a>
     </header>
-    <ng-view></ng-view>
+
+    <div ng-view></div>
 
     <div id="fb-root"></div>
   </body>

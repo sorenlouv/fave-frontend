@@ -32,10 +32,8 @@ app.directive('fileUploadOnChange', [function() {
     }
   };
 }]);
-app.controller("headerController", ['$scope', 'facebook', 'safeApply', 'helpers', function ($scope, facebook, safeApply, helpers) {
+app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
-
-  $scope.isPhone = helpers.isPhone();
 
     // facebook.userReady.then(function(){
     //   FB.api('/me', function(activeUser) {
@@ -56,39 +54,7 @@ app.controller("headerController", ['$scope', 'facebook', 'safeApply', 'helpers'
     // };
 
     $scope.settings = function() {
-      console.log("test");
-    };
-
-    // For desktop only
-    $scope.uploadImage = function($event){
-      var file = $event.target.files[0];
-      var reader = new FileReader();
-
-      reader.onload = function(readerEvt) {
-          var binaryString = readerEvt.target.result;
-          var encodedFile = btoa(binaryString);
-          console.log(encodedFile);
-      };
-
-      reader.readAsBinaryString(file);
-    };
-
-    // For mobile only
-    $scope.captureImage = function(){
-      navigator.camera.getPicture( function(image){
-        // success
-        $scope.$apply(function(){
-          $scope.imageResponse = image;
-        });
-      }, function(error){
-        // error
-        alert("error");
-        $scope.imageResponse = error;
-      }, {
-        quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI,
-        allowEdit: true
-      });
+      alert("test");
     };
 
 }]);
@@ -125,8 +91,42 @@ app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($tim
     }
   };
 }]);
-app.controller('addMealController', ['$scope', 'angularFire', function ($scope, angularFire) {
+app.controller('addMealController', ['$scope', 'angularFire', 'helpers', function ($scope, angularFire, helpers) {
   'use strict';
+
+  $scope.isPhone = helpers.isPhone();
+
+  // For desktop only
+  $scope.uploadImage = function($event){
+    var file = $event.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        var encodedFile = btoa(binaryString);
+        console.log(encodedFile);
+    };
+
+    reader.readAsBinaryString(file);
+  };
+
+  // For mobile only
+  $scope.captureImage = function(){
+    navigator.camera.getPicture( function(image){
+      // success
+      $scope.$apply(function(){
+        $scope.imageResponse = image;
+      });
+    }, function(error){
+      // error
+      alert("error");
+      $scope.imageResponse = error;
+    }, {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      allowEdit: true
+    });
+  };
 
   var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
   $scope.meals = null;
@@ -334,7 +334,7 @@ app.factory('helpers', [function() {
 
   // Determine whether current user is on a phone or desktop
   var isPhone = function(){
-    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/);
+    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) === null ? false : true;
   };
 
   return {

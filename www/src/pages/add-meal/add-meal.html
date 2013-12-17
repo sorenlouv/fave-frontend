@@ -2,7 +2,17 @@
 	<p class="intro">Sharing great takeout is just a few photos away</p>
 	<div>
 		<i class="fa fa-camera"></i>
+		<!-- Desktop only -->
+		<div ng-if="!isPhone">
+		<input file-upload-on-change="uploadImage" type="file" />
 		<a class="button red">
+			<p>Boxes received</p>
+			<span>So people know what to expect</span>
+		</a>
+		</div>
+
+		<!-- Mobile only -->
+		<a class="button red" ng-if="isPhone" ng-click="captureImage()">
 			<p>Boxes received</p>
 			<span>So people know what to expect</span>
 		</a>
