@@ -39,9 +39,6 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		F840E1F1165FE0F500CFE078 /* config.xml in Resources */ = {isa = PBXBuildFile; fileRef = F840E1F0165FE0F500CFE078 /* config.xml */; };
-		5038DA58EDEF4AA089546FD4 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3A9CCBA3F74B558FE77CC3 /* CDVCamera.m */; };
-		B4C98D3358B4467E9F7AAF1B /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B8395552B45328C26C500 /* CDVJpegHeaderWriter.m */; };
-		B4BEE019146B417497029A1D /* ImageIO.framework in Resources */ = {isa = PBXBuildFile; fileRef = 3DEAA8A619BD4538A3665BB2 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		64992825085C486E89BF889E /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = E90946A8F9FE475EB99604A9 /* FacebookConnectPlugin.m */; };
 		888E07A9D7D643F48DC4637B /* FacebookSDK-3.5.2-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C7C7C7034543C88D698788 /* FacebookSDK-3.5.2-Release.a */; };
 		0234FAB871084463A9ED5570 /* FacebookSDK-3.5.2-Release.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 992382D1AF3A430283C39189 /* FacebookSDK-3.5.2-Release.a */; };
@@ -52,6 +49,9 @@
 		D36732A5DDB44B66945050DC /* Accounts.framework in Resources */ = {isa = PBXBuildFile; fileRef = 866B5A75DE664FA88B38FB0D /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		59BABE04AF2F4376B686A236 /* AdSupport.framework in Resources */ = {isa = PBXBuildFile; fileRef = 306B609853D64BE6BC868FF7 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F48E152C88EF4D59815CECDC /* Security.framework in Resources */ = {isa = PBXBuildFile; fileRef = 37197883DF43430F8417E0B2 /* Security.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		4D1E740363E74461AA407B4E /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = C26B73F55C2445759F522C0D /* CDVCamera.m */; };
+		5CB8A4AE0D394B81A3DDFB6D /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A9C92CAEAB144C992F1B68F /* CDVJpegHeaderWriter.m */; };
+		8114760BE7E34086806251C2 /* ImageIO.framework in Resources */ = {isa = PBXBuildFile; fileRef = 0396FF2ED8F54EA9813CD994 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,12 +113,6 @@
 		8D1107310486CEB800E47090 /* Fave-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Fave-Info.plist"; path = "../Fave-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "Fave/config.xml"; sourceTree = "<group>"; };
-		7C3A9CCBA3F74B558FE77CC3 /* CDVCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCamera.m"; path = "org.apache.cordova.camera/CDVCamera.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		DE5B8395552B45328C26C500 /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVJpegHeaderWriter.m"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.m"; sourceTree = "<group>"; fileEncoding = 4; };
-		3D761CA241534512A5FE185E /* CDVCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCamera.h"; path = "org.apache.cordova.camera/CDVCamera.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		67F9E7E0A4A445ED987E62A0 /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVJpegHeaderWriter.h"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		7F2747EFC9D643BDB6992276 /* CDVExif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVExif.h"; path = "org.apache.cordova.camera/CDVExif.h"; sourceTree = "<group>"; fileEncoding = 4; };
-		3DEAA8A619BD4538A3665BB2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		E90946A8F9FE475EB99604A9 /* FacebookConnectPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "FacebookConnectPlugin.m"; path = "com.phonegap.plugins.facebookconnect/FacebookConnectPlugin.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		F0C7C7C7034543C88D698788 /* FacebookSDK-3.5.2-Release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "FacebookSDK-3.5.2-Release.a"; path = "com.phonegap.plugins.facebookconnect/FacebookSDK-3.5.2-Release.a"; sourceTree = "<group>"; fileEncoding = 4; };
 		992382D1AF3A430283C39189 /* FacebookSDK-3.5.2-Release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "FacebookSDK-3.5.2-Release.a"; path = "Fave/Plugins/com.phonegap.plugins.facebookconnect/FacebookSDK-3.5.2-Release.a"; sourceTree = "<group>"; fileEncoding = 4; };
@@ -165,6 +159,12 @@
 		866B5A75DE664FA88B38FB0D /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Accounts.framework"; path = "System/Library/Frameworks/Accounts.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		306B609853D64BE6BC868FF7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AdSupport.framework"; path = "System/Library/Frameworks/AdSupport.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		37197883DF43430F8417E0B2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		C26B73F55C2445759F522C0D /* CDVCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVCamera.m"; path = "org.apache.cordova.camera/CDVCamera.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		9A9C92CAEAB144C992F1B68F /* CDVJpegHeaderWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVJpegHeaderWriter.m"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		557ED431095F4D57A7B4B2EE /* CDVCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVCamera.h"; path = "org.apache.cordova.camera/CDVCamera.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		8DE8F84059584D9E90A9D60A /* CDVJpegHeaderWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVJpegHeaderWriter.h"; path = "org.apache.cordova.camera/CDVJpegHeaderWriter.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		AEF49D3C49724DD6A5CB1B2D /* CDVExif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVExif.h"; path = "org.apache.cordova.camera/CDVExif.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		0396FF2ED8F54EA9813CD994 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,13 +177,13 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
-				B4BEE019146B417497029A1D /* ImageIO.framework in Resources */,
 				0234FAB871084463A9ED5570 /* FacebookSDK-3.5.2-Release.a in Frameworks */,
 				8D497DDC1B41440EBE714FBF /* libsqlite3.dylib in Frameworks */,
 				758D387CA1B54E50AE520AC7 /* Social.framework in Resources */,
 				D36732A5DDB44B66945050DC /* Accounts.framework in Resources */,
 				59BABE04AF2F4376B686A236 /* AdSupport.framework in Resources */,
 				F48E152C88EF4D59815CECDC /* Security.framework in Resources */,
+				8114760BE7E34086806251C2 /* ImageIO.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,13 +277,13 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
-				3DEAA8A619BD4538A3665BB2 /* ImageIO.framework */,
 				992382D1AF3A430283C39189 /* FacebookSDK-3.5.2-Release.a */,
 				7FD101B6A1164E4A90A84FEE /* libsqlite3.dylib */,
 				4214D2DB6AB845ACAC5457BA /* Social.framework */,
 				866B5A75DE664FA88B38FB0D /* Accounts.framework */,
 				306B609853D64BE6BC868FF7 /* AdSupport.framework */,
 				37197883DF43430F8417E0B2 /* Security.framework */,
+				0396FF2ED8F54EA9813CD994 /* ImageIO.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -299,11 +299,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				7C3A9CCBA3F74B558FE77CC3 /* CDVCamera.m */,
-				DE5B8395552B45328C26C500 /* CDVJpegHeaderWriter.m */,
-				3D761CA241534512A5FE185E /* CDVCamera.h */,
-				67F9E7E0A4A445ED987E62A0 /* CDVJpegHeaderWriter.h */,
-				7F2747EFC9D643BDB6992276 /* CDVExif.h */,
 				E90946A8F9FE475EB99604A9 /* FacebookConnectPlugin.m */,
 				F0C7C7C7034543C88D698788 /* FacebookSDK-3.5.2-Release.a */,
 				7295B2C3BEBE49D58371F215 /* FacebookConnectPlugin.h */,
@@ -342,6 +337,11 @@
 				973D7188A3404E129BCCED78 /* FBWebDialogs.h */,
 				BBDB2D908B724F75A0531011 /* FacebookSDK.h */,
 				05F9B6A99E714D26A7F90765 /* NSError+FBError.h */,
+				C26B73F55C2445759F522C0D /* CDVCamera.m */,
+				9A9C92CAEAB144C992F1B68F /* CDVJpegHeaderWriter.m */,
+				557ED431095F4D57A7B4B2EE /* CDVCamera.h */,
+				8DE8F84059584D9E90A9D60A /* CDVJpegHeaderWriter.h */,
+				AEF49D3C49724DD6A5CB1B2D /* CDVExif.h */,
 			);
 			name = Plugins;
 			path = "Fave/Plugins";
@@ -529,10 +529,10 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				5038DA58EDEF4AA089546FD4 /* CDVCamera.m in Sources */,
-				B4C98D3358B4467E9F7AAF1B /* CDVJpegHeaderWriter.m in Sources */,
 				64992825085C486E89BF889E /* FacebookConnectPlugin.m in Sources */,
 				888E07A9D7D643F48DC4637B /* FacebookSDK-3.5.2-Release.a in Frameworks */,
+				4D1E740363E74461AA407B4E /* CDVCamera.m in Sources */,
+				5CB8A4AE0D394B81A3DDFB6D /* CDVJpegHeaderWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
