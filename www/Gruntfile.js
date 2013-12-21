@@ -11,8 +11,8 @@ module.exports = function(grunt) {
       },
       js_vendors: {
         src: [
-          'src/vendors/*.js',
-          '!src/vendors/facebook-sdk-*.js'
+          'src/vendors/**/*.js',
+          '!src/vendors/skip/*.js'
         ],
         dest: 'dist/js/fave-app-vendors.js'
       },
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       js: {
         src: [
           'src/**/*.js',
-          '!src/vendors/*.js'
+          '!src/vendors/**/*.js'
         ],
         dest: 'dist/js/fave-app.js'
       }
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         'src/**/*.js',
-        '!src/vendors/*.js'
+        '!src/vendors/**/*.js'
       ],
       // JSHint options http://jshint.com/docs/options/
       options: {
