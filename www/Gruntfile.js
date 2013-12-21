@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    css_dist: 'dist/css/fave-app.css',
 
     // Concatenate files
     concat: {
@@ -14,21 +14,16 @@ module.exports = function(grunt) {
           'src/vendors/*.js',
           '!src/vendors/facebook-sdk-*.js'
         ],
-        dest: 'dist/js/<%= pkg.name %>-vendors.js'
+        dest: 'dist/js/fave-app-vendors.js'
       },
+
+      // All javascript files except vendors
       js: {
         src: [
           'src/**/*.js',
           '!src/vendors/*.js'
         ],
-        dest: 'dist/js/<%= pkg.name %>.js'
-      },
-      less: {
-        src: [
-          'src/**/*.less',    // All less files
-          '!src/less/main-compiled.less'    // Except the main-compiled
-        ],
-        dest: 'src/less/main-compiled.less'
+        dest: 'dist/js/fave-app.js'
       }
     },
 
@@ -47,12 +42,16 @@ module.exports = function(grunt) {
     less: {
       development: {
         options: {
-          paths: ["src/less/"]
+          paths: ["src/mixins/"]
           // cleancss: true
         },
-        files: {
-          "dist/css/<%= pkg.name %>.css": "src/less/main-compiled.less"
-        }
+
+        // Compile all less files which are not partials (starts with "_")
+        src: [
+          'src/**/*.less',
+          '!src/**/_*.less'
+        ],
+        dest: '<%= css_dist %>'
       }
     },
 
@@ -60,10 +59,7 @@ module.exports = function(grunt) {
       options: {
         csslintrc: '.csslintrc' // Get CSSLint options from external file.
       },
-      strict: {
-        options: {},
-        src: ['dist/css/<%= pkg.name %>.css']
-      }
+      src: ['<%= css_dist %>']
     },
 
     watch: {
@@ -76,13 +72,10 @@ module.exports = function(grunt) {
       },
       less: {
         files: 'src/**/*.less',
-        tasks: ['concat:less', 'less:development', 'csslint'],
+        tasks: ['less:development', 'csslint'],
         options: {
           livereload: false
         }
-      },
-      css: {
-        files: 'dist/css/<%= pkg.name %>.css'
       },
       templates: {
         files: ['src/**/*.html', 'index.html']
@@ -98,6 +91,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s) - will be run by writing "grunt" from the command line
-  grunt.registerTask('default', ['concat:less', 'less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors']);
+  grunt.registerTask('default', ['less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors']);
 
 };
