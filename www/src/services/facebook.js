@@ -31,15 +31,15 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
    * Attach a global listener as soon as the SDK is loaded an the FB namespace is available
    * Returns a promise which will be resolved when the user is logged in
    ************************/
-  var userReadyDef = $q.defer();
+  var userLoggedInDef = $q.defer();
   sdkReady.then(function(){
     FB.Event.subscribe('auth.authResponseChange', function(response) {
       if(response.status === "connected"){
-        userReadyDef.resolve();
+        userLoggedInDef.resolve();
       }
     });
   });
-  var userReady = userReadyDef.promise;
+  var userLoggedIn = userLoggedInDef.promise;
 
   //
   var devices = {
@@ -85,7 +85,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   device.init();
 
   return {
-    userReady: userReady,
+    userLoggedIn: userLoggedIn,
     sdkReady: sdkReady
   };
 }]);

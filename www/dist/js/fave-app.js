@@ -35,28 +35,23 @@ app.directive('fileUploadOnChange', [function() {
 app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
-    // facebook.userReady.then(function(){
-    //   FB.api('/me', function(activeUser) {
-    //     safeApply($scope, function(){
-    //       $scope.activeUser = activeUser;
-    //     });
-    //   });
-    // });
+    facebook.userLoggedIn.then(function(){
+      FB.api('/me', function(activeUser) {
+        safeApply($scope, function(){
+          $scope.activeUser = activeUser;
+        });
+      });
+    });
 
     /*
      * Click events
      ********************************************/
 
-    // $scope.login = function(){
-    //   facebook.sdkReady.then(function(){
-    //     FB.login(null, { scope: "email" });
-    //   });
-    // };
-
-    $scope.settings = function() {
-      alert("test");
+    $scope.login = function(){
+      facebook.sdkReady.then(function(){
+        FB.login(null, { scope: "email" });
+      });
     };
-
 }]);
 app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($timeout, angularFireCollection) {
   'use strict';
@@ -213,15 +208,15 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
    * Attach a global listener as soon as the SDK is loaded an the FB namespace is available
    * Returns a promise which will be resolved when the user is logged in
    ************************/
-  var userReadyDef = $q.defer();
+  var userLoggedInDef = $q.defer();
   sdkReady.then(function(){
     FB.Event.subscribe('auth.authResponseChange', function(response) {
       if(response.status === "connected"){
-        userReadyDef.resolve();
+        userLoggedInDef.resolve();
       }
     });
   });
-  var userReady = userReadyDef.promise;
+  var userLoggedIn = userLoggedInDef.promise;
 
   //
   var devices = {
@@ -267,7 +262,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   device.init();
 
   return {
-    userReady: userReady,
+    userLoggedIn: userLoggedIn,
     sdkReady: sdkReady
   };
 }]);
