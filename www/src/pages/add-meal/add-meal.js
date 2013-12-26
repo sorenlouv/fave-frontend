@@ -1,7 +1,7 @@
 app.controller('addMealController', ['$scope', 'angularFire', 'helpers', function ($scope, angularFire, helpers) {
   'use strict';
 
-  $scope.isPhone = helpers.isPhone();
+  $scope.isTouch = helpers.isTouch();
 
   // For desktop only
   $scope.uploadImage = function($event){

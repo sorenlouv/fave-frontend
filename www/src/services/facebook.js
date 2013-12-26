@@ -80,7 +80,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
     }
   };
 
-  var device = helpers.isPhone() ? devices.phone : devices.desktop;
+  var device = helpers.isTouch() ? devices.phone : devices.desktop;
   device.loadSDK();
   device.init();
 

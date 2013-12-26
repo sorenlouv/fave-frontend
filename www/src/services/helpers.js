@@ -1,12 +1,12 @@
 app.factory('helpers', [function() {
   'use strict';
 
-  // Determine whether current user is on a phone or desktop
-  var isPhone = function(){
-    return navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/) === null ? false : true;
+  // Determine whether current user is touch enabled device like phone, tablet etc
+  var isTouch = function(){
+    return 'ontouchstart' in window || 'onmsgesturechange' in window;
   };
 
   return {
-    isPhone: isPhone
+    isTouch: isTouch
   };
 }]);
