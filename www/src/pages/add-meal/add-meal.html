@@ -1,39 +1,29 @@
 <section class="add-meal">
 	<p class="intro">Sharing great takeout is just a few photos away</p>
-	<div>
-		<i class="fa fa-camera"></i>
-		<!-- Desktop only -->
-		<div ng-if="!isTouch">
-		<input file-upload-on-change="uploadImage" type="file" />
-		<a class="button red">
-			<p>Boxes received</p>
-			<span>So people know what to expect</span>
-		</a>
-		</div>
 
-		<!-- Mobile only -->
-		<a class="button red" ng-if="isTouch" ng-click="captureImage()">
-			<p>Boxes received</p>
-			<span>So people know what to expect</span>
-		</a>
-	</div>
+	<!-- Food image -->
 	<div>
 		<i class="fa fa-camera"></i>
-		<a class="button red">whi
-			<p>Food served</p>
-			<span>The first photo people see</span>
-		</a>
+		<div class="button red capture-image" ng-click="captureImage()">
+			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="uploadImage" type="file" />
+			<p>Food</p>
+			<span>Delicious picture of your meal</span>
+		</div>
 	</div>
+
+	<!-- Receipt image -->
 	<div>
 		<i class="fa fa-camera"></i>
-		<a class="button red">
+		<div class="button red capture-image" ng-click="captureImage()">
+			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="uploadImage" type="file" />
 			<p>Receipt</p>
 			<span>We scan it for place & price</span>
-		</a>
+		</div>
 	</div>
+
+	<!-- Comment -->
 	<div>
 		<i class="fa fa-comment"></i>
-		<textarea> class="comment" placeholder="Optional burst of joy / thoughtfull
- description</textarea>
+		<textarea class="comment" placeholder="Optional burst of joy / thoughtful description"></textarea>
 	</div>
 </section>

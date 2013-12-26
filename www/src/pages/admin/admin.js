@@ -1,13 +1,11 @@
-app.controller('adminController', ['$scope', 'angularFire', function ($scope, angularFire) {
+app.controller('adminController', ['$scope', '$firebase', function ($scope, $firebase) {
   'use strict';
 
-  var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
-  $scope.meals = null;
-  angularFire(mealsRef, $scope, 'meals');
+  $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
   // Add meal
   $scope.addMeal = function(){
-    var newMeal = mealsRef.push({
+    $scope.meals.$add({
       title: $scope.title,
       description: $scope.description,
       restaurant: $scope.restaurant,

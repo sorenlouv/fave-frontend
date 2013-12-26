@@ -66,10 +66,26 @@ module.exports = function(grunt) {
       options: {
         livereload: true
       },
+
+      // Concat, jshint and reload browser when JS files are updated
       js: {
-        files: 'src/**/*.js',
+        files: [
+          'src/**/*.js',
+          '!src/vendors/**/*.js'
+        ],
         tasks: ['jshint', 'concat:js']
       },
+
+      // Concat and reload browser when JS files are updated
+      js_vendors: {
+        files: [
+          'src/vendors/**/*.js',
+          '!src/vendors/skip/*.js'
+        ],
+        tasks: ['concat:js_vendors']
+      },
+
+      // Compile less to CSS
       less: {
         files: 'src/**/*.less',
         tasks: ['less:development', 'csslint'],
@@ -77,6 +93,13 @@ module.exports = function(grunt) {
           livereload: false
         }
       },
+
+      // Reload browser when CSS file is updated
+      css: {
+        files: '<%= css_dist %>'
+      },
+
+      // Reload browser when templates are updated
       templates: {
         files: ['src/**/*.html', 'index.html']
       }

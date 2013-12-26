@@ -1,17 +1,38 @@
-app.controller('addMealController', ['$scope', 'angularFire', 'helpers', function ($scope, angularFire, helpers) {
+app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', function ($scope, $firebase, helpers, $http) {
   'use strict';
 
   $scope.isTouch = helpers.isTouch();
+
+
+  function saveImage(encodedImage){
+    var timestamp = "1388031549";
+    var signature = "8ba67ad9cec7a0ebd7caf4574e5bcbc44b5f1607";
+
+    $http({
+      url: "http://api.cloudinary.com/v1_1/konscript/image/upload",
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: helpers.getParams({
+        file: "data:image/jpeg;base64," + encodedImage,
+        api_key: "381981727586644",
+        timestamp: timestamp,
+        signature: signature
+      })
+    }).success(function(response){
+
+    });
+  }
 
   // For desktop only
   $scope.uploadImage = function($event){
     var file = $event.target.files[0];
     var reader = new FileReader();
-
     reader.onload = function(readerEvt) {
         var binaryString = readerEvt.target.result;
-        var encodedFile = btoa(binaryString);
-        console.log(encodedFile);
+        var encodedImage = btoa(binaryString);
+        saveImage(encodedImage);
     };
 
     reader.readAsBinaryString(file);
@@ -19,29 +40,27 @@ app.controller('addMealController', ['$scope', 'angularFire', 'helpers', functio
 
   // For mobile only
   $scope.captureImage = function(){
-    navigator.camera.getPicture( function(image){
-      // success
-      $scope.$apply(function(){
-        $scope.imageResponse = image;
+    if(helpers.isTouch()){
+      navigator.camera.getPicture( function(encodedImage){
+        saveImage(encodedImage);
+        // success
+      }, function(error){
+        // error
+        alert(error);
+      }, {
+        quality: 75,
+        sourceType : Camera.PictureSourceType.CAMERA,
+        destinationType: Camera.DestinationType.DATA_URL,
+        allowEdit: true
       });
-    }, function(error){
-      // error
-      alert("error");
-      $scope.imageResponse = error;
-    }, {
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI,
-      allowEdit: true
-    });
+    }
   };
-
-  var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
-  $scope.meals = null;
-  angularFire(mealsRef, $scope, 'meals');
 
   // Add meal
   $scope.addMeal = function(){
-    var newMeal = mealsRef.push({
+    $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
+
+    $scope.meals.$add({
       title: $scope.title,
       description: $scope.description,
       restaurant: $scope.restaurant,
@@ -49,11 +68,6 @@ app.controller('addMealController', ['$scope', 'angularFire', 'helpers', functio
       faves: $scope.faves,
       images: [$scope.image]
     });
-  };
-
-  // remove meal
-  $scope.removeMeal = function() {
-
   };
 
 }]);

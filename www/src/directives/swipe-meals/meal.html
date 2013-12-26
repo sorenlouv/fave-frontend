@@ -5,9 +5,9 @@
       <h3>
         <span ng-bind="meal.price"></span>$ -
         <span ng-bind="meal.faves"></span> Faves
-        <br> 
+        <br>
         <span ng-bind="meal.restaurant"></span>
-      </h3>      
+      </h3>
       <div class="takeout">
         <img ng-src="{{meal.images[0]}}" class="meal">
       </div>
@@ -15,8 +15,9 @@
       <p ng-bind="meal.description" class="desc"></p>
     </div>
   </div>
-  <div class="actions">
+  <div class="actions" ng-hide="isTouch">
     <a ng-click="prev()">Prev</a>
     <a ng-click="next()">Next</a>
   </div>
 </div>
+

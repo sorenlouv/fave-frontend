@@ -23,11 +23,14 @@ section.add-meal {
 	   color: rgba(255, 255, 255, 0.7);
 	}
 
+	// Styling for page
+	// TODO: should be move to a more general place if shared between multiple pages
 	background-color: @red;
 	height: 100%;
 	float: left;
 	width: 100%;
 	padding: 20px;
+
 
 	.intro {
 		width: 70%;
@@ -36,12 +39,27 @@ section.add-meal {
 		margin: 0 0 20px 0;
 	}
 
+	// Clickable containers to upload an image
+	.capture-image {
+		position: relative;
+
+		.hidden-input {
+			position: absolute;
+			height: 67px;
+			opacity: 0;
+			z-index: 1;
+			top: 0;
+			left: 0;
+		}
+	}
+
 	.fa {
 		float: left;
 		margin-top: 20px;
 		margin-right: 20px;
 	    -webkit-text-stroke-color: @red-dark ;
 	}
+
 	.comment {
 		height: 50px;
 		padding: 10px;

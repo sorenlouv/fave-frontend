@@ -169,6 +169,17 @@ section.add-meal .intro {
   color: white;
   margin: 0 0 20px 0;
 }
+section.add-meal .capture-image {
+  position: relative;
+}
+section.add-meal .capture-image .hidden-input {
+  position: absolute;
+  height: 67px;
+  opacity: 0;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
 section.add-meal .fa {
   float: left;
   margin-top: 20px;

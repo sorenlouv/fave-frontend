@@ -6,7 +6,15 @@ app.factory('helpers', [function() {
     return 'ontouchstart' in window || 'onmsgesturechange' in window;
   };
 
+  // Create a serialized representation of an array or object
+  function getParams(data){
+    return Object.keys(data).map(function(k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+    }).join('&');
+  }
+
   return {
-    isTouch: isTouch
+    isTouch: isTouch,
+    getParams: getParams
   };
 }]);

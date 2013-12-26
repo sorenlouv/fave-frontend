@@ -1,5 +1,7 @@
-app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($timeout, angularFireCollection) {
+app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($timeout, $firebase, helpers) {
   'use strict';
+
+  // Note to self: Explicit bindings!!!s
 
   return {
     restrict: 'E',
@@ -8,11 +10,10 @@ app.directive('swipeMeals', ['$timeout', 'angularFireCollection', function ($tim
     controller: function($scope){
     },
     link: function ($scope, $element, $attrs) {
-      var mealsRef = new Firebase("https://fave.firebaseio.com/meals");
-      mealsRef.on('value', function(snapshot) {
-        $scope.$apply(function(){
-          $scope.meals = snapshot.val();
-        });
+      $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
+
+      // triggered on inital data load
+      $scope.meals.$on('loaded', function(snapshot) {
         $timeout(function(){
           initializeSlider();
         }, 0);

@@ -34,9 +34,6 @@ var phonegap = {
   // deviceready Event Handler
   bootstrapAngular: function() {
     'use strict';
-
-    console.log("bootstrapAngular");
-
     this.angularIsReady(function(){
       angular.element(document).ready(function() {
         angular.bootstrap(document, ['faveapp']);
