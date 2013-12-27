@@ -87,18 +87,25 @@ app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($time
     }
   };
 }]);
-app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 'safeApply', function ($scope, $firebase, helpers, $http, safeApply) {
+app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 'safeApply', '$q', function ($scope, $firebase, helpers, $http, safeApply, $q) {
   'use strict';
 
+  /*
+   * Inital variables
+   ****************************************/
   $scope.isTouch = helpers.isTouch();
-  $scope.foodImage = null;
+  $scope.images = {};
 
+
+  /*
+   * Helper methods
+   ****************************************/
 
   function saveImage(encodedImage){
-    var timestamp = "1388031549";
-    var signature = "8ba67ad9cec7a0ebd7caf4574e5bcbc44b5f1607";
+    var timestamp = "1388134077";
+    var signature = "7e68693d0780f8edfbd6c0380dbef6944dd044fc";
 
-    $http({
+    return $http({
       url: "http://api.cloudinary.com/v1_1/konscript/image/upload",
       method: "POST",
       headers: {
@@ -110,35 +117,33 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
         timestamp: timestamp,
         signature: signature
       })
-    }).success(function(response){
-
     });
   }
 
+  // Select existing image from computer
   // For desktop only
-  $scope.uploadImage = function($event){
-    var file = $event.target.files[0];
+  var selectImage = function(file, imageCategory){
     var reader = new FileReader();
     reader.onload = function(readerEvt) {
         var binaryString = readerEvt.target.result;
         var encodedImage = btoa(binaryString);
-        // saveImage(encodedImage);
+
         safeApply($scope, function(){
-          $scope.foodImage = encodedImage;
+          $scope.images[imageCategory] = encodedImage;
         });
     };
 
     reader.readAsBinaryString(file);
   };
 
+  // Capture image with device camera
   // For mobile only
-  $scope.captureImage = function(){
+  var captureImage = function(imageCategory){
     if(helpers.isTouch()){
       navigator.camera.getPicture( function(encodedImage){
         // success
-        // saveImage(encodedImage);
         safeApply($scope, function(){
-          $scope.foodImage = encodedImage;
+          $scope.images[imageCategory] = encodedImage;
         });
       }, function(error){
         // error
@@ -152,17 +157,57 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
     }
   };
 
+  /*
+   * Click events
+   ****************************************/
+
+  // Select image of food from computer
+  // For desktop only
+  $scope.selectFoodImage = function($event){
+    var file = $event.target.files[0];
+    selectImage(file, "food");
+  };
+
+  // Select image of receipt from computer
+  // For desktop only
+  $scope.selectReceiptImage = function($event){
+    var file = $event.target.files[0];
+    selectImage(file, "receipt");
+  };
+
+  // Capture image of food with device camera
+  // For mobile only
+  $scope.captureFoodImage = function(){
+    captureImage("food");
+  };
+
+  // Capture image of receipt with device camera
+  // For mobile only
+  $scope.captureReceiptImage = function(){
+    captureImage("receipt");
+  };
+
   // Add meal
   $scope.addMeal = function(){
     $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
-    $scope.meals.$add({
-      title: $scope.title,
-      description: $scope.description,
-      restaurant: $scope.restaurant,
-      price: $scope.price,
-      faves: $scope.faves,
-      images: [$scope.image]
+    // save images
+    var saveFoodImage = saveImage($scope.images.food);
+    var saveReceiptImage = saveImage($scope.images.receipt);
+
+    // When images has been uploaded
+    $q.all([saveFoodImage, saveReceiptImage]).then(function(response){
+      var foodImageUrl = response[0].data.url;
+      var foodReceiptUrl = response[1].data.url;
+
+      $scope.meals.$add({
+        // title: $scope.title,
+        // description: $scope.description,
+        // restaurant: $scope.restaurant,
+        // price: $scope.price,
+        // faves: $scope.faves,
+        images: [foodImageUrl, foodReceiptUrl]
+      });
     });
   };
 

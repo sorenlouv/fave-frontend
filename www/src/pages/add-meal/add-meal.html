@@ -4,28 +4,35 @@
 	<!-- Food image -->
 	<div>
 		<i class="fa fa-camera"></i>
-		<div class="button red capture-image" ng-click="captureImage()">
-			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="uploadImage" type="file" />
+		<div class="button red capture-image" ng-click="captureFoodImage()">
+			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="selectFoodImage" type="file" />
 			<p>Food</p>
 			<span>Delicious picture of your meal</span>
 		</div>
 
-		<img ng-if="foodImage" ng-src="data:image/jpeg;base64,{{foodImage}}" width="100">
+		<img ng-if="images.food" ng-src="data:image/jpeg;base64,{{images.food}}" width="100">
 	</div>
 
 	<!-- Receipt image -->
 	<div>
 		<i class="fa fa-camera"></i>
-		<div class="button red capture-image" ng-click="captureImage()">
-			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="uploadImage" type="file" />
+		<div class="button red capture-image" ng-click="captureReceiptImage()">
+			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="selectReceiptImage" type="file" />
 			<p>Receipt</p>
 			<span>We scan it for place & price</span>
 		</div>
+
+		<img ng-if="images.receipt" ng-src="data:image/jpeg;base64,{{images.receipt}}" width="100">
 	</div>
 
 	<!-- Comment -->
 	<div>
 		<i class="fa fa-comment"></i>
 		<textarea class="comment" placeholder="Optional burst of joy / thoughtful description"></textarea>
+	</div>
+
+	<div>
+		<i class="fa fa-comment"></i>
+		<button class="button red" ng-click="addMeal()">Add meal</button>
 	</div>
 </section>
