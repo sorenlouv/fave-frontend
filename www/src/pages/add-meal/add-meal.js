@@ -1,7 +1,8 @@
-app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', function ($scope, $firebase, helpers, $http) {
+app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 'safeApply', function ($scope, $firebase, helpers, $http, safeApply) {
   'use strict';
 
   $scope.isTouch = helpers.isTouch();
+  $scope.foodImage = null;
 
 
   function saveImage(encodedImage){
@@ -32,7 +33,10 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
     reader.onload = function(readerEvt) {
         var binaryString = readerEvt.target.result;
         var encodedImage = btoa(binaryString);
-        saveImage(encodedImage);
+        // saveImage(encodedImage);
+        safeApply($scope, function(){
+          $scope.foodImage = encodedImage;
+        });
     };
 
     reader.readAsBinaryString(file);
@@ -42,8 +46,11 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
   $scope.captureImage = function(){
     if(helpers.isTouch()){
       navigator.camera.getPicture( function(encodedImage){
-        saveImage(encodedImage);
         // success
+        // saveImage(encodedImage);
+        safeApply($scope, function(){
+          $scope.foodImage = encodedImage;
+        });
       }, function(error){
         // error
         alert(error);
