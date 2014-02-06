@@ -1,4 +1,4 @@
-app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+app.controller("headerController", ['$scope', 'facebook', 'safeApply','$firebase', function ($scope, facebook, safeApply, $firebase) {
   'use strict';
 
     facebook.userLoggedIn.then(function(){
@@ -13,9 +13,18 @@ app.controller("headerController", ['$scope', 'facebook', 'safeApply', function 
      * Click events
      ********************************************/
 
+
+
+     $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
+
     $scope.login = function(){
       facebook.sdkReady.then(function(){
         FB.login(null, { scope: "email" });
       });
     };
+
+
+
+
+
 }]);

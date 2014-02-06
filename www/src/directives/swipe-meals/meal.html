@@ -1,18 +1,28 @@
+
 <div class="meals">
   <div class="swipe-wrap">
     <div class="single-meal" ng-repeat="meal in meals">
-      <h1 ng-bind="meal.title"></h1>
+<!--  <h1 ng-bind="meal.title"></h1>
       <h3>
         <span ng-bind="meal.price"></span>$ -
         <span ng-bind="meal.faves"></span> Faves
         <br>
         <span ng-bind="meal.restaurant"></span>
-      </h3>
+      </h3> -->
+      <div class="header-content">
+        <h1 ng-bind="meal.title"></h1>
+        <span class="subheader">
+          <span ng-bind="meal.price"></span>$,
+          <span ng-bind="meal.restaurant"></span>
+        </span>
+      </div>
       <div class="takeout">
         <img ng-src="{{meal.images[0]}}" class="meal">
+        <div class="desc">
+          <p ng-bind="meal.description"></p>
+        </div>
       </div>
       <div class="clear"></div>
-      <p ng-bind="meal.description" class="desc"></p>
     </div>
   </div>
   <div class="actions" ng-hide="isTouch">

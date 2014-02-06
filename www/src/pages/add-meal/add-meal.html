@@ -1,38 +1,14 @@
 <section class="add-meal">
-	<p class="intro">Sharing great takeout is just a few photos away</p>
-
-	<!-- Food image -->
-	<div>
-		<i class="fa fa-camera"></i>
-		<div class="button red capture-image" ng-click="captureFoodImage()">
-			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="selectFoodImage" type="file" />
-			<p>Food</p>
-			<span>Delicious picture of your meal</span>
+	<div class="action">
+		<div class="round-button capture-image" ng-click="captureFoodImage()">
+			<i class="fa fa-camera"></i>
 		</div>
-
-		<img ng-if="images.food" ng-src="data:image/jpeg;base64,{{images.food}}" width="100">
+		<h2>
+			Find a great angel!
+		</h2>
+		<span class="subheader">
+			And take a photo of your food, served
+		</span>
 	</div>
 
-	<!-- Receipt image -->
-	<div>
-		<i class="fa fa-camera"></i>
-		<div class="button red capture-image" ng-click="captureReceiptImage()">
-			<input class="hidden-input" ng-if="!isTouch" file-upload-on-change="selectReceiptImage" type="file" />
-			<p>Receipt</p>
-			<span>We scan it for place & price</span>
-		</div>
-
-		<img ng-if="images.receipt" ng-src="data:image/jpeg;base64,{{images.receipt}}" width="100">
-	</div>
-
-	<!-- Comment -->
-	<div>
-		<i class="fa fa-comment"></i>
-		<textarea class="comment" placeholder="Optional burst of joy / thoughtful description"></textarea>
-	</div>
-
-	<div>
-		<i class="fa fa-comment"></i>
-		<button class="button red" ng-click="addMeal()">Add meal</button>
-	</div>
 </section>

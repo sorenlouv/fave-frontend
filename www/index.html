@@ -5,8 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <link rel="stylesheet" href="dist/css/fave-app.css">
   <link rel="stylesheet" type="text/css" href="dist/css/normalize.css" />
+  <link rel="stylesheet" href="dist/css/fave-app.css">
+
   <link rel="stylesheet" type="text/css" href="dist/css/font-awesome.css" />
 
   <!-- Phonegap specific stuff -->
@@ -22,15 +23,14 @@
   <body>
     <header ng-controller="headerController">
       <a ng-click="login()" class="settings"><i class="fa fa-cog"></i> </a>
-      <a href="#/home"><img class="logo" src="img/logo-red.png"></a>
-      <a class="addMeal" href="#/add-meal"><i class="fa fa-plus action"></i></a>
+      <!-- <a href="#/home"><img class="logo" src="img/logo-red.png"></a> -->
+<!--       <span ng-bind="meal.title"></span>
+ -->      <a class="addMeal" href="#/add-meal"><i class="fa fa-plus action"></i></a>
       <div ng-show="activeUser">
         Hej {{activeUser.name}}
       </div>
     </header>
-
     <div ng-view></div>
-
     <div id="fb-root"></div>
   </body>
 </html>
