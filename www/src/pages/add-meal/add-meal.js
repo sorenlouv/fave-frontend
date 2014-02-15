@@ -4,7 +4,6 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
   /*
    * Inital variables
    ****************************************/
-  $scope.isTouch = helpers.isTouch();
   $scope.images = {};
 
 
@@ -117,7 +116,11 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
         // restaurant: $scope.restaurant,
         // price: $scope.price,
         // faves: $scope.faves,
-        images: [foodImageUrl, foodReceiptUrl]
+        images: {
+          food: foodImageUrl,
+          receipt: foodReceiptUrl,
+          additional: []
+        }
       });
     });
   };

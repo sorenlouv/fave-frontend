@@ -11,7 +11,9 @@ app.controller('adminController', ['$scope', '$firebase', function ($scope, $fir
       restaurant: $scope.restaurant,
       price: $scope.price,
       faves: $scope.faves,
-      images: [$scope.image]
+      images: {
+        food: $scope.image
+      }
     });
   };
 

@@ -20,6 +20,13 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
+// Main controller
+// Consider variables defined in here "global"
+app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
+  'use strict';
+
+  $scope.isTouch = helpers.isTouch();
+}]);
 // make a fileinput listen for change events
 app.directive('fileUploadOnChange', [function() {
   'use strict';
@@ -56,8 +63,6 @@ app.controller("headerController", ['$scope', 'facebook', 'safeApply', function 
 app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($timeout, $firebase, helpers) {
   'use strict';
 
-  // Note to self: Explicit bindings!!!s
-
   return {
     restrict: 'E',
     templateUrl: 'src/directives/swipe-meals/meal.html',
@@ -93,7 +98,6 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
   /*
    * Inital variables
    ****************************************/
-  $scope.isTouch = helpers.isTouch();
   $scope.images = {};
 
 
@@ -206,7 +210,11 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
         // restaurant: $scope.restaurant,
         // price: $scope.price,
         // faves: $scope.faves,
-        images: [foodImageUrl, foodReceiptUrl]
+        images: {
+          food: foodImageUrl,
+          receipt: foodReceiptUrl,
+          additional: []
+        }
       });
     });
   };
@@ -225,7 +233,9 @@ app.controller('adminController', ['$scope', '$firebase', function ($scope, $fir
       restaurant: $scope.restaurant,
       price: $scope.price,
       faves: $scope.faves,
-      images: [$scope.image]
+      images: {
+        food: $scope.image
+      }
     });
   };
 

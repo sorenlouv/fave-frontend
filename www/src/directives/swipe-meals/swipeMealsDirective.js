@@ -1,8 +1,6 @@
 app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($timeout, $firebase, helpers) {
   'use strict';
 
-  // Note to self: Explicit bindings!!!s
-
   return {
     restrict: 'E',
     templateUrl: 'src/directives/swipe-meals/meal.html',

@@ -9,7 +9,7 @@
         <span ng-bind="meal.restaurant"></span>
       </h3>
       <div class="takeout">
-        <img ng-src="{{meal.images[0]}}" class="meal">
+        <img ng-src="{{meal.images.food}}" class="meal">
       </div>
       <div class="clear"></div>
       <p ng-bind="meal.description" class="desc"></p>
@@ -20,4 +20,3 @@
     <a ng-click="next()">Next</a>
   </div>
 </div>
-

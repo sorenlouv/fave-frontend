@@ -19,3 +19,11 @@ app.config(['$routeProvider', function($routeProvider) {
     .otherwise({redirectTo: '/home'});
 }]);
 
+
+// Main controller
+// Consider variables defined in here "global"
+app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
+  'use strict';
+
+  $scope.isTouch = helpers.isTouch();
+}]);
