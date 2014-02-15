@@ -1,4 +1,4 @@
-app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($timeout, $firebase, helpers) {
+app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', '$rootScope', function ($timeout, $firebase, helpers, $rootScope) {
   'use strict';
 
   return {
@@ -8,7 +8,7 @@ app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', function ($time
     controller: function($scope){
     },
     link: function ($scope, $element, $attrs) {
-      $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
+      $rootScope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
       // triggered on inital data load
       $scope.meals.$on('loaded', function(snapshot) {
