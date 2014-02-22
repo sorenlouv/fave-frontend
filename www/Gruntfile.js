@@ -3,8 +3,11 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     css_dist: 'dist/css/fave-app.css',
+    less_compiled: 'dist/css/less_compiled.css',
 
-    // Concatenate files
+    /*
+    * Concatenate files
+    ****************/
     concat: {
       options: {
         separator: '\n'
@@ -27,6 +30,9 @@ module.exports = function(grunt) {
       }
     },
 
+    /*
+    * Jshint: all javascript except vendors
+    ****************/
     jshint: {
       files: [
         'src/**/*.js',
@@ -38,7 +44,9 @@ module.exports = function(grunt) {
       }
     },
 
-    // compile less to css
+    /*
+    * Less: Compile less to css
+    ****************/
     less: {
       development: {
         options: {
@@ -51,10 +59,26 @@ module.exports = function(grunt) {
           'src/**/*.less',
           '!src/**/_*.less'
         ],
+        dest: '<%= less_compiled %>'
+      }
+    },
+
+    /*
+    * Prefixes: Add/remove CSS prefixes
+    ****************/
+    autoprefixer: {
+      development: {
+        options: {
+          browsers: ['last 1 version']
+        },
+        src: '<%= less_compiled %>',
         dest: '<%= css_dist %>'
       }
     },
 
+    /*
+    * CSSLint
+    ****************/
     csslint: {
       options: {
         csslintrc: '.csslintrc' // Get CSSLint options from external file.
@@ -62,6 +86,9 @@ module.exports = function(grunt) {
       src: ['<%= css_dist %>']
     },
 
+    /*
+    * Watch for changes and execute the following tasks
+    ****************/
     watch: {
       options: {
         livereload: true
@@ -94,6 +121,12 @@ module.exports = function(grunt) {
         }
       },
 
+      // Add required vendor-prefixes to
+      autoprefixer: {
+        files: '<%= less_compiled %>',
+        tasks: ['autoprefixer:development']
+      },
+
       // Reload browser when CSS file is updated
       css: {
         files: '<%= css_dist %>'
@@ -106,14 +139,18 @@ module.exports = function(grunt) {
     }
   });
 
-  // load in the plugins we need
+  /*
+  * Load in the plugins we need
+  ****************/
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
-  // Default task(s) - will be run by writing "grunt" from the command line
-  grunt.registerTask('default', ['less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors']);
-
+  /*
+  * Default tasks - will be run by writing "grunt" from the command line
+  ****************/
+  grunt.registerTask('default', ['less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors', 'autoprefixer']);
 };

@@ -2,5 +2,6 @@
   "qualified-headings": false,
   "import": false,
   "box-model": false,
-  "adjoining-classes": false
+  "adjoining-classes": false,
+  "bulletproof-font-face": false
 }

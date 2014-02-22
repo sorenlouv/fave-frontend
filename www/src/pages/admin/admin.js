@@ -1,7 +1,5 @@
-app.controller('adminController', ['$scope', '$firebase', function ($scope, $firebase) {
+app.controller('adminController', ['$scope', function ($scope) {
   'use strict';
-
-  $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
   // Add meal
   $scope.addMeal = function(){

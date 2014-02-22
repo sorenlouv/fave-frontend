@@ -14,8 +14,6 @@
         "FB": true,
         "app": true,
         "CDV": true,
-        "Firebase": true,
-        "FirebaseSimpleLogin": true,
         "Swipe": true
     }
 }

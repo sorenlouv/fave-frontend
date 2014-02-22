@@ -1,4 +1,4 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'firebase', 'ngRoute']);
+var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
   'use strict';
@@ -19,9 +19,29 @@ app.config(['$routeProvider', function($routeProvider) {
     .otherwise({redirectTo: '/home'});
 }]);
 
+/*
+* Constants
+*****************/
+var isProduction = function(){
+  return location.host === "app.joinfave.com";
+};
+var getRestBaseUrl = function(){
+  var restBaseUrl;
+  if(isProduction){
+    restBaseUrl = "http://api.joinfave.com";
+  }else{
+    restBaseUrl = "http://api.joinfave.local";
+  }
 
-// Main controller
-// Consider variables defined in here "global"
+  return restBaseUrl;
+  // return window.location.origin.replace("http://", "http://api.");
+};
+app.constant('REST_BASE_URL', getRestBaseUrl());
+
+/*
+* Main controller
+* Consider variables defined in here "global"
+*****************/
 app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
   'use strict';
 
@@ -39,37 +59,29 @@ app.directive('fileUploadOnChange', [function() {
     }
   };
 }]);
-app.controller("headerController", ['$scope', 'facebook', 'safeApply','$firebase', function ($scope, facebook, safeApply, $firebase) {
+app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
-    facebook.userLoggedIn.then(function(){
-      FB.api('/me', function(activeUser) {
-        safeApply($scope, function(){
-          $scope.activeUser = activeUser;
-        });
+  facebook.userLoggedIn.then(function(){
+    FB.api('/me', function(activeUser) {
+      safeApply($scope, function(){
+        $scope.activeUser = activeUser;
       });
     });
+  });
 
-    /*
-     * Click events
-     ********************************************/
+  /*
+   * Click events
+   ********************************************/
 
-
-
-     $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
-
-    $scope.login = function(){
-      facebook.sdkReady.then(function(){
-        FB.login(null, { scope: "email" });
-      });
-    };
-
-
-
-
+  $scope.login = function(){
+    facebook.sdkReady.then(function(){
+      FB.login(null, { scope: "email" });
+    });
+  };
 
 }]);
-app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', '$rootScope', function ($timeout, $firebase, helpers, $rootScope) {
+app.directive('swipeMeals', ['$timeout', '$http', 'helpers', 'safeApply', 'REST_BASE_URL', function ($timeout, $http, helpers, safeApply, REST_BASE_URL) {
   'use strict';
 
   return {
@@ -79,29 +91,66 @@ app.directive('swipeMeals', ['$timeout', '$firebase', 'helpers', '$rootScope', f
     controller: function($scope){
     },
     link: function ($scope, $element, $attrs) {
-      $rootScope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
-
-      // triggered on inital data load
-      $scope.meals.$on('loaded', function(snapshot) {
-        $timeout(function(){
-          initializeSlider();
-        }, 0);
+      var numberOfElements;
+      var mealsTotal = [];
+      // Get location
+      navigator.geolocation.getCurrentPosition(function(position) {
+        safeApply($scope, function(){
+          $scope.userCoordinates = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+        });
+      }, function(){
+        safeApply($scope, function(){
+          $scope.userCoordinates = {
+            longitude: -122.408211,
+            latitude: 37.762017
+          };
+        });
       });
 
-      var initializeSlider = function(){
-        var swipeElement = Swipe($element[0], {
-          disableScroll: true,
-          callback: function(index, elem) {},
-          transitionEnd: function(index, elem) {}
-        });
+      var swipeElement = Swipe($element[0], {
+        disableScroll: true,
+          callback: function(index, elem) {
+            // Load more meals when we approach the end
+            if(index === (numberOfElements - 5)){
+              console.log("Loading new", index);
+              fetchMeals(numberOfElements);
+            }
+        }
+      });
 
-        $scope.prev = swipeElement.prev;
-        $scope.next = swipeElement.next;
+      $scope.prev = swipeElement.prev;
+      $scope.next = swipeElement.next;
+
+      var fetchMeals = function(offset){
+        $http({method: 'GET', url: REST_BASE_URL + '/meal/closest', params: {radius: 1, longitude: $scope.userCoordinates.longitude, latitude: $scope.userCoordinates.latitude, offset: offset}}).success(function(newMeals){
+
+          // Add new meals to the existing ones
+          mealsTotal = mealsTotal.concat(newMeals);
+
+          // Update view with new elements
+          safeApply($scope, function(){
+            $scope.meals = mealsTotal;
+          });
+
+          // Recalculate swipe
+          $timeout(function(){
+            numberOfElements = $element[0].querySelectorAll('.single-meal').length;
+            swipeElement.setup();
+          });
+        });
       };
+
+      $scope.$watch('userCoordinates.longitude', function(value){
+        if(value === undefined) return;
+        fetchMeals(0);
+      });
     }
   };
 }]);
-app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 'safeApply', '$q', function ($scope, $firebase, helpers, $http, safeApply, $q) {
+app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', '$q', function ($scope, helpers, $http, safeApply, $q) {
   'use strict';
 
   /*
@@ -202,7 +251,6 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
 
   // Add meal
   $scope.addMeal = function(){
-    $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
     // save images
     var saveFoodImage = saveImage($scope.images.food);
@@ -229,10 +277,8 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
   };
 
 }]);
-app.controller('adminController', ['$scope', '$firebase', function ($scope, $firebase) {
+app.controller('adminController', ['$scope', function ($scope) {
   'use strict';
-
-  $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
   // Add meal
   $scope.addMeal = function(){
@@ -257,7 +303,6 @@ app.controller('adminController', ['$scope', '$firebase', function ($scope, $fir
 app.controller('homeController', ['$scope', 'facebook', 'safeApply', 'helpers', function ($scope, facebook, safeApply, helpers) {
   'use strict';
 
-  
 }]);
 app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   'use strict';
@@ -349,64 +394,6 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
     userLoggedIn: userLoggedIn,
     sdkReady: sdkReady
   };
-}]);
-app.factory('firebaseAuth', ['$q', 'safeApply', function($q, safeApply) {
-  'use strict';
-
-  // Init user ready deferred
-  var userReadyDef = $q.defer();
-
-  // Create firebase authentication object
-  var usersRef = new Firebase("https://fave.firebaseio.com/users");
-  var auth = new FirebaseSimpleLogin(usersRef, onAuthenticationChange.bind(this));
-
-  /*
-   * Attempt to login user
-   * Return promise which will be resolved in "onAuthenticationChange" if login successful
-   ****************************************/
-  var login = function(accessToken){
-    this.auth.login('facebook', {
-      access_token: accessToken
-    });
-
-    return userReadyDef.promise;
-  };
-
-  // onChange: Authentication to Firebase
-  var onAuthenticationChange = function(error, facebookUser) {
-    if(facebookUser){
-      this.createCurrentUser(facebookUser).then(function(){
-        userReadyDef.resolve();
-      });
-    }
-  };
-
-  /*
-   * Create user after successful login, if he doesn't exist
-   ****************************************/
-  var createCurrentUser = function(facebookUser){
-    var createUserDef = $q.defer();
-    var activeUserRef = usersRef.child(facebookUser.id);
-    activeUserRef.once('value', function(activeUserSnapshot){
-
-      // Create user if not exists
-      if(activeUserSnapshot.val() === null){
-        activeUserRef.set({
-          id: facebookUser.id,
-          name: facebookUser.name,
-          first_name: facebookUser.first_name,
-          last_name: facebookUser.last_name,
-          email: facebookUser.email
-        });
-      }
-
-      createUserDef.resolve();
-    });
-
-    return createUserDef.promise;
-  };
-
-  return login;
 }]);
 app.factory('helpers', [function() {
   'use strict';

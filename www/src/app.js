@@ -1,4 +1,4 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'firebase', 'ngRoute']);
+var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
   'use strict';
@@ -19,9 +19,29 @@ app.config(['$routeProvider', function($routeProvider) {
     .otherwise({redirectTo: '/home'});
 }]);
 
+/*
+* Constants
+*****************/
+var isProduction = function(){
+  return location.host === "app.joinfave.com";
+};
+var getRestBaseUrl = function(){
+  var restBaseUrl;
+  if(isProduction){
+    restBaseUrl = "http://api.joinfave.com";
+  }else{
+    restBaseUrl = "http://api.joinfave.local";
+  }
 
-// Main controller
-// Consider variables defined in here "global"
+  return restBaseUrl;
+  // return window.location.origin.replace("http://", "http://api.");
+};
+app.constant('REST_BASE_URL', getRestBaseUrl());
+
+/*
+* Main controller
+* Consider variables defined in here "global"
+*****************/
 app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
   'use strict';
 

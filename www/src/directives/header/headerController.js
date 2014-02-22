@@ -1,30 +1,22 @@
-app.controller("headerController", ['$scope', 'facebook', 'safeApply','$firebase', function ($scope, facebook, safeApply, $firebase) {
+app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
   'use strict';
 
-    facebook.userLoggedIn.then(function(){
-      FB.api('/me', function(activeUser) {
-        safeApply($scope, function(){
-          $scope.activeUser = activeUser;
-        });
+  facebook.userLoggedIn.then(function(){
+    FB.api('/me', function(activeUser) {
+      safeApply($scope, function(){
+        $scope.activeUser = activeUser;
       });
     });
+  });
 
-    /*
-     * Click events
-     ********************************************/
+  /*
+   * Click events
+   ********************************************/
 
-
-
-     $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
-
-    $scope.login = function(){
-      facebook.sdkReady.then(function(){
-        FB.login(null, { scope: "email" });
-      });
-    };
-
-
-
-
+  $scope.login = function(){
+    facebook.sdkReady.then(function(){
+      FB.login(null, { scope: "email" });
+    });
+  };
 
 }]);

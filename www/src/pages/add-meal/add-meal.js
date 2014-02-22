@@ -1,4 +1,4 @@
-app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 'safeApply', '$q', function ($scope, $firebase, helpers, $http, safeApply, $q) {
+app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', '$q', function ($scope, helpers, $http, safeApply, $q) {
   'use strict';
 
   /*
@@ -99,7 +99,6 @@ app.controller('addMealController', ['$scope', '$firebase', 'helpers', '$http', 
 
   // Add meal
   $scope.addMeal = function(){
-    $scope.meals = $firebase(new Firebase("https://fave.firebaseio.com/meals"));
 
     // save images
     var saveFoodImage = saveImage($scope.images.food);
