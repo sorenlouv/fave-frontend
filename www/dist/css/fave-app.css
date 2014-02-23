@@ -37,7 +37,6 @@
   display: inline-block;
   margin-bottom: 10px;
   width: 200px;
-  -o-border-radius: 3px;
   border-radius: 3px;
 }
 .button.red {
@@ -153,7 +152,6 @@ header .addMeal {
   width: 70px;
   height: 70px;
   background-color: #e45c36;
-  -o-border-radius: 35px;
   border-radius: 35px;
 }
 .add-meal .action i {
@@ -200,39 +198,13 @@ section.admin .comment {
   width: 100%;
   height: 100%;
 }
-.page-home .header-content {
-  width: 200px;
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  top: 11px;
-}
-.page-home .takeout {
-  overflow: hidden;
-}
-.page-home .takeout img {
-  height: 510px;
-  overflow: hidden;
-}
-.page-home .description {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  z-index: 10;
-  text-align: center;
-}
-.page-home .description p {
-  margin: 0;
-  padding: 10px;
-  display: inline-block;
-  font-weight: 300;
-  font-style: italic;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, 0.9);
-}
 .page-home .actions {
   margin-bottom: 20px;
 }
 .page-home .actions a {
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
