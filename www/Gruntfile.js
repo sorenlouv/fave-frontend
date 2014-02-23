@@ -1,4 +1,7 @@
+/*jslint node: true */
+
 module.exports = function(grunt) {
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
@@ -20,11 +23,12 @@ module.exports = function(grunt) {
         dest: 'dist/js/fave-app-vendors.js'
       },
 
-      // All javascript files except vendors
+      // All javascript files except default files and vendors
       js: {
         src: [
           'src/**/*.js',
-          '!src/vendors/**/*.js'
+          '!**/*.default.js', // Ignore default files
+          '!src/vendors/**/*.js' // ignore vendors
         ],
         dest: 'dist/js/fave-app.js'
       }
@@ -50,7 +54,7 @@ module.exports = function(grunt) {
     less: {
       development: {
         options: {
-          paths: ["src/mixins/"]
+          paths: ['src/mixins/']
           // cleancss: true
         },
 

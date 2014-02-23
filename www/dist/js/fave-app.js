@@ -600,6 +600,7 @@ app.constant('localConfig', {
   'frontend_url': 'http://app.joinfave.local',
   'backend_url': 'http://localhost:8888'
 });
+
 app.constant('productionConfig', {
   'frontend_url': 'http://app.joinfave.com',
   'backend_url': 'http://api.joinfave.com'
