@@ -195,11 +195,11 @@ app.directive('swipeMeals', ['helpers', 'safeApply', function (helpers, safeAppl
       var sliderElm = $element[0];
       var swipeElement = Swipe(sliderElm, {
         disableScroll: true,
-          callback: function(index, elem) {
-            // Load more elements when we approach the end
-            if(index === (numberOfElements - 5)){
-              $scope.control.loadMore(numberOfElements);
-            }
+        callback: function(index, elem) {
+          // Load more elements when we approach the end
+          if(index === (numberOfElements - 5)){
+            $scope.control.loadMore(numberOfElements);
+          }
         }
       });
 
