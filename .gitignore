@@ -23,3 +23,6 @@ platforms/ios/www/
 platforms/ios/cordova/console.log
 
 .DS_Store
+
+# Local config files
+localConfig.js

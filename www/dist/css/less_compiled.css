@@ -83,6 +83,10 @@ body {
   color: #323232;
 }
 
+.google-maps-directions {
+  height: 300px;
+}
+
 /*
  * header.less
  **************************/
@@ -107,64 +111,28 @@ header .addMeal {
   border-left: 1px dotted #ccc;
 }
 
-/*
- * meal.less
- **************************/
-.meals {
+.loading-spinner {
+  position: relative;
+}
+.loading-spinner .loading-spinner-animation {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+}
+
+.swipe-meals {
   overflow: hidden;
   visibility: hidden;
+  position: relative;
 }
-.meals .swipe-wrap {
+.swipe-meals .swipe-wrap {
   overflow: hidden;
   position: relative;
 }
-.meals .swipe-wrap .single-meal {
-  padding-top: 66px;
+.swipe-meals .swipe-wrap > div {
   float: left;
   width: 100%;
   position: relative;
-}
-.meals {
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-.meals .header-content {
-  width: 200px;
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
-  top: 11px;
-}
-.meals .takeout {
-  overflow: hidden;
-}
-.meals .takeout img {
-  height: 510px;
-  overflow: hidden;
-}
-.meals .desc {
-  position: absolute;
-  bottom: 40px;
-  width: 100%;
-  z-index: 10;
-  text-align: center;
-}
-.meals .desc p {
-  margin: 0;
-  padding: 10px;
-  display: inline-block;
-  font-weight: 300;
-  font-style: italic;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, 0.9);
-}
-.meals .actions {
-  margin-bottom: 20px;
-}
-.meals .actions a {
-  cursor: pointer;
 }
 
 /*
@@ -231,3 +199,4 @@ section.admin .comment {
   border: 1px solid #b5462a;
   background-color: transparent;
 }
+

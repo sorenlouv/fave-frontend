@@ -1,2 +1,40 @@
-<swipe-meals></swipe-meals>
+<div class="page-home">
 
+  <div loading-spinner="{{loadingGeoLocation || loadingMeals}}">
+    <span ng-show="loadingGeoLocation">Finding your position</span>
+    <span ng-show="loadingMeals && !loadingGeoLocation">Finding meals near you</span>
+  </div>
+
+  <swipe-meals control="swipeMeals">
+    <div class="single-meal" ng-repeat="meal in meals">
+      Show directions: <input type="checkbox" ng-model="showDirections">
+      <div ng-if="showDirections" class="google-maps-directions" from="currentLocation" to="meal.restaurant.coordinate"></div>
+      <div class="header-content">
+        <h1 ng-bind="meal.title"></h1>
+        <span class="subheader">
+          <span ng-bind="meal.prices[0].amount"></span>$
+          <span ng-bind="meal.restaurant.name"></span>
+        </span>
+        (<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> metres)
+      </div>
+      <div class="takeout">
+        <img ng-src="{{meal.image}}" class="meal">
+        <div class="description">
+          <p ng-bind="meal.description"></p>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </swipe-meals>
+
+  <!-- No meals nearby -->
+  <div ng-show="meals.length === 0">
+    No tasty meals nearby :(
+  </div>
+
+  <!-- Controlls for slider -->
+  <div class="actions" ng-show="meals.length > 0 && !isTouch">
+    <a ng-click="swipeMeals.prev()">Prev</a>
+    <a ng-click="swipeMeals.next()">Next</a>
+  </div>
+</div>

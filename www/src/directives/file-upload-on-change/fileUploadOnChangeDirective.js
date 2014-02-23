@@ -3,7 +3,7 @@ app.directive('fileUploadOnChange', [function() {
   'use strict';
 
   return {
-    restrict: "A",
+    restrict: 'A',
     link: function ($scope, $element, $attrs) {
       var onChangeFunc = $element.scope()[$attrs.fileUploadOnChange];
       $element.bind('change', onChangeFunc);

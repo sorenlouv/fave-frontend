@@ -20,27 +20,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 /*
-* Constants
-*****************/
-var isProduction = function(){
-  return location.host === "app.joinfave.com";
-};
-var getRestBaseUrl = function(){
-  var restBaseUrl;
-  if(isProduction){
-    restBaseUrl = "http://api.joinfave.com";
-  }else{
-    restBaseUrl = "http://api.joinfave.local";
-  }
-
-  return restBaseUrl;
-  // return window.location.origin.replace("http://", "http://api.");
-};
-app.constant('REST_BASE_URL', getRestBaseUrl());
-
-/*
 * Main controller
-* Consider variables defined in here "global"
+* Consider variables defined in here 'global'
 *****************/
 app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
   'use strict';

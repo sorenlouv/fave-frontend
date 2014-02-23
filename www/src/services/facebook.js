@@ -1,7 +1,7 @@
 app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   'use strict';
 
-  var appId = "627802337276971";
+  var appId = '627802337276971';
 
   var loadJS = function(src, callback) {
     var s = document.createElement('script');
@@ -34,7 +34,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   var userLoggedInDef = $q.defer();
   sdkReady.then(function(){
     FB.Event.subscribe('auth.authResponseChange', function(response) {
-      if(response.status === "connected"){
+      if(response.status === 'connected'){
         userLoggedInDef.resolve();
       }
     });

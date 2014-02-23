@@ -20,27 +20,8 @@ app.config(['$routeProvider', function($routeProvider) {
 }]);
 
 /*
-* Constants
-*****************/
-var isProduction = function(){
-  return location.host === "app.joinfave.com";
-};
-var getRestBaseUrl = function(){
-  var restBaseUrl;
-  if(isProduction){
-    restBaseUrl = "http://api.joinfave.com";
-  }else{
-    restBaseUrl = "http://api.joinfave.local";
-  }
-
-  return restBaseUrl;
-  // return window.location.origin.replace("http://", "http://api.");
-};
-app.constant('REST_BASE_URL', getRestBaseUrl());
-
-/*
 * Main controller
-* Consider variables defined in here "global"
+* Consider variables defined in here 'global'
 *****************/
 app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers) {
   'use strict';
@@ -52,104 +33,189 @@ app.directive('fileUploadOnChange', [function() {
   'use strict';
 
   return {
-    restrict: "A",
+    restrict: 'A',
     link: function ($scope, $element, $attrs) {
       var onChangeFunc = $element.scope()[$attrs.fileUploadOnChange];
       $element.bind('change', onChangeFunc);
     }
   };
 }]);
-app.controller("headerController", ['$scope', 'facebook', 'safeApply', function ($scope, facebook, safeApply) {
+/* global google */
+
+app.directive('googleMapsDirections', ['helpers', function (helpers) {
   'use strict';
 
-  facebook.userLoggedIn.then(function(){
-    FB.api('/me', function(activeUser) {
-      safeApply($scope, function(){
-        $scope.activeUser = activeUser;
+  return {
+    restrict: 'C',
+    scope: {
+      from: '=',
+      to: '='
+    },
+    link: function ($scope, $element, $attrs) {
+
+      var directionsDisplay = new google.maps.DirectionsRenderer();
+      var directionsService = new google.maps.DirectionsService();
+      var options = {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        scrollwheel: true,
+        navigationControl: false,
+        draggable: true,
+        disableDefaultUI: true,
+        streetViewControl: false,
+        keyboardShortcuts: false,
+        disableDoubleClickZoom: false
+      };
+      var map = new google.maps.Map($element[0], options);
+      directionsDisplay.setMap(map);
+
+      $scope.$watch('from', function(value){
+        if(value === undefined) return;
+        var toConverted = helpers.convertMongoLocation($scope.to);
+        var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
+        var to = new google.maps.LatLng(toConverted.latitude, toConverted.longitude);
+        calcRoute(from, to);
       });
-    });
-  });
 
-  /*
-   * Click events
-   ********************************************/
+      $scope.$watch('to', function(value){
+        if(value === undefined) return;
+        var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
+        var to = new google.maps.LatLng($scope.to.latitude, $scope.to.longitude);
+        calcRoute(from, to);
+      });
 
-  $scope.login = function(){
-    facebook.sdkReady.then(function(){
-      FB.login(null, { scope: "email" });
-    });
+      function calcRoute(start, end) {
+        var request = {
+            origin: start,
+            destination:end,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+          }
+        });
+      }
+
+    }
   };
-
 }]);
-app.directive('swipeMeals', ['$timeout', '$http', 'helpers', 'safeApply', 'REST_BASE_URL', function ($timeout, $http, helpers, safeApply, REST_BASE_URL) {
+app.directive('header', ['facebook', function(facebook) {
   'use strict';
 
   return {
     restrict: 'E',
-    templateUrl: 'src/directives/swipe-meals/meal.html',
-    replace: true,
-    controller: function($scope){
-    },
+    replace: false,
+    templateUrl: 'src/directives/header/header.html',
     link: function ($scope, $element, $attrs) {
-      var numberOfElements;
-      var mealsTotal = [];
-      // Get location
-      navigator.geolocation.getCurrentPosition(function(position) {
-        safeApply($scope, function(){
-          $scope.userCoordinates = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-        });
-      }, function(){
-        safeApply($scope, function(){
-          $scope.userCoordinates = {
-            longitude: -122.408211,
-            latitude: 37.762017
-          };
-        });
-      });
+      // facebook.userLoggedIn.then(function(){
+      //   FB.api('/me', function(activeUser) {
+      //     safeApply($scope, function(){
+      //       $scope.activeUser = activeUser;
+      //     });
+      //   });
+      // });
 
-      var swipeElement = Swipe($element[0], {
-        disableScroll: true,
-          callback: function(index, elem) {
-            // Load more meals when we approach the end
-            if(index === (numberOfElements - 5)){
-              console.log("Loading new", index);
-              fetchMeals(numberOfElements);
-            }
-        }
-      });
+      /*
+       * Click events
+       ********************************************/
 
-      $scope.prev = swipeElement.prev;
-      $scope.next = swipeElement.next;
-
-      var fetchMeals = function(offset){
-        $http({method: 'GET', url: REST_BASE_URL + '/meal/closest', params: {radius: 1, longitude: $scope.userCoordinates.longitude, latitude: $scope.userCoordinates.latitude, offset: offset}}).success(function(newMeals){
-
-          // Add new meals to the existing ones
-          mealsTotal = mealsTotal.concat(newMeals);
-
-          // Update view with new elements
-          safeApply($scope, function(){
-            $scope.meals = mealsTotal;
-          });
-
-          // Recalculate swipe
-          $timeout(function(){
-            numberOfElements = $element[0].querySelectorAll('.single-meal').length;
-            swipeElement.setup();
-          });
+      $scope.login = function(){
+        facebook.sdkReady.then(function(){
+          FB.login(null, { scope: 'email' });
         });
       };
+    }
+  };
+}]);
+/* global Spinner */
 
-      $scope.$watch('userCoordinates.longitude', function(value){
-        if(value === undefined) return;
-        fetchMeals(0);
+app.directive('loadingSpinner', [function() {
+  'use strict';
+  return {
+    restrict: 'A',
+    scope: {
+      'loadingSpinner': '@'
+    },
+    transclude: true,
+    replace: true,
+    templateUrl: 'src/directives/loading-spinner/loading-spinner.html',
+    link: function($scope, $element, $attrs) {
+
+      var opts = {
+        lines: 7, // The number of lines to draw
+        length: 5, // The length of each line
+        width: 2, // The line thickness
+        radius: 3, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1.3, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: 'auto', // Top position relative to parent in px
+        left: 'auto' // Left position relative to parent in px
+      };
+      var spinner = new Spinner(opts);
+
+      var loadingSpinnerAnimationElm = $element[0].querySelector('.loading-spinner-animation');
+      var loadingSpinnerTextElm = $element[0].querySelector('.loading-spinner-text');
+      loadingSpinnerTextElm.style.textIndent = opts.lines * 4 + 'px';
+
+      $attrs.$observe('loadingSpinner', function(newValue, oldValue){
+        if(newValue === undefined) return;
+
+        if(newValue === 'true'){
+          // console.log('Start spinner');
+          spinner.spin(loadingSpinnerAnimationElm);
+        }else{
+          // console.log('Stop spinner');
+          spinner.stop();
+        }
       });
     }
   };
 }]);
+app.directive('swipeMeals', ['helpers', 'safeApply', function (helpers, safeApply) {
+  'use strict';
+
+  return {
+    restrict: 'E',
+    templateUrl: 'src/directives/swipe-meals/swipe-meals.html',
+    replace: true,
+    transclude: true,
+    scope: {
+      control: '='
+    },
+    link: function ($scope, $element, $attrs) {
+      var numberOfElements;
+      var sliderElm = $element[0];
+      var swipeElement = Swipe(sliderElm, {
+        disableScroll: true,
+          callback: function(index, elem) {
+            // Load more elements when we approach the end
+            if(index === (numberOfElements - 5)){
+              $scope.control.loadMore(numberOfElements);
+            }
+        }
+      });
+
+      $scope.control.recalculate = function(){
+        numberOfElements = $element[0].querySelector('.swipe-wrap').children.length;
+        swipeElement.setup();
+      };
+
+      $scope.control.prev = swipeElement.prev;
+      $scope.control.next = swipeElement.next;
+
+    }
+  };
+}]);
+/* global Camera */
+
 app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', '$q', function ($scope, helpers, $http, safeApply, $q) {
   'use strict';
 
@@ -164,18 +230,18 @@ app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', 
    ****************************************/
 
   function saveImage(encodedImage){
-    var timestamp = "1388134077";
-    var signature = "7e68693d0780f8edfbd6c0380dbef6944dd044fc";
+    var timestamp = '1388134077';
+    var signature = '7e68693d0780f8edfbd6c0380dbef6944dd044fc';
 
     return $http({
-      url: "http://api.cloudinary.com/v1_1/konscript/image/upload",
-      method: "POST",
+      url: 'http://api.cloudinary.com/v1_1/konscript/image/upload',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: helpers.getParams({
-        file: "data:image/jpeg;base64," + encodedImage,
-        api_key: "381981727586644",
+        file: 'data:image/jpeg;base64,' + encodedImage,
+        api_key: '381981727586644',
         timestamp: timestamp,
         signature: signature
       })
@@ -227,26 +293,26 @@ app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', 
   // For desktop only
   $scope.selectFoodImage = function($event){
     var file = $event.target.files[0];
-    selectImage(file, "food");
+    selectImage(file, 'food');
   };
 
   // Select image of receipt from computer
   // For desktop only
   $scope.selectReceiptImage = function($event){
     var file = $event.target.files[0];
-    selectImage(file, "receipt");
+    selectImage(file, 'receipt');
   };
 
   // Capture image of food with device camera
   // For mobile only
   $scope.captureFoodImage = function(){
-    captureImage("food");
+    captureImage('food');
   };
 
   // Capture image of receipt with device camera
   // For mobile only
   $scope.captureReceiptImage = function(){
-    captureImage("receipt");
+    captureImage('receipt');
   };
 
   // Add meal
@@ -300,14 +366,63 @@ app.controller('adminController', ['$scope', function ($scope) {
   };
 
 }]);
-app.controller('homeController', ['$scope', 'facebook', 'safeApply', 'helpers', function ($scope, facebook, safeApply, helpers) {
+app.controller('homeController', ['$scope', '$timeout', '$http',  'safeApply', 'helpers', function ($scope, $timeout, $http, safeApply, helpers) {
   'use strict';
+
+  var mealListTotal = [];
+  $scope.currentLocation = {};
+  $scope.loadingGeoLocation = true;
+  $scope.loadingMeals = true;
+
+  // API interface for swipe meals directive
+  $scope.swipeMeals = {
+    loadMore: function(){},
+    recalculate: function(){},
+    next: function(){},
+    prev: function(){}
+  };
+
+  var fetchMeals = function(offset){
+    $http({method: 'GET', url: helpers.getConfig('backend_url') + '/meal/closest', params: {radius: 1, longitude: $scope.currentLocation.longitude, latitude: $scope.currentLocation.latitude, offset: offset}}).success(function(newMeals){
+      // Add new meals to the existing ones
+      mealListTotal = mealListTotal.concat(newMeals);
+
+      // Update view with new elements
+      safeApply($scope, function(){
+        $scope.meals = mealListTotal;
+        $scope.loadingMeals = false;
+      });
+
+      // Recalculate swipe
+      $timeout(function(){
+        $scope.swipeMeals.recalculate();
+      });
+    });
+  };
+
+  // Add fetchMeals to swipeMeals API
+  $scope.swipeMeals.loadMore = fetchMeals;
+
+  $scope.getDistanceToRestaurant = function(restaurantLocation){
+    restaurantLocation = helpers.convertMongoLocation(restaurantLocation);
+    var distanceInKilometres = helpers.getDistanceBetweenPoints($scope.currentLocation.latitude, $scope.currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
+    return Math.round(distanceInKilometres * 1000);
+  };
+
+  helpers.getLocation().then(function(loc){
+    $scope.currentLocation = loc;
+    fetchMeals(0);
+
+    safeApply($scope, function(){
+      $scope.loadingGeoLocation = false;
+    });
+  });
 
 }]);
 app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   'use strict';
 
-  var appId = "627802337276971";
+  var appId = '627802337276971';
 
   var loadJS = function(src, callback) {
     var s = document.createElement('script');
@@ -340,7 +455,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
   var userLoggedInDef = $q.defer();
   sdkReady.then(function(){
     FB.Event.subscribe('auth.authResponseChange', function(response) {
-      if(response.status === "connected"){
+      if(response.status === 'connected'){
         userLoggedInDef.resolve();
       }
     });
@@ -395,7 +510,7 @@ app.factory('facebook', ['$q', 'helpers', function($q, helpers) {
     sdkReady: sdkReady
   };
 }]);
-app.factory('helpers', [function() {
+app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', function($http, $q, productionConfig, localConfig) {
   'use strict';
 
   // Determine whether current user is touch enabled device like phone, tablet etc
@@ -404,17 +519,91 @@ app.factory('helpers', [function() {
   };
 
   // Create a serialized representation of an array or object
-  function getParams(data){
+  var getParams = function(data){
     return Object.keys(data).map(function(k) {
       return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
     }).join('&');
-  }
+  };
+
+  var getConfig = function(parameter, environment){
+    var config = environment === 'production' || isProduction() ? productionConfig : localConfig;
+    return config[parameter];
+  };
+
+  var isProduction = function(){
+    return location.host === getConfig('frontend_url', 'production');
+  };
+
+  var convertMongoLocation = function(location){
+    return {
+      latitude: location[1],
+      longitude: location[0]
+    };
+  };
+
+  var getLocation = function(){
+    var deferred = $q.defer();
+
+    // User allowed browser based geolocation
+    navigator.geolocation.getCurrentPosition(function(position) {
+
+      deferred.resolve({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+
+    // User did not allow access to location, try with IP address
+    }, function(){
+      $http.jsonp('http://ipinfo.io/geo?callback=JSON_CALLBACK').success(function(data) {
+        deferred.resolve({
+          latitude: data.loc.split(',')[0],
+          longitude: data.loc.split(',')[1]
+        });
+      });
+    });
+
+    return deferred.promise;
+  };
+
+  var toRad = function(degrees) {
+    return degrees * (Math.PI / 180);
+  };
+
+  var getDistanceBetweenPoints = function(lat1, lon1, lat2, lon2){
+    var earthRadius = 6371; // km
+
+    // Calculate difference and convert to radian
+    var diffLatRad = toRad(lat2-lat1);
+    var diffLonRad = toRad(lon2-lon1);
+    var lat1Rad = toRad(lat1);
+    var lat2Rad = toRad(lat2);
+
+    var a = Math.sin(diffLatRad/2) * Math.sin(diffLatRad/2) +
+            Math.sin(diffLonRad/2) * Math.sin(diffLonRad/2) * Math.cos(lat1Rad) * Math.cos(lat2Rad);
+
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    var distance = earthRadius * c;
+    return distance;
+  };
 
   return {
     isTouch: isTouch,
-    getParams: getParams
+    getParams: getParams,
+    getConfig: getConfig,
+    getLocation: getLocation,
+    getDistanceBetweenPoints: getDistanceBetweenPoints,
+    convertMongoLocation: convertMongoLocation
   };
 }]);
+app.constant('localConfig', {
+  'frontend_url': 'http://app.joinfave.local',
+  'backend_url': 'http://localhost:8888'
+});
+app.constant('productionConfig', {
+  'frontend_url': 'http://app.joinfave.com',
+  'backend_url': 'http://api.joinfave.com'
+});
 angular.module('safeApply',[]).factory('safeApply', [function($rootScope) {
     'use strict';
     return function($scope, fn) {

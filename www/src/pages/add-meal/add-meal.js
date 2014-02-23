@@ -1,3 +1,5 @@
+/* global Camera */
+
 app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', '$q', function ($scope, helpers, $http, safeApply, $q) {
   'use strict';
 
@@ -12,18 +14,18 @@ app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', 
    ****************************************/
 
   function saveImage(encodedImage){
-    var timestamp = "1388134077";
-    var signature = "7e68693d0780f8edfbd6c0380dbef6944dd044fc";
+    var timestamp = '1388134077';
+    var signature = '7e68693d0780f8edfbd6c0380dbef6944dd044fc';
 
     return $http({
-      url: "http://api.cloudinary.com/v1_1/konscript/image/upload",
-      method: "POST",
+      url: 'http://api.cloudinary.com/v1_1/konscript/image/upload',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: helpers.getParams({
-        file: "data:image/jpeg;base64," + encodedImage,
-        api_key: "381981727586644",
+        file: 'data:image/jpeg;base64,' + encodedImage,
+        api_key: '381981727586644',
         timestamp: timestamp,
         signature: signature
       })
@@ -75,26 +77,26 @@ app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', 
   // For desktop only
   $scope.selectFoodImage = function($event){
     var file = $event.target.files[0];
-    selectImage(file, "food");
+    selectImage(file, 'food');
   };
 
   // Select image of receipt from computer
   // For desktop only
   $scope.selectReceiptImage = function($event){
     var file = $event.target.files[0];
-    selectImage(file, "receipt");
+    selectImage(file, 'receipt');
   };
 
   // Capture image of food with device camera
   // For mobile only
   $scope.captureFoodImage = function(){
-    captureImage("food");
+    captureImage('food');
   };
 
   // Capture image of receipt with device camera
   // For mobile only
   $scope.captureReceiptImage = function(){
-    captureImage("receipt");
+    captureImage('receipt');
   };
 
   // Add meal
