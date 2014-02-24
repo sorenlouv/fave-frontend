@@ -13,7 +13,7 @@ var phonegap = {
   bindEvents: function() {
     'use strict';
 
-    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+    if (navigator.userAgent.match(/(iPhone|Android)/)) {
       document.addEventListener('deviceready', this.bootstrapAngular.bind(this), false);
     } else {
       this.bootstrapAngular();
@@ -24,7 +24,7 @@ var phonegap = {
     'use strict';
 
     this.checkForAngularInternval = window.setInterval(function(){
-      if(typeof angular !== "undefined"){
+      if(typeof angular !== 'undefined'){
         window.clearInterval(phonegap.checkForAngularInternval);
         callback();
       }
