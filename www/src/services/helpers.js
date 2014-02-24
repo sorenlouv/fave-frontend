@@ -1,3 +1,5 @@
+/* global cordova */
+
 app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', function($http, $q, productionConfig, localConfig) {
   'use strict';
 
@@ -19,7 +21,9 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
   };
 
   var isProduction = function(){
-    return location.host === getConfig('frontend_url', 'production');
+    var isProductionWebsite = 'http://' + location.host === productionConfig.frontend_url;
+    var isCordova = (typeof cordova !== 'undefined' && cordova.version !== undefined);
+    return isProductionWebsite || isCordova;
   };
 
   var convertMongoLocation = function(location){
