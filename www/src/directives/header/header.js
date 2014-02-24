@@ -1,4 +1,4 @@
-app.directive('header', ['facebook', function(facebook) {
+app.directive('header', [function() {
   'use strict';
 
   return {
@@ -18,11 +18,11 @@ app.directive('header', ['facebook', function(facebook) {
        * Click events
        ********************************************/
 
-      $scope.login = function(){
-        facebook.sdkReady.then(function(){
-          FB.login(null, { scope: 'email' });
-        });
-      };
+      // $scope.login = function(){
+      //   facebook.sdkReady.then(function(){
+      //     FB.login(null, { scope: 'email' });
+      //   });
+      // };
     }
   };
 }]);
