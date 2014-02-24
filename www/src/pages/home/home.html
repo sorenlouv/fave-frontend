@@ -5,12 +5,12 @@
     <span ng-show="loadingMeals && !loadingGeoLocation">Finding meals near you</span>
   </div>
 
-  <swipe-meals control="swipeMeals">
+  <swipe-meals control="swipeMealsControl">
     <div class="single-meal" ng-repeat="meal in meals">
       Show directions: <input type="checkbox" ng-model="showDirections">
       <div ng-if="showDirections" class="google-maps-directions" from="currentLocation" to="meal.restaurant.coordinate"></div>
       <div class="header-content">
-        <h1 ng-bind="meal.title"></h1>
+        <h1 ng-bind="meal.name"></h1>
         <span class="subheader">
           <span ng-bind="meal.prices[0].amount"></span>$
           <span ng-bind="meal.restaurant.name"></span>
@@ -34,7 +34,7 @@
 
   <!-- Controlls for slider -->
   <div class="actions" ng-show="meals.length > 0 && !isTouch">
-    <a ng-click="swipeMeals.prev()">Prev</a>
-    <a ng-click="swipeMeals.next()">Next</a>
+    <a ng-click="swipeMealsControl.prev()">Prev</a>
+    <a ng-click="swipeMealsControl.next()">Next</a>
   </div>
 </div>

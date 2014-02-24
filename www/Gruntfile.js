@@ -54,7 +54,7 @@ module.exports = function(grunt) {
     less: {
       development: {
         options: {
-          paths: ['src/mixins/']
+          paths: ['src/less-partials/']
           // cleancss: true
         },
 
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
     autoprefixer: {
       development: {
         options: {
-          browsers: ['last 1 version']
+          browsers: ['last 2 version']
         },
         src: '<%= less_compiled %>',
         dest: '<%= css_dist %>'

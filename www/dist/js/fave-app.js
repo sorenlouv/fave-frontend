@@ -375,7 +375,7 @@ app.controller('homeController', ['$scope', '$timeout', '$http',  'safeApply', '
   $scope.loadingMeals = true;
 
   // API interface for swipe meals directive
-  $scope.swipeMeals = {
+  $scope.swipeMealsControl = {
     loadMore: function(){},
     recalculate: function(){},
     next: function(){},
@@ -395,13 +395,13 @@ app.controller('homeController', ['$scope', '$timeout', '$http',  'safeApply', '
 
       // Recalculate swipe
       $timeout(function(){
-        $scope.swipeMeals.recalculate();
+        $scope.swipeMealsControl.recalculate();
       });
     });
   };
 
   // Add fetchMeals to swipeMeals API
-  $scope.swipeMeals.loadMore = fetchMeals;
+  $scope.swipeMealsControl.loadMore = fetchMeals;
 
   $scope.getDistanceToRestaurant = function(restaurantLocation){
     restaurantLocation = helpers.convertMongoLocation(restaurantLocation);
