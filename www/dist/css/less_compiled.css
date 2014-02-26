@@ -1,84 +1,7 @@
-@font-face {
-  font-family: 'Averia Serif Libre';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Averia Serif Libre Light'), local('AveriaSerifLibre-Light'), url(/dist/fonts/averia-normal-300.woff) format('woff');
-}
-@font-face {
-  font-family: 'Averia Serif Libre';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Averia Serif Libre Regular'), local('AveriaSerifLibre-Regular'), url(/dist/fonts/averia-normal-400.woff) format('woff');
-}
-@font-face {
-  font-family: 'Averia Serif Libre';
-  font-style: italic;
-  font-weight: 300;
-  src: local('Averia Serif Libre Light Italic'), local('AveriaSerifLibre-LightItalic'), url(/dist/fonts/averia-italic-300.woff) format('woff');
-}
-/*
- * Main.less
- **************************/
-.clear {
-  clear: both;
-}
-.fa {
-  font-size: 18px;
-  height: 22px;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #989898;
-  color: transparent;
-}
-.button {
-  font-weight: 300;
-  padding: 13px 20px;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.9);
-  display: inline-block;
-  margin-bottom: 10px;
-  width: 200px;
-  border-radius: 3px;
-}
-.button.red {
-  background-color: #b5462b;
-}
-.button p {
-  font-size: 18px;
-  margin: 0;
-}
-.button span {
-  font-size: 14px;
-  font-style: italic;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.7);
-}
-h1 {
-  color: #333;
-  font-size: 18px;
-  font-weight: 300;
-  margin: 0;
-}
-h2 {
-  font-size: 16px;
-  margin: 22px 0 3px 0;
-}
-h3 {
-  margin: 3px 0 0 0;
-  font-size: 14px;
-  font-weight: 300;
-}
-.subheader {
-  font-size: 14px;
-  font-weight: 300;
-  font-style: italic;
-}
-html,
-body {
-  height: 100%;
-  font-family: 'Averia Serif Libre', cursive;
-  color: #323232;
-}
 
+/*
+ * google-maps-directions.less
+ **************************/
 .google-maps-directions {
   height: 300px;
 }
@@ -96,9 +19,8 @@ header .settings {
   border-right: 1px dotted #ccc;
 }
 header .logo {
-  padding-top: 5px;
-  margin: 10px 0 0 0;
-  height: 30px;
+  margin: 15px 0 0 0;
+  height: 35px;
 }
 header .addMeal {
   float: right;
@@ -107,6 +29,9 @@ header .addMeal {
   border-left: 1px dotted #ccc;
 }
 
+/*
+ * Loading-spinner.less
+ **************************/
 .loading-spinner {
   position: relative;
 }
@@ -116,6 +41,9 @@ header .addMeal {
   left: 10px;
 }
 
+/*
+ * swipe-meals.less
+ **************************/
 .swipe-meals {
   overflow: hidden;
   visibility: hidden;
@@ -192,16 +120,14 @@ section.admin .comment {
   background-color: transparent;
 }
 
-.page-home {
-  margin: 0 auto;
-  text-align: center;
+/*
+ * Home.less
+ **************************/
+.page-home .single-meal img {
+  max-width: 100%;
+}
+
+.page-restaurants #restaurants-map {
+  height: 600px;
   width: 100%;
-  height: 100%;
-}
-.page-home .actions {
-  margin-bottom: 20px;
-}
-.page-home .actions a {
-  cursor: pointer;
-  user-select: none;
 }

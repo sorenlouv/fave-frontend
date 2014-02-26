@@ -7,23 +7,15 @@
 
   <swipe-meals control="swipeMealsControl">
     <div class="single-meal" ng-repeat="meal in meals">
-      Show directions: <input type="checkbox" ng-model="showDirections">
-      <div ng-if="showDirections" class="google-maps-directions" from="currentLocation" to="meal.restaurant.coordinate"></div>
-      <div class="header-content">
-        <h1 ng-bind="meal.name"></h1>
-        <span class="subheader">
-          <span ng-bind="meal.prices[0].amount"></span>$
-          <span ng-bind="meal.restaurant.name"></span>
-        </span>
-        (<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> metres)
-      </div>
-      <div class="takeout">
-        <img ng-src="{{meal.image}}" class="meal">
-        <div class="description">
-          <p ng-bind="meal.description"></p>
-        </div>
-      </div>
-      <div class="clear"></div>
+      <h1 ng-bind="meal.name"></h1>
+      <span class="subheader">
+        $<span ng-bind="meal.prices[0].amount"></span>
+        <span ng-bind="meal.restaurant.name"></span>
+      </span>
+      <p><span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> metres</p>
+      <img ng-src="{{meal.image}}" class="meal">
+      <p ng-bind="meal.description"></p>
+      <div ng-if="false" class="google-maps-directions" from="currentLocation" to="meal.restaurant.coordinate"></div>
     </div>
   </swipe-meals>
 
