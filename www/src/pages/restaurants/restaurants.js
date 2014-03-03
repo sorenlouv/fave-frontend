@@ -8,7 +8,7 @@ app.controller('restaurantsController', ['$scope', '$http',  'safeApply', 'helpe
     zoom: 13,
     center: center
   };
-  var map = new google.maps.Map(document.querySelector('#restaurants-map'), mapOptions);
+  var map = new google.maps.Map(document.querySelector('.restaurants-map'), mapOptions);
 
   $http({method: 'GET', url: helpers.getConfig('backend_url') + '/restaurant?limit=999'}).success(function(restaurants){
 

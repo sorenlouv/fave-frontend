@@ -26,6 +26,28 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     return isProductionWebsite || isCordova;
   };
 
+  /*
+  * Return a promise and resolve it when the watched object changes
+  * Param {$scope} scope
+  * Param {String} observed
+  * Return {promise} promise
+  *******************/
+  var getWatchAsPromise = function($scope, observed){
+    var deferred = $q.defer();
+
+    $scope.$watch(observed, function(value){
+      if(value === undefined) return;
+      deferred.resolve();
+    });
+
+    return deferred.promise;
+  };
+
+  /*
+  * Convert MongoDB's location array to a location object
+  * Param {Array} location
+  * Return {Object} location
+  *******************/
   var convertMongoLocation = function(location){
     return {
       latitude: location[1],
@@ -61,6 +83,9 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     return degrees * (Math.PI / 180);
   };
 
+  /*
+  * Return distance in kilometres between two coordinates
+  *****************/
   var getDistanceBetweenPoints = function(lat1, lon1, lat2, lon2){
     var earthRadius = 6371; // km
 
@@ -85,6 +110,6 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     getConfig: getConfig,
     getLocation: getLocation,
     getDistanceBetweenPoints: getDistanceBetweenPoints,
-    convertMongoLocation: convertMongoLocation
+    getWatchAsPromise: getWatchAsPromise
   };
 }]);

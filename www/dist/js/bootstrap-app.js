@@ -1,3 +1,5 @@
+/* global cordova */
+
 var phonegap = {
   // Application Constructor
   initialize: function() {
@@ -13,7 +15,9 @@ var phonegap = {
   bindEvents: function() {
     'use strict';
 
-    if (navigator.userAgent.match(/(iPhone|Android)/)) {
+    var isCordova = (typeof cordova !== 'undefined' && cordova.version !== undefined);
+    if (isCordova) {
+      console.log('Phonegap mode: waiting for device ready signal');
       document.addEventListener('deviceready', this.bootstrapAngular.bind(this), false);
     } else {
       this.bootstrapAngular();

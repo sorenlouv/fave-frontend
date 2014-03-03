@@ -1,32 +1,39 @@
 <div class="page-home">
 
-  <div loading-spinner="{{loadingGeoLocation || loadingMeals}}">
-    <span ng-show="loadingGeoLocation">Finding your position</span>
-    <span ng-show="loadingMeals && !loadingGeoLocation">Finding meals near you</span>
+  <div loading-spinner="{{settings.loadingGeoLocation || carousel.loading}}">
+    <span ng-show="settings.loadingGeoLocation">Finding your position</span>
+    <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
   </div>
 
-  <swipe-meals control="swipeMealsControl">
-    <div class="single-meal" ng-repeat="meal in meals">
-      <h1 ng-bind="meal.name"></h1>
+  <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
+  <div class="actions" ng-show="carousel.items.length > 0 && !isTouch">
+    <button ng-click="prev()">Prev</button>
+    <button ng-click="next()">Next</button>
+  </div>
+
+  <ul rn-carousel rn-carousel-index="carousel.index">
+    <li class="single-meal" ng-repeat="meal in carousel.items">
+
+      <h1 class="page-title" ng-bind="meal.name"></h1>
       <span class="subheader">
         $<span ng-bind="meal.prices[0].amount"></span>
         <span ng-bind="meal.restaurant.name"></span>
       </span>
-      <p><span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> metres</p>
-      <img ng-src="{{meal.image}}" class="meal">
+      <p>(approx. <span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> m.)</p>
+      <img ng-src="{{meal.image}}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
       <p ng-bind="meal.description"></p>
-      <div ng-if="false" class="google-maps-directions" from="currentLocation" to="meal.restaurant.coordinate"></div>
-    </div>
-  </swipe-meals>
+    </li>
+  </ul>
 
-  <!-- No meals nearby -->
-  <div ng-show="meals.length === 0">
-    No tasty meals nearby :(
+  <div
+    ng-if="settings.restaurantMode"
+    class="google-maps-directions"
+    from="settings.currentLocation"
+    to="settings.clickedRestaurant.coordinate">
   </div>
 
-  <!-- Controlls for slider -->
-  <div class="actions" ng-show="meals.length > 0 && !isTouch">
-    <a ng-click="swipeMealsControl.prev()">Prev</a>
-    <a ng-click="swipeMealsControl.next()">Next</a>
+  <!-- No meals nearby -->
+  <div ng-show="carousel.items.length === 0 && !settings.loadingGeoLocation && !carousel.loading">
+    No tasty meals nearby :(
   </div>
 </div>

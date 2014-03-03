@@ -26,16 +26,9 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
       var map = new google.maps.Map($element[0], options);
       directionsDisplay.setMap(map);
 
-      $scope.$watch('from', function(value){
+      $scope.$watch('to', function(value, oldValue){
         if(value === undefined) return;
-        var toConverted = helpers.convertMongoLocation($scope.to);
-        var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
-        var to = new google.maps.LatLng(toConverted.latitude, toConverted.longitude);
-        calcRoute(from, to);
-      });
 
-      $scope.$watch('to', function(value){
-        if(value === undefined) return;
         var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
         var to = new google.maps.LatLng($scope.to.latitude, $scope.to.longitude);
         calcRoute(from, to);
@@ -45,11 +38,13 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
         var request = {
             origin: start,
             destination:end,
-            travelMode: google.maps.TravelMode.DRIVING
+            travelMode: google.maps.TravelMode.WALKING,
+            unitSystem: google.maps.UnitSystem.METRIC // meters
         };
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            console.log(response.routes[0].legs[0].distance.text);
           }
         });
       }

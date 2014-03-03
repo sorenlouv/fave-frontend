@@ -1,4 +1,4 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'safeApply', 'ngRoute']);
+var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'angular-carousel', 'safeApply', 'ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
   'use strict';
@@ -72,16 +72,9 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
       var map = new google.maps.Map($element[0], options);
       directionsDisplay.setMap(map);
 
-      $scope.$watch('from', function(value){
+      $scope.$watch('to', function(value, oldValue){
         if(value === undefined) return;
-        var toConverted = helpers.convertMongoLocation($scope.to);
-        var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
-        var to = new google.maps.LatLng(toConverted.latitude, toConverted.longitude);
-        calcRoute(from, to);
-      });
 
-      $scope.$watch('to', function(value){
-        if(value === undefined) return;
         var from = new google.maps.LatLng($scope.from.latitude, $scope.from.longitude);
         var to = new google.maps.LatLng($scope.to.latitude, $scope.to.longitude);
         calcRoute(from, to);
@@ -91,11 +84,13 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
         var request = {
             origin: start,
             destination:end,
-            travelMode: google.maps.TravelMode.DRIVING
+            travelMode: google.maps.TravelMode.WALKING,
+            unitSystem: google.maps.UnitSystem.METRIC // meters
         };
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            console.log(response.routes[0].legs[0].distance.text);
           }
         });
       }
@@ -183,7 +178,7 @@ app.directive('loadingSpinner', [function() {
     }
   };
 }]);
-app.directive('swipeMeals', ['helpers', 'safeApply', function (helpers, safeApply) {
+app.directive('swipeMeals', ['helpers', 'safeApply', '$timeout', function (helpers, safeApply, $timeout) {
   'use strict';
 
   return {
@@ -195,26 +190,66 @@ app.directive('swipeMeals', ['helpers', 'safeApply', function (helpers, safeAppl
       control: '='
     },
     link: function ($scope, $element, $attrs) {
-      var numberOfElements;
-      var sliderElm = $element[0];
-      var swipeElement = Swipe(sliderElm, {
-        disableScroll: true,
-        callback: function(index, elem) {
-          // Load more elements when we approach the end
-          if(index === (numberOfElements - 5)){
-            $scope.control.loadMore(numberOfElements);
-          }
-        }
-      });
 
-      $scope.control.recalculate = function(){
-        numberOfElements = $element[0].querySelector('.swipe-wrap').children.length;
-        swipeElement.setup();
+      var swipeElement;
+      var start = function(){
+        swipeElement = Swipe($element[0], {
+          // startSlide: 2,
+          disableScroll: true,
+          callback: function(index, elem) {
+
+            // Load more elements when we approach the end
+            if(index === ($scope.control.offset - 5)){
+              $scope.control.getItems($scope.control.offset).then(onLoadSuccess);
+            }
+          }
+        });
+
+        $scope.control.getItems(0).then(onLoadSuccess);
+
+        // Inbuilt swipe methods
+        $scope.control.prev = swipeElement.prev;
+        $scope.control.next = swipeElement.next;
+        $scope.control.getPos = swipeElement.getPos;
+        $scope.control.getNumSlides = swipeElement.getNumSlides;
+        $scope.control.slide = swipeElement.slide;
+        $scope.control.setup = swipeElement.setup;
       };
 
-      $scope.control.prev = swipeElement.prev;
-      $scope.control.next = swipeElement.next;
+      // $scope.swipeMealsControl = {
+      //   getItems: function(){},
+      //   recalculate: function(){},
+      //   next: function(){},
+      //   prev: function(){},
+      //   start: function(){},
+      //   items: [],
+      //   offset: 0
+      // };
 
+
+      // Own swipe methods
+      $scope.control.start = start;
+
+      // Own
+      $scope.control.loading = true;
+
+
+
+      var onLoadSuccess = function(response){
+        $scope.control.loading = false;
+
+        // Update view with new elements
+        safeApply($scope, function(){
+          $scope.control.items = $scope.control.items.concat(response.data);
+        });
+
+        $scope.control.offset = $scope.control.items.length;
+
+        // Recalculate swipe
+        $timeout(function(){
+          swipeElement.setup();
+        });
+      };
     }
   };
 }]);
@@ -370,57 +405,138 @@ app.controller('adminController', ['$scope', function ($scope) {
   };
 
 }]);
-app.controller('homeController', ['$scope', '$timeout', '$http',  'safeApply', 'helpers', function ($scope, $timeout, $http, safeApply, helpers) {
+app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApply', 'helpers', 'homeMethods', function ($scope, $timeout, $http, $q, safeApply, helpers, homeMethods) {
   'use strict';
 
-  var mealListTotal = [];
-  $scope.currentLocation = {};
-  $scope.loadingGeoLocation = true;
-  $scope.loadingMeals = true;
+  /*
+  * On page load
+  *****************/
 
-  // API interface for swipe meals directive
-  $scope.swipeMealsControl = {
-    loadMore: function(){},
-    recalculate: function(){},
-    next: function(){},
-    prev: function(){}
+  // Initial values
+  $scope.settings = homeMethods.settings;
+  $scope.carousel = {
+    items: [],
+    index: 0
   };
 
-  var fetchMeals = function(offset){
-    $http({method: 'GET', url: helpers.getConfig('backend_url') + '/meal/closest', params: {radius: 1, longitude: $scope.currentLocation.longitude, latitude: $scope.currentLocation.latitude, offset: offset}}).success(function(newMeals){
-      // Add new meals to the existing ones
-      mealListTotal = mealListTotal.concat(newMeals);
-
-      // Update view with new elements
-      safeApply($scope, function(){
-        $scope.meals = mealListTotal;
-        $scope.loadingMeals = false;
-      });
-
-      // Recalculate swipe
-      $timeout(function(){
-        $scope.swipeMealsControl.recalculate();
-      });
-    });
-  };
-
-  // Add fetchMeals to swipeMeals API
-  $scope.swipeMealsControl.loadMore = fetchMeals;
-
-  $scope.getDistanceToRestaurant = function(restaurantLocation){
-    restaurantLocation = helpers.convertMongoLocation(restaurantLocation);
-    var distanceInKilometres = helpers.getDistanceBetweenPoints($scope.currentLocation.latitude, $scope.currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
-    return Math.round(distanceInKilometres * 1000);
-  };
-
+  // Get location and start carousel
   helpers.getLocation().then(function(loc){
-    $scope.currentLocation = loc;
-    fetchMeals(0);
-
     safeApply($scope, function(){
-      $scope.loadingGeoLocation = false;
+      $scope.settings.currentLocation = loc;
+      $scope.settings.loadingGeoLocation = false;
     });
+
+    // Start carousel
+    $scope.$watch('carousel.index', onSlideChange);
+    $scope.carousel.index = 0;
+
   });
+
+  /*
+  * Event listeners
+  *****************/
+
+  // Click event: show restaurant info (map)
+  $scope.toggleRestaurantMode = function(restaurant){
+    $scope.settings.restaurantMode = !$scope.settings.restaurantMode;
+    $scope.settings.clickedRestaurant = restaurant;
+  };
+
+  // Click event: Previous slide
+  $scope.prev = function(){
+    $scope.carousel.index--;
+  };
+
+  // Click event: Next slide
+  $scope.next = function(){
+    $scope.carousel.index++;
+  };
+
+  // Slide event: when a slide is swiped
+  var onSlideChange = function(index){
+    if(index === undefined) return;
+
+    // Load more elements when we approach the end
+    if(index > ($scope.carousel.items.length - 5)){
+      homeMethods.getClosestMeals(index).then(function(response){
+        safeApply($scope, function(){
+          $scope.carousel.items = $scope.carousel.items.concat(response.data);
+        });
+      });
+    }
+  };
+
+  /*
+  * UI Data
+  *****************/
+  $scope.getDistanceToRestaurant = homeMethods.getDistanceToRestaurant;
+
+}]);
+app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, safeApply, helpers) {
+  'use strict';
+
+  /*
+  * Default values
+  *****************/
+  var settings = {
+    currentLocation: {},
+    loadingGeoLocation: true,
+    loadingMeals: true,
+    restaurantMode: false,
+    clickedRestaurant: {},
+  };
+
+  /*
+  * HTTP request to backend, to get meals from nearby restaurants
+  *****************/
+  var getClosestMeals = function(offset){
+    return $http({
+      method: 'GET',
+      url: helpers.getConfig('backend_url') + '/meal/closest',
+      params: {
+        radius: 1,
+        longitude: settings.currentLocation.longitude,
+        latitude: settings.currentLocation.latitude,
+        offset: offset
+      }
+    });
+  };
+
+  /*
+  * HTTP request to backend, to get meals from specific restaurant
+  *****************/
+  var getRestaurantMeals = function(restaurantId){
+
+    return function(offset){
+      return $http({
+        method: 'GET',
+        url: helpers.getConfig('backend_url') + '/meal',
+        params: {
+          'restaurant._id': restaurantId,
+          offset: offset
+        }
+      });
+    };
+  };
+
+  /*
+  * Return calculated distance in kilometres to restaurant
+  *****************/
+  var getDistanceToRestaurant = function(restaurantLocation){
+    var distance = helpers.getDistanceBetweenPoints(settings.currentLocation.latitude, settings.currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
+    return Math.ceil(distance * 10 * 1.3) * 100;
+  };
+
+
+  /*
+  * Return values
+  *****************/
+  return {
+    settings: settings,
+    getClosestMeals: getClosestMeals,
+    getRestaurantMeals: getRestaurantMeals,
+    getDistanceToRestaurant: getDistanceToRestaurant
+  };
 
 }]);
 /* global google */
@@ -433,7 +549,7 @@ app.controller('restaurantsController', ['$scope', '$http',  'safeApply', 'helpe
     zoom: 13,
     center: center
   };
-  var map = new google.maps.Map(document.querySelector('#restaurants-map'), mapOptions);
+  var map = new google.maps.Map(document.querySelector('.restaurants-map'), mapOptions);
 
   $http({method: 'GET', url: helpers.getConfig('backend_url') + '/restaurant?limit=999'}).success(function(restaurants){
 
@@ -570,6 +686,28 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     return isProductionWebsite || isCordova;
   };
 
+  /*
+  * Return a promise and resolve it when the watched object changes
+  * Param {$scope} scope
+  * Param {String} observed
+  * Return {promise} promise
+  *******************/
+  var getWatchAsPromise = function($scope, observed){
+    var deferred = $q.defer();
+
+    $scope.$watch(observed, function(value){
+      if(value === undefined) return;
+      deferred.resolve();
+    });
+
+    return deferred.promise;
+  };
+
+  /*
+  * Convert MongoDB's location array to a location object
+  * Param {Array} location
+  * Return {Object} location
+  *******************/
   var convertMongoLocation = function(location){
     return {
       latitude: location[1],
@@ -605,6 +743,9 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     return degrees * (Math.PI / 180);
   };
 
+  /*
+  * Return distance in kilometres between two coordinates
+  *****************/
   var getDistanceBetweenPoints = function(lat1, lon1, lat2, lon2){
     var earthRadius = 6371; // km
 
@@ -629,12 +770,41 @@ app.factory('helpers', ['$http', '$q', 'productionConfig', 'localConfig', functi
     getConfig: getConfig,
     getLocation: getLocation,
     getDistanceBetweenPoints: getDistanceBetweenPoints,
-    convertMongoLocation: convertMongoLocation
+    getWatchAsPromise: getWatchAsPromise
   };
 }]);
+app.config(['$httpProvider', '$provide', function($httpProvider, $provide) {
+    'use strict';
+
+    $provide.factory('myHttpInterceptor', ['$q', function($q) {
+        return {
+          'response': function(response) {
+
+            /*
+            * Intercept calls to "/meal/*" and convert coordinate property from mongo format (indexed array) to object format (named properties)
+            ********************/
+            if(response.config.url.indexOf('/meal/') > -1 && typeof response.data === 'object'){
+              response.data = response.data.map(function(meal){
+                meal.restaurant.coordinate = {
+                  latitude: meal.restaurant.coordinate[1],
+                  longitude: meal.restaurant.coordinate[0]
+                };
+                return meal;
+              });
+            }
+            return response || $q.when(response);
+          }
+        };
+      }
+    ]);
+
+    // Add interceptor
+    $httpProvider.interceptors.push('myHttpInterceptor');
+  }
+]);
 app.constant('localConfig', {
   'frontend_url': 'http://app.joinfave.local',
-  'backend_url': 'http://api.joinfave.com'
+  'backend_url': 'http://api.joinfave.local'
 });
 
 app.constant('productionConfig', {

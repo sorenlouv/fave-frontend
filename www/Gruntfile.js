@@ -5,8 +5,14 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    css_dist: 'dist/css/fave-app.css',
-    less_compiled: 'dist/css/less_compiled.css',
+    // CSS
+    file_app_css: 'dist/css/fave-app.css',      // final css file
+    file_compiled_css: 'dist/css/fave-app-compiled.css', // Intermediary css file
+    file_vendors_css: 'dist/css/fave-app-vendors.css',   // vendors css file
+
+    // JS
+    file_app_js: 'dist/js/fave-app.js',   // vendors js file
+    file_vendors_js: 'dist/js/fave-app-vendors.js',   // vendors js file
 
     /*
     * Concatenate files
@@ -20,17 +26,17 @@ module.exports = function(grunt) {
           'src/vendors/**/*.js',
           '!src/vendors/skip/*.js'
         ],
-        dest: 'dist/js/fave-app-vendors.js'
+        dest: '<%= file_vendors_js %>'
       },
 
       // All javascript files except default files and vendors
-      js: {
+      source_files: {
         src: [
           'src/**/*.js',
-          '!**/*.default.js', // Ignore default files
-          '!src/vendors/**/*.js' // ignore vendors
+          '!**/*.default.js',     // Ignore default files
+          '!src/vendors/**/*.js'  // ignore vendors
         ],
-        dest: 'dist/js/fave-app.js'
+        dest: '<%= file_app_js %>'
       }
     },
 
@@ -40,7 +46,7 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         'src/**/*.js',
-        '!src/vendors/**/*.js'
+        '!src/vendors/**' // Exclude vendors
       ],
       // JSHint options http://jshint.com/docs/options/
       options: {
@@ -52,7 +58,14 @@ module.exports = function(grunt) {
     * Less: Compile less to css
     ****************/
     less: {
-      development: {
+      vendors: {
+        options: {
+          cleancss: true
+        },
+        src: ['src/vendors/**/*.less'],
+        dest: '<%= file_vendors_css %>'
+      },
+      source_files: {
         options: {
           paths: ['src/less-partials/']
           // cleancss: true
@@ -61,9 +74,10 @@ module.exports = function(grunt) {
         // Compile all less files which are not partials (starts with "_")
         src: [
           'src/**/*.less',
-          '!src/**/_*.less'
+          '!src/**/_*.less', // exclude partials
+          '!src/vendors/**'  // exclude vendors
         ],
-        dest: '<%= less_compiled %>'
+        dest: '<%= file_compiled_css %>'
       }
     },
 
@@ -71,12 +85,12 @@ module.exports = function(grunt) {
     * Prefixes: Add/remove CSS prefixes
     ****************/
     autoprefixer: {
-      development: {
+      source_files: {
         options: {
           browsers: ['last 2 version']
         },
-        src: '<%= less_compiled %>',
-        dest: '<%= css_dist %>'
+        src: '<%= file_compiled_css %>',
+        dest: '<%= file_app_css %>'
       }
     },
 
@@ -87,7 +101,7 @@ module.exports = function(grunt) {
       options: {
         csslintrc: '.csslintrc' // Get CSSLint options from external file.
       },
-      src: ['<%= css_dist %>']
+      src: ['<%= file_app_css %>']
     },
 
     /*
@@ -99,12 +113,12 @@ module.exports = function(grunt) {
       },
 
       // Concat, jshint and reload browser when JS files are updated
-      js: {
+      js_source_files: {
         files: [
           'src/**/*.js',
           '!src/vendors/**/*.js'
         ],
-        tasks: ['jshint', 'concat:js']
+        tasks: ['jshint', 'concat:source_files']
       },
 
       // Concat and reload browser when JS files are updated
@@ -117,23 +131,32 @@ module.exports = function(grunt) {
       },
 
       // Compile less to CSS
-      less: {
+      less_source_files: {
         files: 'src/**/*.less',
-        tasks: ['less:development', 'csslint'],
+        tasks: ['less:source_files'],
         options: {
           livereload: false
         }
       },
 
-      // Add required vendor-prefixes to
-      autoprefixer: {
-        files: '<%= less_compiled %>',
-        tasks: ['autoprefixer:development']
+      less_vendors: {
+        files: 'src/vendors/**/*.less',
+        tasks: ['less:vendors']
       },
 
-      // Reload browser when CSS file is updated
+      // Add required vendor-prefixes to
+      autoprefixer: {
+        files: '<%= file_compiled_css %>',
+        tasks: ['autoprefixer:source_files'],
+        options: {
+          livereload: false
+        }
+      },
+
+      // Lint and reload browser when CSS file is updated
       css: {
-        files: '<%= css_dist %>'
+        files: '<%= file_app_css %>',
+        tasks: ['csslint']
       },
 
       // Reload browser when templates are updated
@@ -156,5 +179,5 @@ module.exports = function(grunt) {
   /*
   * Default tasks - will be run by writing "grunt" from the command line
   ****************/
-  grunt.registerTask('default', ['less:development', 'csslint', 'jshint', 'concat:js', 'concat:js_vendors', 'autoprefixer']);
+  grunt.registerTask('default', ['less:source_files', 'less:vendors', 'autoprefixer', 'csslint', 'jshint', 'concat:source_files', 'concat:js_vendors']);
 };

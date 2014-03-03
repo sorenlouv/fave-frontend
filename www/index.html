@@ -5,9 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <link rel="stylesheet" type="text/css" href="dist/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="dist/css/fave-app-vendors.css" />
   <link rel="stylesheet" href="dist/css/fave-app.css">
-  <link rel="stylesheet" type="text/css" href="dist/css/font-awesome.css" />
 
   <!-- Phonegap specific stuff -->
   <script type="text/javascript" src="cordova.js"></script>
@@ -22,7 +21,7 @@
   </head>
   <body ng-controller="mainController">
     <header></header>
-    <div ng-view></div>
+    <div class="main-container" ng-view></div>
     <div id="fb-root"></div>
   </body>
 </html>
