@@ -5,10 +5,10 @@
     <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
   </div>
 
-  <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
   <div class="actions" ng-show="carousel.items.length > 0 && !isTouch">
     <button ng-click="prev()">Prev</button>
     <button ng-click="next()">Next</button>
+    <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
   </div>
 
   <ul rn-carousel rn-carousel-index="carousel.index">
@@ -21,7 +21,7 @@
       </span>
       <p>(approx. <span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span> m.)</p>
       <img ng-src="{{meal.image}}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
-      <p ng-bind="meal.description"></p>
+      <p ng-show="meal.description" class="description" ng-bind="meal.description"></p>
     </li>
   </ul>
 

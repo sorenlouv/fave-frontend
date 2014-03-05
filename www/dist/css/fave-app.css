@@ -146,11 +146,35 @@ section.page-admin .comment {
 /*
  * Home.less
  **************************/
-.page-home .single-meal img {
+.page-home .actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+.page-home .rn-carousel-container {
+  position: absolute;
+  top: -60px;
+  right: 0;
+}
+.page-home .rn-carousel-container .single-meal img {
   width: 100%;
 }
-.page-home .page-title {
+.page-home .rn-carousel-container .page-title {
   text-align: center;
+}
+.page-home .description {
+  position: relative;
+  top: -77px;
+  padding: 0 11px;
+  height: 44px;
+  line-height: 44px;
+  z-index: 1;
+  overflow: hidden;
+  font-weight: 300;
+  font-style: italic;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .page-restaurants .restaurants-map {

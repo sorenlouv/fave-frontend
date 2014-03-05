@@ -1,65 +1,45 @@
+@import "_variables.less";
+
 /*
  * Home.less
  **************************/
 
 .page-home {
-  // margin: 0 auto;
-  // text-align: center;
-  // width: 100%;
-  // height: 100%;
-
-  .single-meal img {
-    width: 100%;
+  // Prev/Next buttons
+  .actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
   }
 
-  .page-title {
-    // position: relative;
-    // top: -20px;
-    // width: 100%;
-    text-align: center;
+  // Slider container
+  .rn-carousel-container {
+    position: absolute;
+    top: -60px;
+    right: 0;
+
+    .single-meal img {
+      width: 100%;
+    }
+
+    .page-title {
+      text-align: center;
+    }
   }
 
-  // // These styles break the actions
-  // top: 0;
-  // position: absolute;
-  // z-index: -10;
-  // // end here
+  .description {
+    position: relative;
+    top: -(3.5*@unit);
+    padding: 0 (0.5 * @unit);
+    height: (2 * @unit);
+    line-height: (2 * @unit);
+    z-index: 1;
+    overflow: hidden;
 
-  // .header-content {
-  //   width: 200px;
-  //   position: absolute;
-  //   left: 50%;
-  //   margin-left: -100px;
-  //   top: 11px;
-  // }
-  // .takeout {
-  //   overflow: hidden;
-  //   img {
-  //     height: 510px;
-  //     overflow: hidden;
-  //   }
-  // }
-  // .description {
-  //   position: absolute;
-  //   bottom: 40px;
-  //   width: 100%;
-  //   z-index: 10;
-  //   text-align: center;
-  //   p {
-  //     margin: 0;
-  //     padding: 10px;
-  //     display: inline-block;
-  //     font-weight: 300;
-  //     font-style: italic;
-  //     background-color: #fff;
-  //     background-color: rgba(255, 255, 255, 0.9);
-  //   }
-  // }
-  // .actions {
-  //   margin-bottom: 20px;
-  //   a {
-  //     cursor: pointer;
-  //     user-select: none;
-  //   }
-  // }
+    font-weight: 300;
+    font-style: italic;
+    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
 }
