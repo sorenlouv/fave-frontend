@@ -23,7 +23,8 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
         radius: 1,
         longitude: settings.currentLocation.longitude,
         latitude: settings.currentLocation.latitude,
-        offset: offset
+        offset: offset,
+        sort: 'review_count'
       }
     });
   };
