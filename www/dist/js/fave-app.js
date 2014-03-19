@@ -498,7 +498,8 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
         longitude: settings.currentLocation.longitude,
         latitude: settings.currentLocation.latitude,
         offset: offset,
-        sort: 'review_count'
+        sort: 'review_count',
+        sort_order: -1
       }
     });
   };
@@ -805,7 +806,7 @@ app.config(['$httpProvider', '$provide', function($httpProvider, $provide) {
 ]);
 app.constant('localConfig', {
   'frontend_url': 'http://app.joinfave.local',
-  'backend_url': 'http://api.joinfave.local'
+  'backend_url': 'http://api.joinfave.com'
 });
 
 app.constant('productionConfig', {

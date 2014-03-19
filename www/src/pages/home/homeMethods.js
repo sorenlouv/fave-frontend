@@ -24,7 +24,8 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
         longitude: settings.currentLocation.longitude,
         latitude: settings.currentLocation.latitude,
         offset: offset,
-        sort: 'review_count'
+        sort: 'review_count',
+        sort_order: -1
       }
     });
   };
