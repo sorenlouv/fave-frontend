@@ -803,10 +803,9 @@ app.config(['$httpProvider', '$provide', function($httpProvider, $provide) {
   }
 ]);
 app.constant('localConfig', {
-  'frontend_url': 'http://app.joinfave.local',
-  'backend_url': 'http://api.joinfave.local'
+  'frontend_url': '',
+  'backend_url': 'http://api.joinfave.com'
 });
-
 app.constant('productionConfig', {
   'frontend_url': 'http://app.joinfave.com',
   'backend_url': 'http://api.joinfave.com'

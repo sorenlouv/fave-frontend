@@ -24,7 +24,6 @@
  **************************/
 .main-container {
   position: relative;
-  top: 44px;
 }
 
 /*
@@ -146,35 +145,71 @@ section.page-admin .comment {
 /*
  * Home.less
  **************************/
-.page-home .actions {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
+html,
+body,
+.main-container,
+.content,
+.single-meal,
+.rn-carousel-container,
+.rn-carousel-slides {
+  height: 100%;
+}
+.page-home {
+  height: 100%;
 }
 .page-home .rn-carousel-container {
   position: absolute;
-  top: -60px;
-  right: 0;
 }
 .page-home .rn-carousel-container .single-meal img {
   width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 .page-home .rn-carousel-container .page-title {
   text-align: center;
 }
-.page-home .description {
-  position: relative;
-  top: -77px;
-  padding: 0 11px;
-  height: 44px;
-  line-height: 44px;
-  z-index: 1;
-  overflow: hidden;
+.page-home .page-header {
+  padding: 7px;
+}
+.page-home .page-header h1 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0;
+}
+.page-home .page-header h2 {
+  font-size: 16px;
+  margin: 22px 0 3px 0;
+}
+.page-home .page-header h3 {
+  margin: 3px 0 0 0;
+  font-size: 14px;
   font-weight: 300;
-  font-style: italic;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, 0.9);
+}
+.page-home .page-header .subheader {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+}
+.page-home .content .meal {
+  height: 100%;
+  background-size: cover;
+}
+.page-home .content img {
+  width: 320px;
+}
+.overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+.actions {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
 
 .page-restaurants .restaurants-map {

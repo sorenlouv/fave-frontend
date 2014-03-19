@@ -4,23 +4,21 @@
  * Home.less
  **************************/
 
+html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn-carousel-slides {
+  height: 100%;
+}
+
 .page-home {
-  // Prev/Next buttons
-  .actions {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-  }
+  height: 100%;
 
   // Slider container
   .rn-carousel-container {
     position: absolute;
-    top: -60px;
-    right: 0;
 
     .single-meal img {
       width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
 
     .page-title {
@@ -28,18 +26,61 @@
     }
   }
 
-  .description {
-    position: relative;
-    top: -(3.5*@unit);
-    padding: 0 (0.5 * @unit);
-    height: (2 * @unit);
-    line-height: (2 * @unit);
-    z-index: 1;
-    overflow: hidden;
+  .page-header {
+    padding: 7px;
 
-    font-weight: 300;
-    font-style: italic;
-    background-color: #fff;
-    background-color: rgba(255, 255, 255, 0.9);
+    h1 {
+      color: #333;
+      font-size: 18px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin: 22px 0 3px 0;
+    }
+    h3 {
+      margin: 3px 0 0 0;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .subheader {
+      font-size: 14px;
+      font-weight: 300;
+      text-align: center;
+    }
   }
+
+  .content {
+    .meal {
+      height: 100%;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+
+    img {
+      width: 320px;
+    }
+  }
+}
+
+.overlay {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
+
+// Prev/Next buttons
+.actions {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
