@@ -64,24 +64,6 @@ header .add-meal {
 }
 
 /*
- * swipe-meals.less
- **************************/
-.swipe-meals {
-  overflow: hidden;
-  visibility: hidden;
-  position: relative;
-}
-.swipe-meals .swipe-wrap {
-  overflow: hidden;
-  position: relative;
-}
-.swipe-meals .swipe-wrap > div {
-  float: left;
-  width: 100%;
-  position: relative;
-}
-
-/*
  * add-meal.less
  **************************/
 .page-add-meal {

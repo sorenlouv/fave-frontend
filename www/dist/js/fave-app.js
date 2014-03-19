@@ -178,81 +178,6 @@ app.directive('loadingSpinner', [function() {
     }
   };
 }]);
-app.directive('swipeMeals', ['helpers', 'safeApply', '$timeout', function (helpers, safeApply, $timeout) {
-  'use strict';
-
-  return {
-    restrict: 'E',
-    templateUrl: 'src/directives/swipe-meals/swipe-meals.html',
-    replace: true,
-    transclude: true,
-    scope: {
-      control: '='
-    },
-    link: function ($scope, $element, $attrs) {
-
-      var swipeElement;
-      var start = function(){
-        swipeElement = Swipe($element[0], {
-          // startSlide: 2,
-          disableScroll: true,
-          callback: function(index, elem) {
-
-            // Load more elements when we approach the end
-            if(index === ($scope.control.offset - 5)){
-              $scope.control.getItems($scope.control.offset).then(onLoadSuccess);
-            }
-          }
-        });
-
-        $scope.control.getItems(0).then(onLoadSuccess);
-
-        // Inbuilt swipe methods
-        $scope.control.prev = swipeElement.prev;
-        $scope.control.next = swipeElement.next;
-        $scope.control.getPos = swipeElement.getPos;
-        $scope.control.getNumSlides = swipeElement.getNumSlides;
-        $scope.control.slide = swipeElement.slide;
-        $scope.control.setup = swipeElement.setup;
-      };
-
-      // $scope.swipeMealsControl = {
-      //   getItems: function(){},
-      //   recalculate: function(){},
-      //   next: function(){},
-      //   prev: function(){},
-      //   start: function(){},
-      //   items: [],
-      //   offset: 0
-      // };
-
-
-      // Own swipe methods
-      $scope.control.start = start;
-
-      // Own
-      $scope.control.loading = true;
-
-
-
-      var onLoadSuccess = function(response){
-        $scope.control.loading = false;
-
-        // Update view with new elements
-        safeApply($scope, function(){
-          $scope.control.items = $scope.control.items.concat(response.data);
-        });
-
-        $scope.control.offset = $scope.control.items.length;
-
-        // Recalculate swipe
-        $timeout(function(){
-          swipeElement.setup();
-        });
-      };
-    }
-  };
-}]);
 /* global Camera */
 
 app.controller('addMealController', ['$scope', 'helpers', '$http', 'safeApply', '$q', function ($scope, helpers, $http, safeApply, $q) {
@@ -413,10 +338,18 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   *****************/
 
   // Initial values
-  $scope.settings = homeMethods.settings;
+  $scope.settings = {
+    currentLocation: {},
+    loadingGeoLocation: true,
+    restaurantMode: false,
+    clickedRestaurant: {},
+  };
+
+  //
   $scope.carousel = {
     items: [],
-    index: 0
+    index: 0,
+    loading: true
   };
 
   // Get location and start carousel
@@ -458,9 +391,10 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
 
     // Load more elements when we approach the end
     if(index > ($scope.carousel.items.length - 5)){
-      homeMethods.getClosestMeals(index).then(function(response){
+      homeMethods.getClosestMeals($scope.settings.currentLocation, index).then(function(response){
         safeApply($scope, function(){
           $scope.carousel.items = $scope.carousel.items.concat(response.data);
+          $scope.carousel.loading = false;
         });
       });
     }
@@ -469,34 +403,25 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   /*
   * UI Data
   *****************/
-  $scope.getDistanceToRestaurant = homeMethods.getDistanceToRestaurant;
+  $scope.getDistanceToRestaurant = function(restaurantLocation){
+    return homeMethods.getDistanceToRestaurant($scope.settings.currentLocation, restaurantLocation);
+  };
 
 }]);
 app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, safeApply, helpers) {
   'use strict';
 
   /*
-  * Default values
-  *****************/
-  var settings = {
-    currentLocation: {},
-    loadingGeoLocation: true,
-    loadingMeals: true,
-    restaurantMode: false,
-    clickedRestaurant: {},
-  };
-
-  /*
   * HTTP request to backend, to get meals from nearby restaurants
   *****************/
-  var getClosestMeals = function(offset){
+  var getClosestMeals = function(currentLocation, offset){
     return $http({
       method: 'GET',
       url: helpers.getConfig('backend_url') + '/meal/closest',
       params: {
         radius: 1,
-        longitude: settings.currentLocation.longitude,
-        latitude: settings.currentLocation.latitude,
+        longitude: currentLocation.longitude,
+        latitude: currentLocation.latitude,
         offset: offset,
         sort: 'review_count',
         sort_order: -1
@@ -524,8 +449,8 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
   /*
   * Return calculated distance in kilometres to restaurant
   *****************/
-  var getDistanceToRestaurant = function(restaurantLocation){
-    var distance = helpers.getDistanceBetweenPoints(settings.currentLocation.latitude, settings.currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
+  var getDistanceToRestaurant = function(currentLocation, restaurantLocation){
+    var distance = helpers.getDistanceBetweenPoints(currentLocation.latitude, currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
     return Math.ceil(distance * 10 * 1.3) * 100;
   };
 
@@ -534,7 +459,6 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
   * Return values
   *****************/
   return {
-    settings: settings,
     getClosestMeals: getClosestMeals,
     getRestaurantMeals: getRestaurantMeals,
     getDistanceToRestaurant: getDistanceToRestaurant

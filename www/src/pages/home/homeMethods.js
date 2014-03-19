@@ -2,27 +2,16 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
   'use strict';
 
   /*
-  * Default values
-  *****************/
-  var settings = {
-    currentLocation: {},
-    loadingGeoLocation: true,
-    loadingMeals: true,
-    restaurantMode: false,
-    clickedRestaurant: {},
-  };
-
-  /*
   * HTTP request to backend, to get meals from nearby restaurants
   *****************/
-  var getClosestMeals = function(offset){
+  var getClosestMeals = function(currentLocation, offset){
     return $http({
       method: 'GET',
       url: helpers.getConfig('backend_url') + '/meal/closest',
       params: {
         radius: 1,
-        longitude: settings.currentLocation.longitude,
-        latitude: settings.currentLocation.latitude,
+        longitude: currentLocation.longitude,
+        latitude: currentLocation.latitude,
         offset: offset,
         sort: 'review_count',
         sort_order: -1
@@ -50,8 +39,8 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
   /*
   * Return calculated distance in kilometres to restaurant
   *****************/
-  var getDistanceToRestaurant = function(restaurantLocation){
-    var distance = helpers.getDistanceBetweenPoints(settings.currentLocation.latitude, settings.currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
+  var getDistanceToRestaurant = function(currentLocation, restaurantLocation){
+    var distance = helpers.getDistanceBetweenPoints(currentLocation.latitude, currentLocation.longitude, restaurantLocation.latitude, restaurantLocation.longitude);
     return Math.ceil(distance * 10 * 1.3) * 100;
   };
 
@@ -60,7 +49,6 @@ app.factory('homeMethods', ['$http', 'safeApply', 'helpers', function ($http, sa
   * Return values
   *****************/
   return {
-    settings: settings,
     getClosestMeals: getClosestMeals,
     getRestaurantMeals: getRestaurantMeals,
     getDistanceToRestaurant: getDistanceToRestaurant
