@@ -12,7 +12,7 @@ html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn
 h1 {
   color: #333;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -25,9 +25,43 @@ h3 {
   font-size: 14px;
   font-weight: 300;
 }
+.button {
+  padding: 12px 24px;
+  width: calc(~"100% - 50px");
+  display: block;
+  background-color: #ce421b;
+  color: white;
+  text-decoration: none;
+}
 
 .page-home {
   height: 100%;
+
+  .load-screen {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: block;
+
+    img {
+      text-align: center;
+      padding-top: 40%;
+    }
+
+    .loadingSpinner {
+      margin: 0 auto;
+    }
+    .loading-spinner-animation {
+      display: block;
+      margin-left: 50%;
+    }   
+    span {
+      width: 100%;
+      display: block;
+      padding-top: 50px;
+      margin-top: 50%;
+    }
+  }
 
   // Slider container
   .rn-carousel-container {
@@ -48,7 +82,7 @@ h3 {
     padding: 7px;
 
     .subheader {
-
+      color: #999;
       font-size: 12px;
       font-weight: 300;
       text-align: center;

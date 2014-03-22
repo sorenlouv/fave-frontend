@@ -1,6 +1,6 @@
 <div class="page-home">
-
-  <div loading-spinner="{{settings.loadingGeoLocation || carousel.loading}}">
+<div >
+  <div class="load-screen" loading-spinner="{{settings.loadingGeoLocation || carousel.loading}}" >
     <span ng-show="settings.loadingGeoLocation">Finding your position</span>
     <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
   </div>
@@ -14,8 +14,7 @@
       <div class="page-header">
         <h1 class="page-title" ng-bind="meal.name"></h1>
         <div class="subheader">
-          $<span ng-bind="meal.prices[0].amount"></span>  &nbsp;
-          ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)"></span>m
+          $<span ng-bind="meal.prices[0].amount"></span>
         </div>
       </div>
       <div class="content">
@@ -27,7 +26,6 @@
     <div class="page-header">
       <h1>Restaurent name</h1>
       <div class="subheader">
-      $12<span ng-bind="meal.prices[0].amount"></span>  &nbsp;
       ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)">1300</span> m
         </div>
     </div>
@@ -37,8 +35,8 @@
       to="settings.clickedRestaurant.coordinate">
     </div>
     <div class="page-content">
-      <span ng-show="meal.description" class="description" ng-bind="meal.description"></span>Meal description
-      <p> <a href="tel://1-555-555-5555">(555) 555-5555</a></p>
+      <p ng-show="meal.description" class="description" ng-bind="meal.description"></p>Meal description
+      <p> <a class="button" href="tel://1-555-555-5555">Call now</a></p>
     </div>
   </div>
 
