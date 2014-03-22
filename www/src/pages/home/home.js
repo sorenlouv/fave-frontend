@@ -6,10 +6,18 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   *****************/
 
   // Initial values
-  $scope.settings = homeMethods.settings;
+  $scope.settings = {
+    currentLocation: {},
+    loadingGeoLocation: true,
+    restaurantMode: false,
+    clickedRestaurant: {},
+  };
+
+  //
   $scope.carousel = {
     items: [],
-    index: 0
+    index: 0,
+    loading: true
   };
 
   // Get location and start carousel
@@ -51,9 +59,10 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
 
     // Load more elements when we approach the end
     if(index > ($scope.carousel.items.length - 5)){
-      homeMethods.getClosestMeals(index).then(function(response){
+      homeMethods.getClosestMeals($scope.settings.currentLocation, index).then(function(response){
         safeApply($scope, function(){
           $scope.carousel.items = $scope.carousel.items.concat(response.data);
+          $scope.carousel.loading = false;
         });
       });
     }
@@ -62,6 +71,8 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   /*
   * UI Data
   *****************/
-  $scope.getDistanceToRestaurant = homeMethods.getDistanceToRestaurant;
+  $scope.getDistanceToRestaurant = function(restaurantLocation){
+    return homeMethods.getDistanceToRestaurant($scope.settings.currentLocation, restaurantLocation);
+  };
 
 }]);
