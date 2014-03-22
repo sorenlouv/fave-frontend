@@ -6,6 +6,24 @@
 
 html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn-carousel-slides {
   height: 100%;
+  font-weight: 300;
+}
+
+h1 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 22px 0 3px 0;
+}
+h3 {
+  margin: 3px 0 0 0;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .page-home {
@@ -29,25 +47,8 @@ html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn
   .page-header {
     padding: 7px;
 
-    h1 {
-      color: #333;
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    h2 {
-      font-size: 16px;
-      margin: 22px 0 3px 0;
-    }
-    h3 {
-      margin: 3px 0 0 0;
-      font-size: 14px;
-      font-weight: 300;
-    }
-
     .subheader {
-      
+
       font-size: 12px;
       font-weight: 300;
       text-align: center;
@@ -63,7 +64,6 @@ html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn
       background-size: cover;
     }
 
-
     img {
       width: 320px;
     }
@@ -71,11 +71,19 @@ html, body, .main-container, .content, .single-meal, .rn-carousel-container, .rn
 }
 
 .overlay {
-  position: relative;
+  position: absolute;
   z-index: 2;
-  height: 100%;
+  height: 90%;
   width: 100%;
   background-color: white;
+  .page-header {
+    text-align: center;
+  }
+  .page-content {
+    padding: 20px;
+  }
+
+
 }
 
 // Prev/Next buttons

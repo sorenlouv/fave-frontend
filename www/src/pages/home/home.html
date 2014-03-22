@@ -24,13 +24,22 @@
     </li>
   </ul>
   <div class="overlay" ng-if="settings.restaurantMode">
+    <div class="page-header">
+      <h1>Restaurent name</h1>
+      <div class="subheader">
+      $12<span ng-bind="meal.prices[0].amount"></span>  &nbsp;
+      ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)">1300</span> m
+        </div>
+    </div>
     <div ng-if="settings.restaurantMode"
       class="google-maps-directions"
       from="settings.currentLocation"
       to="settings.clickedRestaurant.coordinate">
     </div>
-    <span ng-show="meal.description" class="description" ng-bind="meal.description"></span>
-    <span ng-bind="meal.restaurant.name"></span>
+    <div class="page-content">
+      <span ng-show="meal.description" class="description" ng-bind="meal.description"></span>Meal description
+      <p> <a href="tel://1-555-555-5555">(555) 555-5555</a></p>
+    </div>
   </div>
 
   <!-- No meals nearby -->
