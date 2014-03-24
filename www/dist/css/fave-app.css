@@ -22,6 +22,40 @@
 /*
  * Main.less
  **************************/
+html,
+body,
+.main-container,
+.content,
+.single-meal,
+.rn-carousel-container,
+.rn-carousel-slides {
+  height: 100%;
+  font-weight: 300;
+}
+h1 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0;
+}
+h2 {
+  font-size: 14px;
+  margin: 0;
+}
+h3 {
+  margin: 3px 0 0 0;
+  font-size: 14px;
+  font-weight: 300;
+}
+.button {
+  padding: 12px 24px;
+  width: -webkit-calc(100% - 50px);
+  width: calc(100% - 50px);
+  display: block;
+  background-color: #ce421b;
+  color: white;
+  text-decoration: none;
+}
 .main-container {
   position: relative;
 }
@@ -83,7 +117,7 @@ header .add-meal {
   margin: 0 auto;
   width: 70px;
   height: 70px;
-  background-color: #e45c36;
+  background-color: #ce421b;
   border-radius: 35px;
 }
 .page-add-meal .action i {
@@ -97,7 +131,7 @@ header .add-meal {
  * admin.less
  **************************/
 section.page-admin {
-  background-color: #e45c36;
+  background-color: #ce421b;
   height: 100%;
   float: left;
   width: 100%;
@@ -127,40 +161,6 @@ section.page-admin .comment {
 /*
  * Home.less
  **************************/
-html,
-body,
-.main-container,
-.content,
-.single-meal,
-.rn-carousel-container,
-.rn-carousel-slides {
-  height: 100%;
-  font-weight: 300;
-}
-h1 {
-  color: #333;
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-}
-h2 {
-  font-size: 16px;
-  margin: 22px 0 3px 0;
-}
-h3 {
-  margin: 3px 0 0 0;
-  font-size: 14px;
-  font-weight: 300;
-}
-.button {
-  padding: 12px 24px;
-  width: -webkit-calc(100% - 50px);
-  width: calc(100% - 50px);
-  display: block;
-  background-color: #ce421b;
-  color: white;
-  text-decoration: none;
-}
 .page-home {
   height: 100%;
 }
@@ -199,20 +199,36 @@ h3 {
   text-align: center;
 }
 .page-home .page-header {
-  padding: 7px;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
 }
-.page-home .page-header .subheader {
-  color: #999;
-  font-size: 12px;
-  font-weight: 300;
-  text-align: center;
+.page-home .content {
+  background-color: #f0f0f2;
+  padding-top: 1%;
 }
 .page-home .content .meal {
-  height: 100%;
+  width: 98%;
+  margin: 0 auto;
+  height: 70%;
   background-size: cover;
+  background-position: 50%;
+  -webkit-filter: contrast(110%) brightness(110%) saturate(120%);
+  background-repeat: no-repeat;
+  border-radius: 3px;
+  background-clip: padding-box;
 }
-.page-home .content img {
-  width: 320px;
+.page-home .footer {
+  text-align: center;
+  font-size: 14px;
+  line-height: 21px;
+  height: 30%;
+  padding: 15px 20px;
+}
+.page-home .footer .price {
+  font-weight: 400;
+}
+.page-home .footer p {
+  margin: 0;
 }
 .overlay {
   position: absolute;
@@ -225,6 +241,7 @@ h3 {
   text-align: center;
 }
 .overlay .page-content {
+  text-align: center;
   padding: 20px;
 }
 .actions {

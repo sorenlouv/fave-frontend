@@ -4,30 +4,27 @@
     <span ng-show="settings.loadingGeoLocation">Finding your position</span>
     <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
   </div>
-
   <div class="actions" ng-show="carousel.items.length > 0 && !isTouch">
     <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
   </div>
-
   <ul rn-carousel rn-carousel-index="carousel.index">
     <li class="single-meal" ng-repeat="meal in carousel.items">
       <div class="page-header">
         <h1 class="page-title" ng-bind="meal.name"></h1>
-        <div class="subheader">
-          $<span ng-bind="meal.prices[0].amount"></span>
-        </div>
       </div>
       <div class="content">
-        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)"></div>
+        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
+        </div>
+        <div class="footer">
+           <p class="price">$<span ng-bind="meal.prices[0].amount" ></span></p>
+          <p ng-show="meal.description" class="description" ng-bind="meal.description"></p>
+        </div>
       </div>
     </li>
   </ul>
   <div class="overlay" ng-if="settings.restaurantMode">
     <div class="page-header">
       <h1>Restaurent name</h1>
-      <div class="subheader">
-      ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)">1300</span> m
-        </div>
     </div>
     <div ng-if="settings.restaurantMode"
       class="google-maps-directions"
@@ -35,8 +32,8 @@
       to="settings.clickedRestaurant.coordinate">
     </div>
     <div class="page-content">
-      <p ng-show="meal.description" class="description" ng-bind="meal.description"></p>Meal description
-      <p> <a class="button" href="tel://1-555-555-5555">Call now</a></p>
+      ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)">1300</span> m
+      <p> <a class="button" href="tel://1-555-555-5555">Call</a></p>
     </div>
   </div>
 
