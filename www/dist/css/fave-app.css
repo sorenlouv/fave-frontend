@@ -203,16 +203,17 @@ section.page-admin .comment {
   border-bottom: 1px solid #ddd;
 }
 .page-home .content {
-  background-color: #f0f0f2;
+  background-color: #f9f9f2;
   padding-top: 1%;
 }
 .page-home .content .meal {
+  border-bottom: 1px solid #ddd;
   width: 98%;
   margin: 0 auto;
   height: 70%;
   background-size: cover;
   background-position: 50%;
-  -webkit-filter: contrast(110%) brightness(110%) saturate(120%);
+  -webkit-filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg);
   background-repeat: no-repeat;
   border-radius: 3px;
   background-clip: padding-box;
@@ -233,7 +234,7 @@ section.page-admin .comment {
 .overlay {
   position: absolute;
   z-index: 2;
-  height: 90%;
+  height: 100%;
   width: 100%;
   background-color: white;
 }
