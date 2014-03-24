@@ -25,7 +25,6 @@
 html,
 body,
 .main-container,
-.content,
 .single-meal,
 .rn-carousel-container,
 .rn-carousel-slides {
@@ -161,9 +160,6 @@ section.page-admin .comment {
 /*
  * Home.less
  **************************/
-.page-home {
-  height: 100%;
-}
 .page-home .load-screen {
   width: 100%;
   height: 100%;
@@ -203,14 +199,15 @@ section.page-admin .comment {
   border-bottom: 1px solid #ddd;
 }
 .page-home .content {
-  background-color: #f9f9f2;
+  background-color: #fcfcf8;
   padding-top: 1%;
+  height: 68%;
 }
 .page-home .content .meal {
   border-bottom: 1px solid #ddd;
   width: 98%;
   margin: 0 auto;
-  height: 70%;
+  height: 100%;
   background-size: cover;
   background-position: 50%;
   -webkit-filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg);
@@ -222,10 +219,19 @@ section.page-admin .comment {
   text-align: center;
   font-size: 14px;
   line-height: 21px;
-  height: 30%;
-  padding: 15px 20px;
+  padding: 1%;
 }
 .page-home .footer .price {
+  font-weight: 400;
+}
+.page-home .footer .description,
+.page-home .footer .price {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  background-clip: padding-box;
+  margin-bottom: 1%;
   font-weight: 400;
 }
 .page-home .footer p {
