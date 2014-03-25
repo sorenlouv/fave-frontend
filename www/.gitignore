@@ -6,3 +6,5 @@ dist/css/fave-app-vendors.css
 dist/css/fave-app.css
 dist/js/fave-app-vendors.js
 dist/js/fave-app.js
+
+npm-debug.log
