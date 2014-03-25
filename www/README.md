@@ -1,0 +1,1 @@
+Phonegap app, built with Angularjs, nodejs and MongoDB
