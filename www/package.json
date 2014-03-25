@@ -1,6 +1,11 @@
 {
   "name": "fave-app",
   "version": "0.1.0",
+  "description": "Better takeout",
+  "repository" :{
+    "type" : "git",
+    "url" : "http://github.com/sqren/fave-frontend.git"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-csslint": "~0.2.0",
