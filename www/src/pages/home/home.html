@@ -13,15 +13,15 @@
         <h1 class="page-title" ng-bind="meal.name"></h1>
       </div>
       <div class="content">
+        <div class="price"><span ng-bind="meal.prices[0].amount">$</span>
+        </div>
         <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
         </div>
-      </div>
-
+   
         <div class="footer">
           <p ng-show="meal.description" class="description" ng-bind="meal.description" class="description"></p>
-           <p class="price">$<span ng-bind="meal.prices[0].amount" ></span></p>
         </div>
-
+      </div>
     </li>
   </ul>
   <div class="overlay" ng-if="settings.restaurantMode">
@@ -47,4 +47,5 @@
 </div>
 
 
-
+<!-- 
+           <p class="price">$<span ng-bind="meal.prices[0].amount" ></span></p> -->
