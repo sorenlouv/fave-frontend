@@ -33,4 +33,4 @@ app.controller('mainController', ['$scope', 'helpers', function ($scope, helpers
   $scope.isTouch = helpers.isTouch();
 }]);
 
-alert('lolz');
+alert('test2');
