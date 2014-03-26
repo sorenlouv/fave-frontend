@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  
+
   <link rel="stylesheet" type="text/css" href="dist/css/fave-app-vendors.css" />
   <link rel="stylesheet" href="dist/css/fave-app.css">
 
@@ -20,7 +20,7 @@
   <!-- Angular app -->
   <script type="text/javascript" src="dist/js/fave-app.js"></script>
   </head>
-  <body ng-controller="mainController">
+  <body ng-controller="mainController" ng-keydown="alert('asdda')">
     <header></header>
     <div class="main-container" ng-view></div>
     <div id="fb-root"></div>

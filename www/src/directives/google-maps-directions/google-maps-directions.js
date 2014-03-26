@@ -7,7 +7,8 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
     restrict: 'C',
     scope: {
       from: '=',
-      to: '='
+      to: '=',
+      distance: '='
     },
     link: function ($scope, $element, $attrs) {
 
@@ -44,7 +45,10 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
-            console.log(response.routes[0].legs[0].distance.text);
+
+            $scope.$apply(function(){
+              $scope.distance = response.routes[0].legs[0].distance.text;
+            });
           }
         });
       }

@@ -144,7 +144,7 @@ module.exports = function(grunt) {
         tasks: ['less:vendors']
       },
 
-      // Add required vendor-prefixes to
+      // Add required vendor-prefixes to CSS
       autoprefixer: {
         files: '<%= file_compiled_css %>',
         tasks: ['autoprefixer:source_files'],

@@ -1,4 +1,4 @@
-app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApply', 'helpers', 'homeMethods', function ($scope, $timeout, $http, $q, safeApply, helpers, homeMethods) {
+app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers', 'homeMethods', function ($scope, $document, safeApply, helpers, homeMethods) {
   'use strict';
 
   /*
@@ -9,7 +9,7 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   $scope.settings = {
     currentLocation: {},
     loadingGeoLocation: true,
-    restaurantMode: false,
+    restaurantOverlay: false,
     clickedRestaurant: {},
   };
 
@@ -37,10 +37,23 @@ app.controller('homeController', ['$scope', '$timeout', '$http', '$q',  'safeApp
   * Event listeners
   *****************/
 
+  // Keyboard event: Listen for left/right arrow key
+  $document.bind('keydown', function(event) {
+    if(event.which === 37 || event.which === 39){
+      $scope.$apply(function(){
+        $scope.carousel.index = event.which === 37 ? $scope.carousel.index-1 : $scope.carousel.index+1;
+      });
+    }
+  });
+
   // Click event: show restaurant info (map)
-  $scope.toggleRestaurantMode = function(restaurant){
-    $scope.settings.restaurantMode = !$scope.settings.restaurantMode;
+  $scope.addRestaurantOverlay = function(restaurant){
+    $scope.settings.restaurantOverlay = true;
     $scope.settings.clickedRestaurant = restaurant;
+  };
+
+  $scope.removeRestaurantOverlay = function(){
+    $scope.settings.restaurantOverlay = false;
   };
 
   // Click event: Previous slide
