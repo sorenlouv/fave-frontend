@@ -12,6 +12,7 @@ app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers'
     restaurantOverlay: false,
     clickedRestaurant: {},
   };
+  var busy = false;
 
   //
   $scope.carousel = {
@@ -29,7 +30,7 @@ app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers'
 
     // Start carousel
     $scope.$watch('carousel.index', onSlideChange);
-    $scope.carousel.index = 0;
+    // $scope.carousel.index = 0;
 
   });
 
@@ -71,8 +72,11 @@ app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers'
     if(index === undefined) return;
 
     // Load more elements when we approach the end
-    if(index > ($scope.carousel.items.length - 5)){
-      homeMethods.getClosestMeals($scope.settings.currentLocation, index).then(function(response){
+    if(index > ($scope.carousel.items.length - 5) && busy === false){
+      busy = true;
+      var offset = Math.round(index / 10) * 10;
+      homeMethods.getClosestMeals($scope.settings.currentLocation, offset).then(function(response){
+        busy = false;
         safeApply($scope, function(){
           $scope.carousel.items = $scope.carousel.items.concat(response.data);
           $scope.carousel.loading = false;
