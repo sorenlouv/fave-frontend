@@ -91,12 +91,14 @@ header .add-meal {
  * Loading-spinner.less
  **************************/
 .loading-spinner {
-  position: relative;
-}
-.loading-spinner .loading-spinner-animation {
   position: absolute;
   top: 50%;
-  left: 10px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.loading-spinner .loading-spinner-animation {
+  padding: 10px 0;
 }
 
 /*
@@ -164,27 +166,9 @@ section.page-admin .comment {
  * Home.less
  **************************/
 .page-home .load-screen {
-  display: block;
   width: 100%;
-  height: 100%;
+  height: 50px;
   text-align: center;
-}
-.page-home .load-screen img {
-  padding-top: 40%;
-  text-align: center;
-}
-.page-home .load-screen .loadingSpinner {
-  margin: 0 auto;
-}
-.page-home .load-screen .loading-spinner-animation {
-  display: block;
-  margin-left: 50%;
-}
-.page-home .load-screen span {
-  display: block;
-  margin-top: 50%;
-  padding-top: 50px;
-  width: 100%;
 }
 .page-home .rn-carousel-container {
   position: absolute;
@@ -250,9 +234,8 @@ section.page-admin .comment {
 .page-home .footer .description,
 .page-home .footer .price {
   padding: 10px;
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  border: 1px solid #ddd;
+  border-top: 0;
   border-radius: 3px;
   background-color: #fff;
   background-clip: padding-box;

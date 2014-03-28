@@ -2,8 +2,8 @@
 
   <!-- Loading spinner -->
   <div class="load-screen" loading-spinner="{{settings.loadingGeoLocation || carousel.loading}}" >
-    <span ng-show="settings.loadingGeoLocation">Finding your position</span>
-    <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
+    <div ng-show="settings.loadingGeoLocation">Finding your position</div>
+    <div ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</div>
   </div>
 
   <!-- Actions -->
@@ -18,8 +18,7 @@
         <h1 class="page-title" ng-bind="meal.name"></h1>
       </div>
       <div class="content">
-        <div class="price"><span ng-bind="meal.prices[0].amount">$</span>
-        </div>
+        <div class="price" ng-show="meal.prices.length > 0"><span ng-bind="meal.prices[0].amount"></span></div>
         <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="addRestaurantOverlay(meal.restaurant)">
         </div>
 
@@ -53,7 +52,3 @@
     No tasty meals nearby :(
   </div>
 </div>
-
-
-<!--
-           <p class="price">$<span ng-bind="meal.prices[0].amount" ></span></p> -->
