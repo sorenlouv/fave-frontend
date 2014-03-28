@@ -164,14 +164,14 @@ section.page-admin .comment {
  * Home.less
  **************************/
 .page-home .load-screen {
+  display: block;
   width: 100%;
   height: 100%;
   text-align: center;
-  display: block;
 }
 .page-home .load-screen img {
-  text-align: center;
   padding-top: 40%;
+  text-align: center;
 }
 .page-home .load-screen .loadingSpinner {
   margin: 0 auto;
@@ -181,17 +181,17 @@ section.page-admin .comment {
   margin-left: 50%;
 }
 .page-home .load-screen span {
-  width: 100%;
   display: block;
-  padding-top: 50px;
   margin-top: 50%;
+  padding-top: 50px;
+  width: 100%;
 }
 .page-home .rn-carousel-container {
   position: absolute;
 }
 .page-home .rn-carousel-container .single-meal img {
-  width: 100%;
   max-width: 400px;
+  width: 100%;
   text-align: center;
 }
 .page-home .rn-carousel-container .page-title {
@@ -202,61 +202,62 @@ section.page-admin .comment {
   border-bottom: 1px solid #ddd;
 }
 .page-home .content {
-  background-image: url('/www/img/bg.png');
-  background-repeat: repeat;
+  position: relative;
   padding-top: 1%;
   height: 100%;
-  position: relative;
+  background-image: url('/www/img/bg.png');
+  background-repeat: repeat;
 }
 .page-home .content .price {
   position: absolute;
-  height: 40px;
-  width: 40px;
-  right: 10px;
   top: 10px;
-  background-color: #ce421b;
-  border-radius: 25px;
-  background-clip: padding-box;
+  right: 10px;
   z-index: 2;
-  font-size: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: #ce421b;
+  background-clip: padding-box;
   color: white;
   text-align: center;
+  font-size: 12px;
 }
 .page-home .content .price span {
   display: block;
   margin-top: 12px;
 }
 .page-home .content .meal {
-  width: 98%;
   margin: 0 auto;
+  width: 98%;
   height: 68%;
-  background-size: cover;
-  background-position: 50%;
-  -webkit-filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg);
-  background-repeat: no-repeat;
   border-radius: 3px;
+  background-position: 50%;
   background-clip: padding-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg);
+  filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg);
 }
 .page-home .footer {
+  padding: 0 1% 1% 1%;
   text-align: center;
   font-size: 14px;
   line-height: 21px;
-  padding: 0 1% 1% 1%;
 }
 .page-home .footer .price {
   font-weight: 400;
 }
 .page-home .footer .description,
 .page-home .footer .price {
-  color: #333;
   padding: 10px;
-  border-radius: 3px;
-  background-clip: padding-box;
-  font-weight: 300;
-  background-color: #fff;
   border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+  background-clip: padding-box;
+  color: #333;
+  font-weight: 300;
 }
 .page-home .footer p {
   margin: 0;
@@ -264,21 +265,21 @@ section.page-admin .comment {
 .overlay {
   position: absolute;
   z-index: 2;
-  height: 100%;
   width: 100%;
+  height: 100%;
   background-color: white;
 }
 .overlay .page-header {
   text-align: center;
 }
 .overlay .page-content {
-  text-align: center;
   padding: 20px;
+  text-align: center;
 }
 .actions {
   position: fixed;
-  bottom: 0;
   right: 0;
+  bottom: 0;
   z-index: 1;
 }
 
