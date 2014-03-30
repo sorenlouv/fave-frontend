@@ -1,43 +1,48 @@
 <div class="page-home">
-<div >
+
+  <!-- Loading spinner -->
   <div class="load-screen" loading-spinner="{{settings.loadingGeoLocation || carousel.loading}}" >
-    <span ng-show="settings.loadingGeoLocation">Finding your position</span>
-    <span ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</span>
+    <div ng-show="settings.loadingGeoLocation">Finding your position</div>
+    <div ng-show="carousel.loading && !settings.loadingGeoLocation">Finding meals near you</div>
   </div>
+
+  <!-- Actions -->
   <div class="actions" ng-show="carousel.items.length > 0 && !isTouch">
     <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
   </div>
-  <ul rn-carousel rn-carousel-index="carousel.index">
-    <li class="single-meal" ng-repeat="meal in carousel.items">
-<!--       <div class="page-header">
 
-      </div> -->
+  <!-- Carousel -->
+  <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true">
+    <li class="single-meal" ng-repeat="meal in carousel.items">
       <div class="content">
-        <div class="price">$<span ng-bind="meal.prices[0].amount">$</span>
+        <div class="price" ng-show="meal.prices.length > 0">
+          <div ng-bind="meal.prices[0].amount"></div>
         </div>
-        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
+        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="addRestaurantOverlay(meal.restaurant)">
         </div>
-   
         <div class="footer">
           <h1 class="meal-title" ng-bind="meal.name"></h1>
-          <p ng-show="meal.description" class="description" ng-bind="meal.description" class="meal-description"></p>
+          <div ng-show="meal.description" ng-bind="meal.description" class="meal-description"></div>
         </div>
       </div>
     </li>
   </ul>
-  <div class="overlay" ng-if="settings.restaurantMode">
+
+  <!-- Map overlay and restaurant info -->
+  <div class="overlay" ng-if="settings.restaurantOverlay">
     <div class="page-header">
-      <h1>Restaurent name</h1>
+      <h1>{{settings.clickedRestaurant.name}}</h1>
     </div>
-    <div ng-if="settings.restaurantMode"
+    <div
       class="google-maps-directions"
+      distance="settings.clickedRestaurant.distance"
       from="settings.currentLocation"
       to="settings.clickedRestaurant.coordinate">
     </div>
     <div class="page-content">
-      ~<span ng-bind="getDistanceToRestaurant(meal.restaurant.coordinate)">1300</span> m
-      <p> <a class="button" href="tel://1-555-555-5555">Call</a></p>
-      <p><a ng-click="toggleRestaurantMode(meal.restaurant)">Back</a></p>
+      <span ng-bind="settings.clickedRestaurant.distance"></span>
+      <p><a class="button" href="tel://1-555-555-5555">Call</a></p>
+      <p><a ng-click="removeRestaurantOverlay()">Back</a></p>
     </div>
   </div>
 
@@ -46,7 +51,3 @@
     No tasty meals nearby :(
   </div>
 </div>
-
-
-<!-- 
-           <p class="price">$<span ng-bind="meal.prices[0].amount" ></span></p> -->

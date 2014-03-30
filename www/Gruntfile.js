@@ -87,7 +87,7 @@ module.exports = function(grunt) {
     autoprefixer: {
       source_files: {
         options: {
-          browsers: ['last 2 version']
+          browsers: ['last 3 versions']
         },
         src: '<%= file_compiled_css %>',
         dest: '<%= file_app_css %>'
@@ -144,7 +144,7 @@ module.exports = function(grunt) {
         tasks: ['less:vendors']
       },
 
-      // Add required vendor-prefixes to
+      // Add required vendor-prefixes to CSS
       autoprefixer: {
         files: '<%= file_compiled_css %>',
         tasks: ['autoprefixer:source_files'],
@@ -169,12 +169,15 @@ module.exports = function(grunt) {
   /*
   * Load in the plugins we need
   ****************/
-  grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+
+
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-autoprefixer');
+  grunt.loadNpmTasks('grunt-contrib-csslint');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+
 
   /*
   * Default tasks - will be run by writing "grunt" from the command line

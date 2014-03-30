@@ -33,8 +33,6 @@ app.directive('loadingSpinner', [function() {
       var spinner = new Spinner(opts);
 
       var loadingSpinnerAnimationElm = $element[0].querySelector('.loading-spinner-animation');
-      var loadingSpinnerTextElm = $element[0].querySelector('.loading-spinner-text');
-      loadingSpinnerTextElm.style.textIndent = opts.lines * 4 + 'px';
 
       $attrs.$observe('loadingSpinner', function(newValue, oldValue){
         if(newValue === undefined) return;

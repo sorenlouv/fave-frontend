@@ -3,5 +3,6 @@
   "import": false,
   "box-model": false,
   "adjoining-classes": false,
-  "bulletproof-font-face": false
+  "bulletproof-font-face": false,
+  "compatible-vendor-prefixes": false
 }
