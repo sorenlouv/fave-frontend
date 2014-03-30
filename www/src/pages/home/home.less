@@ -88,30 +88,21 @@
 
     }
   }
-  
   .footer {
     text-align: center;
     font-size: 14px;
     line-height: 21px;
-    padding: 0 1% 1% 1%;
-    // font-style: italic;
-    .price {
-      font-weight: 400;
+    margin: 1%;
+    border-radius: 3px; 
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    .meal-title {
+      padding: @unit-half @unit-half 0 @unit-half;
     }
-    .description, .price {
-      color: #333;
-      padding: 10px;
-      -webkit-border-radius: 3px;
-      border-radius: 3px; 
-      background-clip: padding-box;
-      font-weight: 300;
-      background-color: #fff;
-      border-right: 1px solid #ddd;
-      border-left: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-    }
-    p {
+    .meal-description {
       margin: 0;
+      padding:0 @unit-half @unit-half @unit-half ;
     }
   }
 }

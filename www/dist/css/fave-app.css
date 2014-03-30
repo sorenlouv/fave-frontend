@@ -241,25 +241,18 @@ section.page-admin .comment {
   text-align: center;
   font-size: 14px;
   line-height: 21px;
-  padding: 0 1% 1% 1%;
-}
-.page-home .footer .price {
-  font-weight: 400;
-}
-.page-home .footer .description,
-.page-home .footer .price {
-  color: #333;
-  padding: 10px;
+  margin: 1%;
   border-radius: 3px;
   background-clip: padding-box;
-  font-weight: 300;
   background-color: #fff;
-  border-right: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border: 1px solid #ddd;
 }
-.page-home .footer p {
+.page-home .footer .meal-title {
+  padding: 11px 11px 0 11px;
+}
+.page-home .footer .meal-description {
   margin: 0;
+  padding: 0 11px 11px 11px;
 }
 .overlay {
   position: absolute;

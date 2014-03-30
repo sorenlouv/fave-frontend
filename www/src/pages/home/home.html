@@ -9,17 +9,18 @@
   </div>
   <ul rn-carousel rn-carousel-index="carousel.index">
     <li class="single-meal" ng-repeat="meal in carousel.items">
-      <div class="page-header">
-        <h1 class="page-title" ng-bind="meal.name"></h1>
-      </div>
+<!--       <div class="page-header">
+
+      </div> -->
       <div class="content">
-        <div class="price"><span ng-bind="meal.prices[0].amount">$</span>
+        <div class="price">$<span ng-bind="meal.prices[0].amount">$</span>
         </div>
         <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="toggleRestaurantMode(meal.restaurant)">
         </div>
    
         <div class="footer">
-          <p ng-show="meal.description" class="description" ng-bind="meal.description" class="description"></p>
+          <h1 class="meal-title" ng-bind="meal.name"></h1>
+          <p ng-show="meal.description" class="description" ng-bind="meal.description" class="meal-description"></p>
         </div>
       </div>
     </li>
