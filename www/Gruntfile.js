@@ -3,6 +3,12 @@
 module.exports = function(grunt) {
   'use strict';
 
+  // Time how long grunt tasks take to execute
+  // require('time-grunt')(grunt);
+
+  // Load NPM modules as needed
+  require('jit-grunt')(grunt);
+
   // Project configuration.
   grunt.initConfig({
     // CSS
@@ -171,12 +177,12 @@ module.exports = function(grunt) {
   ****************/
 
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-csslint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-concat');
+  // grunt.loadNpmTasks('grunt-contrib-watch');
+  // grunt.loadNpmTasks('grunt-contrib-less');
+  // grunt.loadNpmTasks('grunt-autoprefixer');
+  // grunt.loadNpmTasks('grunt-contrib-csslint');
+  // grunt.loadNpmTasks('grunt-contrib-jshint');
+  // grunt.loadNpmTasks('grunt-contrib-concat');
 
 
   /*
