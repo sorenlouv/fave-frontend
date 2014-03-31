@@ -15,7 +15,7 @@
   <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true">
     <li class="single-meal" ng-repeat="meal in carousel.items">
       <div class="content">
-        <div class="price" ng-show="meal.prices.length > 0">
+        <div class="focus" ng-show="meal.prices.length > 0">
           <div ng-bind="meal.prices[0].amount"></div>
         </div>
         <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="addRestaurantOverlay(meal.restaurant)">
@@ -35,11 +35,15 @@
       from="settings.currentLocation"
       to="settings.clickedRestaurant.coordinate">
     </div>
+    <div class="focus" >
+      <div ng-bind="settings.clickedRestaurant.distance">2km</div>
+    </div>
     <div class="page-content">
       <h1 class="restaurent-title">{{settings.clickedRestaurant.name}}</h1>
-      <span ng-bind="settings.clickedRestaurant.distance"></span>
-      <p><a class="button" href="tel://1-555-555-5555">Call</a></p>
-      <p><a ng-click="removeRestaurantOverlay()">Back</a></p>
+<!--       <div ng-bind="settings.clickedRestaurant.distance" class="restaurent-description"></div> -->
+      <p><a class="button " href="tel://1-555-555-5555">Call</a></p>
+      <p><a class="button secondary">Open map</a></p>
+      <p><a ng-click="removeRestaurantOverlay()" class="button secondary">Back</a></p>
     </div>
   </div>
 
