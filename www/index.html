@@ -14,16 +14,25 @@
   <meta name="apple-mobile-web-app-title" content="Fave">
   
 
-  <!-- iPhone -->
-  <link href="img/apple-touch-startup-image-320x460.png"
-        media="(device-width: 320px) and (device-height: 480px)
-           and (-webkit-device-pixel-ratio: 1)"
-        rel="apple-touch-startup-image">
   <!-- iPhone 5 -->
   <link href="img/apple-touch-startup-image-640x1096.png"
         media="(device-width: 320px) and (device-height: 568px)
            and (-webkit-device-pixel-ratio: 2)"
         rel="apple-touch-startup-image">
+
+
+  <!-- Letterboxed on iPhone 5 -->
+  <meta name="viewport"
+        content="width=device-width">
+  <meta name="viewport"
+        content="width=320">
+  <!-- Not letterboxed on iPhone 5 -->
+  <meta name="viewport"
+        content="initial-scale=1.0">
+  <meta name="viewport"
+        content="width=320.1">
+
+
 
   <!-- Phonegap specific stuff -->
   <script type="text/javascript" src="cordova.js"></script>
