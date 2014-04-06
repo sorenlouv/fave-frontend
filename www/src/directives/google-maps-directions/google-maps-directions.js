@@ -16,9 +16,9 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
       var directionsService = new google.maps.DirectionsService();
       var options = {
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        scrollwheel: true,
+        scrollwheel: false,
         navigationControl: false,
-        draggable: true,
+        draggable: false,
         disableDefaultUI: true,
         streetViewControl: false,
         keyboardShortcuts: false,

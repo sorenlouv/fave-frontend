@@ -12,27 +12,17 @@
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Fave">
-  
 
   <!-- iPhone 5 -->
-  <link href="img/apple-touch-startup-image-640x1096.png"
-        media="(device-width: 320px) and (device-height: 568px)
-           and (-webkit-device-pixel-ratio: 2)"
-        rel="apple-touch-startup-image">
-
+  <link href="img/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
 
   <!-- Letterboxed on iPhone 5 -->
-  <meta name="viewport"
-        content="width=device-width">
-  <meta name="viewport"
-        content="width=320">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=320">
+
   <!-- Not letterboxed on iPhone 5 -->
-  <meta name="viewport"
-        content="initial-scale=1.0">
-  <meta name="viewport"
-        content="width=320.1">
-
-
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta name="viewport" content="width=320.1">
 
   <!-- Phonegap specific stuff -->
   <script type="text/javascript" src="cordova.js"></script>
@@ -45,9 +35,9 @@
   <!-- Angular app -->
   <script type="text/javascript" src="dist/js/fave-app.js"></script>
   </head>
-  <body ng-controller="mainController" ng-keydown="alert('asdda')">
+  <body ng-controller="mainController">
     <header></header>
-    <div class="main-container" ng-view></div>
+    <div class="main-container full-height" ng-view></div>
     <div id="fb-root"></div>
   </body>
 </html>

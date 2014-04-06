@@ -2,7 +2,7 @@
 @import "_fonts.less";
 
 /*
- * Main.less
+ * App.less
  **************************/
 
 html {
@@ -11,9 +11,12 @@ html {
   font-weight: 300;  
 }
 
-body, .main-container, .single-meal, .rn-carousel-container, .rn-carousel-slides {
+html, body, .full-height, .rn-carousel-container {
   height: 100%;
-  font-weight: 300;  
+}
+
+html, body {
+  font-weight: 300;
 }
 
 h1 {
@@ -21,7 +24,7 @@ h1 {
   font-size: 16px;
   font-weight: 300;
   margin: 0;
-  
+
   span {
   	text-align: center;
   }
@@ -42,7 +45,7 @@ h3 {
   background-color: @red;
   color: white;
   text-decoration: none;
-  border-radius: 3px;
+  border-radius: @unit-quarter;
 
   &.secondary {
     background-color: #333;

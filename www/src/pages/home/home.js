@@ -21,6 +21,10 @@ app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers'
     loading: true
   };
 
+  $scope.stopEvent = function(e){
+    e.stopPropagation();
+  };
+
   // Get location and start carousel
   helpers.getLocation().then(function(loc){
     safeApply($scope, function(){

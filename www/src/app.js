@@ -1,7 +1,10 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'angular-carousel', 'safeApply', 'ngRoute']);
+var app = angular.module('faveapp', ['ngTouch', 'angular-carousel', 'safeApply', 'ngRoute']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$compileProvider', function($routeProvider, $compileProvider) {
   'use strict';
+
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|geo|tel):/);
+
 
   $routeProvider
     .when('/home', {
