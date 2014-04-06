@@ -11,38 +11,44 @@
     <p>{{carousel.index + 1}}/{{carousel.items.length}}</p>
   </div>
 
-  <!-- Carousel -->
-  <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true">
-    <li class="single-meal" ng-repeat="meal in carousel.items" ng-click="addRestaurantOverlay(meal.restaurant)">
-      <div class="content">
-        <div class="focus" ng-show="meal.prices.length > 0">
-          <div ng-bind="meal.prices[0].amount"></div>
+  <!-- Flip container -->
+  <div class="flip-container full-height">
+    <div class="flip-container-inner full-height" ng-class="settings.restaurantOverlay ? 'flipped': ''">
+
+      <!-- Carousel -->
+      <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true" class="full-height">
+        <li class="single-meal full-height" ng-repeat="meal in carousel.items" ng-click="addRestaurantOverlay(meal.restaurant)">
+          <div class="page-content full-height">
+            <div class="focus" ng-show="meal.prices.length > 0">
+              <div ng-bind="meal.prices[0].amount"></div>
+            </div>
+            <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal">
+            </div>
+            <div class="footer">
+              <h1 class="meal-title" ng-bind="meal.name"></h1>
+              <div ng-show="meal.description" ng-bind="meal.description" class="meal-description"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Restaurant overlay-->
+      <div class="restaurant-overlay full-height" test-ng-if="settings.restaurantOverlay" ng-click="removeRestaurantOverlay()">
+        <div
+          class="google-maps-directions"
+          distance="settings.clickedRestaurant.distance"
+          from="settings.currentLocation"
+          to="settings.clickedRestaurant.coordinate">
         </div>
-        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal">
+        <div class="focus">
+          <div ng-bind="settings.clickedRestaurant.distance">2km</div>
         </div>
-        <div class="footer">
-          <h1 class="meal-title" ng-bind="meal.name"></h1>
-          <div ng-show="meal.description" ng-bind="meal.description" class="meal-description"></div>
+        <div class="page-content">
+          <h1 class="restaurent-title" ng-bind="settings.clickedRestaurant.name"></h1>
+          <p><a class="button" stop-event='click' ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
+          <p><a class="button secondary">Back</a></p>
         </div>
       </div>
-    </li>
-  </ul>
-
-  <!-- Map overlay and restaurant info -->
-  <div class="overlay" ng-if="settings.restaurantOverlay" ng-click="removeRestaurantOverlay()">
-    <div
-      class="google-maps-directions"
-      distance="settings.clickedRestaurant.distance"
-      from="settings.currentLocation"
-      to="settings.clickedRestaurant.coordinate">
-    </div>
-    <div class="focus" >
-      <div ng-bind="settings.clickedRestaurant.distance">2km</div>
-    </div>
-    <div class="page-content">
-      <h1 class="restaurent-title" ng-bind="settings.clickedRestaurant.name"></h1>
-      <p><a class="button" stop-event='click' ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
-      <p><a class="button secondary">Back</a></p>
     </div>
   </div>
 

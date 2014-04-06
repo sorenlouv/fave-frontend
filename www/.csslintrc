@@ -4,5 +4,6 @@
   "box-model": false,
   "adjoining-classes": false,
   "bulletproof-font-face": false,
-  "compatible-vendor-prefixes": false
+  "compatible-vendor-prefixes": false,
+  "box-sizing": false
 }
