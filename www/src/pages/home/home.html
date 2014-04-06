@@ -41,7 +41,7 @@
     <div class="page-content">
       <h1 class="restaurent-title">{{settings.clickedRestaurant.name}}</h1>
 <!--       <div ng-bind="settings.clickedRestaurant.distance" class="restaurent-description"></div> -->
-      <p><a class="button " href="tel://1-555-555-5555">Call</a></p>
+      <p><a class="button" ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
       <p><a ng-click="removeRestaurantOverlay()" class="button secondary">Back</a></p>
     </div>
   </div>
