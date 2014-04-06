@@ -22,6 +22,12 @@
     background-image: url('../../img/bg.png');
   }
 
+  .thick-frame {
+    border-radius: @unit-half;
+    border: 5px solid black;
+    box-sizing: border-box;
+  }
+
   .focus {
     position: absolute;
     top: @unit-half;
@@ -61,12 +67,10 @@
 
       position: absolute;
       top: 0;
-      left: 1%;
-      width: 98%;
+      left: 0;
+      width: 100%;
       min-height: 500px;
       z-index: 2;
-
-      border-radius: @unit-half;
     }
 
     // Slider container
