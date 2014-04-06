@@ -28,7 +28,7 @@
     </li>
   </ul>
   <!-- Map overlay and restaurant info -->
-  <div class="overlay" ng-if="settings.restaurantOverlay">
+  <div class="overlay" ng-if="settings.restaurantOverlay" ng-click="removeRestaurantOverlay()">
     <div
       class="google-maps-directions"
       distance="settings.clickedRestaurant.distance"
@@ -40,9 +40,8 @@
     </div>
     <div class="page-content">
       <h1 class="restaurent-title">{{settings.clickedRestaurant.name}}</h1>
-<!--       <div ng-bind="settings.clickedRestaurant.distance" class="restaurent-description"></div> -->
-      <p><a class="button" ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
-      <p><a ng-click="removeRestaurantOverlay()" class="button secondary">Back</a></p>
+      <p><a class="button" stop-event='click' ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
+      <p><a class="button secondary">Back</a></p>
     </div>
   </div>
 
