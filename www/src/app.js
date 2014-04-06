@@ -1,4 +1,4 @@
-var app = angular.module('faveapp', ['ngTouch', 'ngAnimate', 'angular-carousel', 'safeApply', 'ngRoute']);
+var app = angular.module('faveapp', ['ngTouch', 'angular-carousel', 'safeApply', 'ngRoute']);
 
 app.config(['$routeProvider', '$compileProvider', function($routeProvider, $compileProvider) {
   'use strict';
