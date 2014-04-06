@@ -13,12 +13,12 @@
 
   <!-- Carousel -->
   <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true">
-    <li class="single-meal" ng-repeat="meal in carousel.items">
+    <li class="single-meal" ng-repeat="meal in carousel.items" ng-click="addRestaurantOverlay(meal.restaurant)">
       <div class="content">
         <div class="focus" ng-show="meal.prices.length > 0">
           <div ng-bind="meal.prices[0].amount"></div>
         </div>
-        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal" ng-click="addRestaurantOverlay(meal.restaurant)">
+        <div ng-style="{'background-image':'url({{meal.image}})'}" class="meal">
         </div>
         <div class="footer">
           <h1 class="meal-title" ng-bind="meal.name"></h1>
@@ -27,6 +27,7 @@
       </div>
     </li>
   </ul>
+
   <!-- Map overlay and restaurant info -->
   <div class="overlay" ng-if="settings.restaurantOverlay" ng-click="removeRestaurantOverlay()">
     <div
@@ -39,7 +40,7 @@
       <div ng-bind="settings.clickedRestaurant.distance">2km</div>
     </div>
     <div class="page-content">
-      <h1 class="restaurent-title">{{settings.clickedRestaurant.name}}</h1>
+      <h1 class="restaurent-title" ng-bind="settings.clickedRestaurant.name"></h1>
       <p><a class="button" stop-event='click' ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
       <p><a class="button secondary">Back</a></p>
     </div>
