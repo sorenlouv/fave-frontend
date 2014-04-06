@@ -3,7 +3,7 @@ var app = angular.module('faveapp', ['ngTouch', 'angular-carousel', 'safeApply',
 app.config(['$routeProvider', '$compileProvider', function($routeProvider, $compileProvider) {
   'use strict';
 
-  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|geo):/);
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|geo|tel):/);
 
 
   $routeProvider
