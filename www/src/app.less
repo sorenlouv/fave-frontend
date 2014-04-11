@@ -6,7 +6,6 @@
  **************************/
 
 html {
-  background-color: black;
   height: 100%;
   font-weight: 300;  
 }
@@ -21,7 +20,7 @@ html, body {
 
 h1 {
   color: #333;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 300;
   margin: 0;
 
@@ -42,13 +41,15 @@ h3 {
   padding: 12px 24px;
   width: calc(~"100% - 50px");
   display: block;
-  background-color: @red;
-  color: white;
+  background-color: @grey-lightest;
+  color: @black;
   text-decoration: none;
-  border-radius: @unit-quarter;
-
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 12px;
+  text-align: center;
   &.secondary {
-    background-color: #333;
+    
   }
 }
 .main-container {

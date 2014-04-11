@@ -13,17 +13,11 @@
     text-align: center;
     background-color: white;
   }
-  .no-meals {
-    color: white;
-  }
-
   .page-content {
-    background-image: url('../../img/bg.png');
+    // background-image: url('../../img/bg.png');
   }
-
   .thick-frame {
-    border-radius: @unit-quarter;
-    border: 5px solid black;
+    border: 5px solid white;
     box-sizing: border-box;
   }
 
@@ -31,19 +25,20 @@
     position: absolute;
     top: @unit-half;
     right: @unit-half;
-    width: @unit-double;
-    height: @unit-double;
-    border-radius: @unit;
-    background-color: @red;
-    background-color: rgba(195, 44, 12, 0.8);
-    color: white;
+    width: @unit-triple;
+    height: @unit-triple;
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: @black;
     text-align: center;
     font-size: 12px;
+    border-radius: @unit-double;
+
     div {
       top: 50%;
       transform: translateY(-50%);
       position: relative;
-      font-weight: 400;
+      font-weight: 300;
     }
   }
 
@@ -67,7 +62,6 @@
       width: 100%;
       min-height: 490px;
       z-index: 2;
-      border-radius: 10px;
     }
 
     // Slider container
@@ -82,7 +76,6 @@
 
         .page-content {
           position: relative;
-          border-radius: @unit-quarter;
           margin: 0 auto;
 
           .focus {
@@ -94,28 +87,32 @@
             }
           }
           .meal {
-            border-radius: @unit-quarter @unit-quarter 0 0 ;
             height: 70%;
             background-position: 50%;
             background-size: cover;
             background-repeat: no-repeat;
             filter: contrast(110%) brightness(110%) saturate(120%) hue-rotate(-20deg) ;
           }
+          .action {
+            margin-top: @unit;
+          }
 
           .footer {
             padding: @unit-half;
-            text-align: center;
+            text-align: left;
             font-size: 14px;
             margin: @unit-quarter;
             .meal-title {
               margin: 0;
-              padding: 0;
-              font-weight: 400;
-              color: @red;
+              padding: 10px 0;
+              font-weight: 300;
+              color: @black;
+
             }
             .meal-description {
               margin: 0;
               padding: @unit-quarter 0 0 0;
+              color: @grey;
             }
           }
         }
@@ -128,7 +125,6 @@
       z-index: 2;
       background-color: white;
       .google-maps-directions {
-        border-radius: @unit-quarter @unit-quarter 0 0 ;
         overflow: hidden;
       }
 
@@ -138,13 +134,11 @@
 
       .page-content {
         padding: @unit;
-        text-align: center;
+        text-align: left;
         font-size: 14px;
-        border-radius: @unit-quarter;
 
         .restaurent-title {
-          font-weight: 400;
-          color: @red;
+          padding-bottom: @unit;
         }
       }
     }
