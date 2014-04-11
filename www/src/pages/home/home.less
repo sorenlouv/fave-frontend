@@ -17,7 +17,7 @@
     // background-image: url('../../img/bg.png');
   }
   .thick-frame {
-    border: 5px solid white;
+    // border: 5px solid white;
     box-sizing: border-box;
   }
 
@@ -46,7 +46,8 @@
     perspective: 800px;
 
     .flip-container-inner {
-      transition: 0.2s;
+      transition: 0.3s;
+      
       transform-style: preserve-3d;
       position: relative;
 
@@ -61,7 +62,8 @@
       top: 0;
       left: 0;
       width: 100%;
-      min-height: 490px;
+      height: 100%;
+      min-height: 500px;
       z-index: 2;
     }
 
@@ -105,14 +107,14 @@
             margin: @unit-quarter;
             .meal-title {
               margin: 0;
-              padding: 10px 0;
+              padding: 10px;
               font-weight: 300;
               color: @black;
 
             }
             .meal-description {
               margin: 0;
-              padding: @unit-quarter 0 0 0;
+              padding: 0 @unit-half @unit-half @unit-half;
               color: @grey;
             }
           }
