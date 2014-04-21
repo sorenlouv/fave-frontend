@@ -22,7 +22,11 @@ app.directive('googleMapsDirections', ['helpers', function (helpers) {
         disableDefaultUI: true,
         streetViewControl: false,
         keyboardShortcuts: false,
-        disableDoubleClickZoom: false
+        disableDoubleClickZoom: false,
+        styles: [{
+          featureType: 'poi',
+          stylers: [{ visibility: 'off' }]
+        }]
       };
       var map = new google.maps.Map($element[0], options);
       directionsDisplay.setMap(map);
