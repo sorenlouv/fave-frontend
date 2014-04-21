@@ -25,6 +25,11 @@ app.controller('homeController', ['$scope', '$document',  'safeApply', 'helpers'
     e.stopPropagation();
   };
 
+  $scope.websafe = function(url){
+    if(url === undefined) return;
+    return url.replace(/ /g, '+');
+  };
+
   // Get location and start carousel
   helpers.getLocation().then(function(loc){
     safeApply($scope, function(){
