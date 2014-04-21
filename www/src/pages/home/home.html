@@ -40,14 +40,13 @@
           from="settings.currentLocation"
           to="settings.clickedRestaurant.coordinate">
         </div>
-        <a ng-href="geo:0,0?q={{settings.clickedRestaurant.coordinate.latitude}},{{settings.clickedRestaurant.coordinate.longitude}}({{settings.clickedRestaurant.name}})" ng-click="stopEvent($event)">Open in Maps</a>
         <div class="focus">
           <div ng-bind="settings.clickedRestaurant.distance">2km</div>
         </div>
         <div class="page-content">
           <h1 class="restaurent-title" ng-bind="settings.clickedRestaurant.name"></h1>
-          <p><a class="button" ng-click="stopEvent($event)" ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></p>
-          <p><a class="button secondary">Back</a></p>
+          <div ><a class="button" ng-click="stopEvent($event)" ng-href="tel://{{settings.clickedRestaurant.phone}}">Call</a></div>
+          <div ><a class="button secondary" ng-href="geo:0,0?q={{settings.clickedRestaurant.coordinate.latitude}},{{settings.clickedRestaurant.coordinate.longitude}}({{settings.clickedRestaurant.name}})" ng-click="stopEvent($event)">Directions</a></div>
         </div>
       </div>
     </div>
