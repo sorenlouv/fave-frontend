@@ -17,7 +17,7 @@
 
       <!-- Carousel -->
       <ul rn-carousel rn-carousel-index="carousel.index" rn-carousel-buffered="true" class="full-height">
-        <li class="single-meal thick-frame full-height" ng-repeat="meal in carousel.items track by item._id" ng-click="addRestaurantOverlay(meal.restaurant)">
+        <li class="single-meal thick-frame full-height" ng-repeat="meal in carousel.items track by meal._id" ng-click="addRestaurantOverlay(meal.restaurant)">
           <div class="page-content full-height">
             <div class="focus" ng-show="meal.prices.length > 0">
               <div ng-bind="meal.prices[0].amount"></div>
